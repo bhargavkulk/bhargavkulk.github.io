@@ -1,0 +1,55 @@
+@font-face {
+    font-family: "h3-sans";
+    src: url("./fonts/SourceSans3.ttf");
+    font-weight: 300;
+    font-size: 30px;
+}
+
+@font-face {
+    font-family: "body-serif";
+    src: url("./fonts/SourceSerif4.ttf");
+    font-weight: 300;
+    font-size: 22px;
+}
+
+body {
+    margin: 0;
+}
+
+h3 {
+    font-family: "h3-sans", sans-serif;
+}
+
+.wrapper {
+    display: flex;
+    font-family: "body-serif", serif;
+    font-weight: 300;
+    font-size: 22px
+}
+
+* {
+    box-sizing: border-box;
+}
+  
+nav {
+    height: 100vh;
+    box-sizing: border-box;
+    padding: 1.1em 1em 1em 4em;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 10px;
+    padding-left: 20px;
+}
+
+nav h3 {
+    margin: 10px;
+}
+
+main {
+    height: 100vh;
+    overflow: scroll;
+    padding: 2em;
+    width: 80%;
+}
