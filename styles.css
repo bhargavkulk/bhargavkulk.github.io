@@ -6,18 +6,73 @@
 }
 
 @font-face {
+    font-family: "h2-sans";
+    src: url("./fonts/SourceSans3.ttf");
+    font-weight: 300;
+    font-size: 30px;
+}
+
+@font-face {
     font-family: "body-serif";
     src: url("./fonts/SourceSerif4.ttf");
     font-weight: 300;
     font-size: 22px;
 }
 
+@font-face {
+    font-family: "body-mono";
+    src: url("./fonts/SourceCodePro.ttf");
+    font-weight: 300;
+    font-size: 10px;
+}
+
+@font-face {
+    font-family: "heavy-serif";
+    src: url("./fonts/SourceSerif4.ttf");
+    font-weight: 400;
+    font-size: 22px;
+}
+
 body {
     margin: 0;
+    background-color: #D8DEE9;
+    color: #2E3440
+}
+
+main a:link {
+    color: #81A1C1;
+}
+
+main a:visited {
+    color: #81A1C1;
+}
+
+main a:hover {
+    color: #5E81AC;
 }
 
 h3 {
     font-family: "h3-sans", sans-serif;
+    margin: 10px;
+    margin-left: 0;
+}
+
+h2 {
+    font-family: "h2-sans", sans-serif;
+    margin: 10px;
+    margin-left: 0;
+}
+
+ul {
+    margin: 10px;
+}
+
+ul li::marker {
+    content: '» '
+}
+
+ol {
+    margin: 10px;
 }
 
 .wrapper {
@@ -35,6 +90,11 @@ nav {
     height: 100vh;
     box-sizing: border-box;
     padding: 1.1em 1em 1em 4em;
+    background-color: #2e3440;
+}
+
+nav h3 {
+    color: #eceff4;
 }
 
 nav ul {
@@ -43,13 +103,97 @@ nav ul {
     padding-left: 20px;
 }
 
-nav h3 {
-    margin: 10px;
+nav a:link {
+    color: #eceff4;
+}
+
+nav a:visited {
+    color: #eceff4;
+}
+
+nav a:hover {
+    color: #4c566a;
 }
 
 main {
     height: 100vh;
     overflow: scroll;
-    padding: 2em;
-    width: 80%;
+    padding: 1.1em 2em 2em 2em;
+    width: 50%;
+}
+
+blockquote {
+    border-left: 5px solid #2e3440; /* Add a light gray border to the left */
+    padding: 10px;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+p {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+dt {
+    color: #BF616A;
+    font-family: "heavy-serif", serif;
+}
+
+dd::marker {
+    content: '» '
+}
+
+dd {
+    display: list-item;
+    list-style-type: disc;
+}
+
+details {
+    background-color: #8FBCBB;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+details a:link {
+    color: #5E81AC;
+}
+
+details a:visited {
+    color: #5E81AC;
+}
+
+details a:hover {
+    color: #81A1C1;
+}
+
+hr {
+    border: 1px solid #2e3440;
+    margin: .5rem 0
+}
+
+table, th, td {
+    border: 1px solid;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 10px;
+}
+
+th {
+    font-family: "heavy-serif", serif;
+}
+
+div code {
+    background-color: #2E3440;
+    color: #D8DEE9;
+    font-family: "body-mono", monospace;
+    padding: 0 .125rem;
+    border-radius: 3px;
+}
+
+mark {
+    padding: 0 .25em;
+    border-radius: 3px;
+    background-color: #D08770;
 }
