@@ -1,46 +1,111 @@
-  /* For WebKit browsers */
-  ::-webkit-scrollbar {
+/* For WebKit browsers */
+::-webkit-scrollbar {
     width: 12px;
-  }
+}
 
-  ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     background: none;
-  }
+}
 
-  ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background: #888;
     border-radius: 10px;
-  }
+}
 
-  ::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
     background: #555;
-  }
+}
 
-  /* For Firefox */
-  body {
+/* For Firefox */
+body {
     scrollbar-width: thin;
     scrollbar-color: #888 transparent;
-  }
+}
+
+@font-face {
+    font-family: charter;
+    font-style: normal;
+    font-weight: normal;
+    font-stretch: normal;
+    src: url('./fonts/charter_regular.woff2') format('woff2');
+}
+    
+@font-face {
+    font-family: charter;
+    font-style: italic;
+    font-weight: normal;
+    font-stretch: normal;
+    src: url('./fonts/charter_italic.woff2') format('woff2');
+}
+    
+@font-face {
+    font-family: charter;
+    font-style: normal;
+    font-weight: bold;
+    font-stretch: normal;
+    src: url('./fonts/charter_bold.woff2') format('woff2');
+}
+    
+@font-face {
+    font-family: charter;
+    font-style: italic;
+    font-weight: bold;
+    font-stretch: normal;
+    src: url('./fonts/charter_bold_italic.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: cooper;
+    font-style: normal;
+    font-weight: normal;
+    font-stretch: normal;
+    src: url('./fonts/CooperHewitt-Medium.woff') format('woff2');
+}
+    
+@font-face {
+    font-family: cooper;
+    font-style: italic;
+    font-weight: normal;
+    font-stretch: normal;
+    src: url('./fonts/CooperHewitt-MediumItalic.woff') format('woff2');
+}
+    
+@font-face {
+    font-family: cooper;
+    font-style: normal;
+    font-weight: bold;
+    font-stretch: normal;
+    src: url('./fonts/CooperHewitt-Bold.woff') format('woff2');
+}
+    
+@font-face {
+    font-family: cooper;
+    font-style: italic;
+    font-weight: bold;
+    font-stretch: normal;
+    src: url('./fonts/CooperHewitt-BoldItalic.woff') format('woff2');
+}
+
+@font-face {
+    font-family: "heavy-serif";
+    font-style: normal;
+    font-weight: bold;
+    font-stretch: normal;
+    src: url('./fonts/charter_bold.woff2') format('woff2');
+}
 
 @font-face {
     font-family: "h3-sans";
-    src: url("./fonts/SourceSans3.ttf");
+    src: url("./fonts/CooperHewitt-Light.woff");
     font-weight: 300;
     font-size: 30px;
 }
 
 @font-face {
     font-family: "h2-sans";
-    src: url("./fonts/SourceSans3.ttf");
+    src: url("./fonts/CooperHewitt-Light.woff");
     font-weight: 300;
     font-size: 30px;
-}
-
-@font-face {
-    font-family: "body-serif";
-    src: url("./fonts/SourceSerif4.ttf");
-    font-weight: 300;
-    font-size: 22px;
 }
 
 @font-face {
@@ -50,12 +115,13 @@
     font-size: 10px;
 }
 
+/*
 @font-face {
     font-family: "heavy-serif";
     src: url("./fonts/SourceSerif4.ttf");
     font-weight: 400;
     font-size: 22px;
-}
+}*/
 
 body {
     margin: 0;
@@ -77,13 +143,13 @@ main a:hover {
 
 h3 {
     font-family: "h3-sans", sans-serif;
-    margin: 10px;
+    /*margin: 10px;*/
     margin-left: 0;
 }
 
 h2 {
     font-family: "h2-sans", sans-serif;
-    margin: 10px;
+    /*margin: 10px;*/
     margin-left: 0;
 }
 
@@ -101,7 +167,7 @@ ol {
 
 .wrapper {
     display: flex;
-    font-family: "body-serif", serif;
+    font-family: "charter", serif;
     font-weight: 300;
     font-size: 22px
 }
@@ -113,7 +179,7 @@ ol {
 nav {
     height: 100vh;
     box-sizing: border-box;
-    padding: 1.1em 1em 1em 4em;
+    padding: 1.1em 1em 1em 2em;
     background-color: #2e3440;
 }
 
