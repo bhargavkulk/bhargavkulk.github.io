@@ -25,32 +25,12 @@
                     </address>
                 </div>
                 <nav>
-                    <a href="/" class="active">/home</a>
-<a href="/research.html">/research</a>
-<a href="/cv.html">/cv</a>
-<a href="/contact.html">/contact</a>
-
+                    ${site_map.getvalue()}
                 </nav>
             </header>
             <main>
                 <div class="intro">
-                    <p>I am Bhargav Kulkarni, a PhD student at the University of Utah since
-2023. I am advised by <a href="https://www.pavpanchekha.com/">Pavel
-Panchekha</a>.</p>
-<p>My goal is to make it easier for developers to write more correct and
-more robust code. To that end I have been currently working on sound
-attribution of floating point error in floating point programs. I am
-also currently contributing to the Herbie project.</p>
-<p>Before joining the PhD program at the U, I got my bachelor’s in
-Computer Science from the Birla Institute of Technology and Sciences.
-There I worked with Prof. Anup Basil Mathew on adapting the Coq
-interactive theorem prover in an educational environment.</p>
-<p>You can find ways to contact me <a href="/contact.html">here</a>.</p>
-<blockquote>
-<p>Once you learn to read, you will be forever free.<br />
-— Frederick Douglass</p>
-</blockquote>
-
+                    ${content}
                 </div>
             </main>
             <footer><hr/>Website styling adapted from <a href="https://www.cs.cornell.edu/~asampson/">Adrian Sampson</a></footer>

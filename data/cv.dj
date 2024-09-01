@@ -1,0 +1,67 @@
+{% template = "cv.html"
+   dir = "cv" %}
+
+I am a PhD student advised by [Prof. Pavel Panchekha]()
+and interested in PL and formal methods.
+
+# Education
+
+: University of Utah
+
+  PhD in Computer Science, 2023-\
+  Advisor: [Pavel Panchekha]()\
+  CGPA: 3.9/4.0\
+  Courses: PL, architecture, algorithms, verification, distributed systems
+
+: Birla Institute of Technology and Science, Pilani
+
+  B.Eng. in Computer Science, 2019-2023\
+  CGPA: 8.9/10.0; Merit scholarship holder
+
+# Research Positions
+
+: NASA Langley Formal Methods
+
+  Research Intern, 2024\
+  Working on generating PVS proof certificates for Herbie's accuracy aware optimizations
+
+: The Herbie Project [[source]]()
+
+  Researcher and Contributer, 2023-\
+  Working on sound attribution of floating point errors
+
+: HCFC Lab @ BITS Pilani, Goa
+
+  Undergraduate Researcher, 2022\
+  Developed a portable Indian Sign Language translator\
+  Used beam search and, Hidden Markov Models, conducted user study
+
+: Automatons
+
+  Undergraduate Researcher, 2022\
+  Worked with Prof. SP Suresh and Prof. Anup Basil Mathew @ Chennai Mathematical Institute\
+  Formalized basic DFA/NFA constructions in Coq/Rocq\
+  Some initial work adapted into undergraduate Discrete Structures course
+
+# Teaching Positions
+
+: University of Utah
+
+  *Fall 2023*: CS 3810 "Computer Organization"
+
+: Birla Institute of Technology and Science, Pilani
+
+  *Spring 2023*: Operating Systems, Compiler Construction, Computer Networks\
+  *Fall 2022*: Operating Systems Computer Architecture\
+  *Spring 2022*: VLSI Design, Computer Programming\
+  *Fall 2022*: Discrete Structures in Computer Science
+
+# Skills & Projects
+
+*General Programming*: Python, Racket, Java, JavaScript, SQL\
+*Systems Programming*: C/C++, Bass, Rust\
+*Hardware*: Verilog, MASM
+
+*Trinity Game Engine*: A game engine and byte code VM for scripting [[source]](https://github.com/bhargavkulk/trinity)\
+*Logic in Coq*: Classical propositional logic and natural deduction in Coq/Rocq [[source]](https://github.com/bhargavkulk/logic-in-Coq)\
+*CheemScheme*: Scheme dialect in C++ with tail recursion and error reporting [[source]](https://github.com/bhargavkulk/cheem-scheme/tree/C%2B%2B)
