@@ -11,7 +11,7 @@ import sass
 from plumbum.path.local import shutil
 
 DATA_PATH = 'data'
-BUILD_PATH = 'build'
+BUILD_PATH = 'docs'
 TEMPLATE_PATH = 'templates'
 
 SITE_MAP = OrderedDict([('home', '/'), ('research', '/research.html'), ('cv', '/cv.html'), ('contact', '/contact.html')])
