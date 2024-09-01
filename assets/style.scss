@@ -1,0 +1,161 @@
+@import url("https://fonts.cdnfonts.com/css/cooper-hewitt-book");
+@import url("https://cdn.jsdelivr.net/npm/charter-webfont@4/charter.min.css");
+@import "gruvbox";
+
+$font-size-base: 18px;
+$line-height-base: 1.428571429;
+$line-height-computed: floor(($font-size-base * $line-height-base));
+$body-margin: 8px;
+$column-width: 720px;
+$mobile-size: $column-width;
+$leftwidth: 310;
+$title-font: "Nanum Gothic Coding", sans-serif;
+$base-font: "Charter", sans-serif;
+
+//- COLORS ---------------------------------------------------------------------
+$main-dark: $gb-dm-bg0;
+$main-light: $gb-dm-fg0;
+$hlht-light: $gb-dm-light-orange;
+$hlht-dark: $gb-dm-dark-orange;
+
+//- WEBPAGE BODY ---------------------------------------------------------------
+body {
+    font-size: $font-size-base;
+    line-height: $line-height-base;
+    margin: $body-margin;
+    font-family: $base-font;
+
+    background-color: $main-light;
+    color: $main-dark;
+
+    @media (prefers-color-scheme: dark) {
+        background-color: $main-dark;
+        color: $main-light;
+    }
+}
+
+.container {
+    // Narrow, centered column.
+    max-width: $column-width;
+    margin: 0 auto;
+}
+
+p {
+    margin: 0 0 calc($line-height-computed / 2);
+}
+
+a {
+    color: $hlht-light;
+    @media (prefers-color-scheme: dark) {
+        color: $hlht-dark;
+    }
+}
+
+a:hover {
+    color: $hlht-dark;
+    @media (prefers-color-scheme: dark) {
+        color: $hlht-light;
+    }
+}
+
+blockquote {
+    margin-left: 0;
+    margin-right: 0;
+    border-left: 5px solid $main-dark;
+    padding-left: 0.5rem;
+    font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        border-color: $main-light;
+    }
+}
+
+//- WEBPAGE HEADER -------------------------------------------------------------
+
+header {
+    margin-top: 0.5rem;
+
+    // Mobile: stacked.
+    nav {
+        margin-top: 0.75rem;
+    }
+
+    // Desktop: side by side.
+    @media (min-width: $mobile-size) {
+        display: flex;
+        #name {
+            width: $leftwidth;
+        }
+        nav {
+            //width: $column-width - $leftwidth;
+            flex-grow: 1;
+            margin-top: 0.5rem;
+        }
+    }
+}
+
+header {
+    color: $hlht-dark;
+    font-family: $title-font;
+    //font-weight: 700;
+    a {
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: none;
+    }
+    h1 {
+        margin: 0;
+        font-size: 35px;
+    }
+    address {
+        margin: 0;
+        p {
+            margin: 0;
+        }
+    }
+    @media (prefers-color-scheme: dark) {
+        color: $hlht-light;
+    }
+}
+#name {
+    white-space: nowrap;
+}
+nav {
+    // Negate first/last link padding.
+    margin: 0 -3px;
+    a {
+        display: inline-block;
+        margin: 0;
+        padding: 0 3px;
+        border: 1px solid transparent;
+        border-radius: 3px;
+    }
+
+    a.active {
+        border-color: $hlht-light;
+        @media (prefers-color-scheme: dark) {
+            border-color: $hlht-dark;
+        }
+    }
+
+    a.active:hover {
+        border-color: $hlht-dark;
+        @media (prefers-color-scheme: dark) {
+            border-color: $hlht-light;
+        }
+    }
+
+    // Looser layout on desktop.
+    @media (min-width: $mobile-size) {
+        text-align: right;
+        a {
+            padding: 2px 6px;
+        }
+    }
+}
+
+//- HOMEPAGE SPECIFIC ----------------------------------------------------------
+
+.intro {
+    margin: 1em 0;
+}

@@ -1,0 +1,146 @@
+@import url("https://fonts.cdnfonts.com/css/cooper-hewitt-book");
+@import url("https://cdn.jsdelivr.net/npm/charter-webfont@4/charter.min.css");
+body {
+  font-size: 18px;
+  line-height: 1.428571429;
+  margin: 8px;
+  font-family: "Charter", sans-serif;
+  background-color: #fbf1c7;
+  color: #282828;
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #282828;
+    color: #fbf1c7;
+  }
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+p {
+  margin: 0 0 12.5px;
+}
+
+a {
+  color: #f38019;
+}
+@media (prefers-color-scheme: dark) {
+  a {
+    color: #d65d0e;
+  }
+}
+
+a:hover {
+  color: #d65d0e;
+}
+@media (prefers-color-scheme: dark) {
+  a:hover {
+    color: #f38019;
+  }
+}
+
+blockquote {
+  margin-left: 0;
+  margin-right: 0;
+  border-left: 5px solid #282828;
+  padding-left: 0.5rem;
+  font-style: italic;
+}
+@media (prefers-color-scheme: dark) {
+  blockquote {
+    border-color: #fbf1c7;
+  }
+}
+
+header {
+  margin-top: 0.5rem;
+}
+header nav {
+  margin-top: 0.75rem;
+}
+@media (min-width: 720px) {
+  header {
+    display: flex;
+  }
+  header #name {
+    width: 310;
+  }
+  header nav {
+    flex-grow: 1;
+    margin-top: 0.5rem;
+  }
+}
+
+header {
+  color: #d65d0e;
+  font-family: "Nanum Gothic Coding", sans-serif;
+}
+header a {
+  text-decoration: none;
+}
+header a:hover {
+  text-decoration: none;
+}
+header h1 {
+  margin: 0;
+  font-size: 35px;
+}
+header address {
+  margin: 0;
+}
+header address p {
+  margin: 0;
+}
+@media (prefers-color-scheme: dark) {
+  header {
+    color: #f38019;
+  }
+}
+
+#name {
+  white-space: nowrap;
+}
+
+nav {
+  margin: 0 -3px;
+}
+nav a {
+  display: inline-block;
+  margin: 0;
+  padding: 0 3px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+}
+nav a.active {
+  border-color: #f38019;
+}
+@media (prefers-color-scheme: dark) {
+  nav a.active {
+    border-color: #d65d0e;
+  }
+}
+nav a.active:hover {
+  border-color: #d65d0e;
+}
+@media (prefers-color-scheme: dark) {
+  nav a.active:hover {
+    border-color: #f38019;
+  }
+}
+@media (min-width: 720px) {
+  nav {
+    text-align: right;
+  }
+  nav a {
+    padding: 2px 6px;
+  }
+}
+
+.intro {
+  margin: 1em 0;
+}
+
+/*# sourceMappingURL=style.css.map */
