@@ -161,6 +161,24 @@ dd {
     }
 }
 
+aside {
+    width: 30%;
+    padding-left: 0.5rem;
+    margin-left: 0.5rem;
+    float: right;
+    border-left: 3px solid $gray-light;
+    font-style: italic;
+    color: $gray-light;
+    @media (prefers-color-scheme: dark) {
+        border-color: $gray-dark;
+        color: $gray-dark;
+    }
+}
+
+aside > p {
+    margin: 0.5rem;
+}
+
 //- WEBPAGE HEADER -------------------------------------------------------------
 
 header {

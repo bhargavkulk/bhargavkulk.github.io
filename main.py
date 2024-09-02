@@ -57,7 +57,7 @@ def get_frontmatter(path: str) -> dict[str, Any]:
                 data.append(line)
     return read_toml('\n'.join(data))
 
-sass.compile(dirname=('assets', 'build/assets'), output_style='compressed')
+sass.compile(dirname=('assets', 'docs/assets'), output_style='compressed')
 
 for file in os.listdir(DATA_PATH):
     file_path = os.path.join(DATA_PATH, file)
