@@ -24,7 +24,7 @@
             href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap"
             rel="stylesheet"
         />
-        <link rel="stylesheet" href="./assets/style.css" />
+        <link rel="stylesheet" href="/assets/style.css" />
         <script>
                 document.addEventListener("DOMContentLoaded", function() {
                     var mathElements = document.querySelectorAll("div.math");
@@ -62,7 +62,11 @@
                 <nav>${site_map.getvalue()}</nav>
             </header>
             <main>
-                <div class="intro">${content}</div>
+                <div class="intro">
+                    <h1 class="blogtitle">${title}</h1>
+                    <p class="blogdate">${date.strftime('%B %-m, %Y')}</p>
+                    ${content}
+                </div>
             </main>
             <footer>
                 <hr />

@@ -24,7 +24,7 @@
             href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap"
             rel="stylesheet"
         />
-        <link rel="stylesheet" href="./assets/style.css" />
+        <link rel="stylesheet" href="/assets/style.css" />
         <script>
                 document.addEventListener("DOMContentLoaded", function() {
                     var mathElements = document.querySelectorAll("div.math");
@@ -59,10 +59,33 @@
                         <a href="http://www.utah.edu/">University of Utah</a>
                     </address>
                 </div>
-                <nav>${site_map.getvalue()}</nav>
+                <nav><a href="/">/home</a>
+<a href="/research.html">/research</a>
+<a href="/blog.html" class="active">/blog</a>
+<a href="/cv.html">/cv</a>
+<a href="/contact.html">/contact</a>
+</nav>
             </header>
             <main>
-                <div class="intro">${content}</div>
+                <div class="intro">
+                    <h1 class="blogtitle">First Blog Post!</h1>
+                    <p class="blogdate">September 9, 2024</p>
+                    <p>This blog post is <em>hopefully</em> the start of me keeping track of
+what I am doing, learning, and accomplishing during my PhD.</p>
+<p>This blog and the website as a whole is built from scratch, that’s
+right no static site generators 😤. I use <a
+href="https://djot.net/">Djot</a> as my markup language, and <a
+href="https://www.makotemplates.org/">Mako</a> as my templating engine
+as choice. I don’t like how widely-used static site generators either
+use a markup language I don’t like or a templating engine that I don’t
+like. I always like writing things from scratch however painful it ends
+up being. But this wasn’t too bad. Parsing Djot was easy because of <a
+href="https://pandoc.org/">Pandoc</a>, and Mako is very easy to use
+because it’s just Python!</p>
+<p>I am looking forward to filling this blog up pretty frequently; I
+already have one blog cooking up!</p>
+
+                </div>
             </main>
             <footer>
                 <hr />

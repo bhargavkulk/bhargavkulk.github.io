@@ -1,7 +1,7 @@
 {% template = "cv.html"
    dir = "cv" %}
 
-I am a PhD student advised by [Prof. Pavel Panchekha]()
+I am a PhD student advised by [Prof. Pavel Panchekha](https://pavpanchekha.com/)
 and interested in PL and formal methods.
 
 # Education
@@ -9,7 +9,7 @@ and interested in PL and formal methods.
 : University of Utah
 
   PhD in Computer Science, 2023-\
-  Advisor: [Pavel Panchekha]()\
+  Advisor: [Pavel Panchekha](https://pavpanchekha.com/)\
   CGPA: 3.9/4.0\
   Courses: PL, architecture, algorithms, verification, distributed systems
 
@@ -25,7 +25,7 @@ and interested in PL and formal methods.
   Research Intern, 2024\
   Working on generating PVS proof certificates for Herbie's accuracy aware optimizations
 
-: The Herbie Project [[source]]()
+: The Herbie Project [`[source]`](https://herbie.uwplse.org/)
 
   Researcher and Contributer, 2023-\
   Working on sound attribution of floating point errors
@@ -59,9 +59,9 @@ and interested in PL and formal methods.
 # Skills & Projects
 
 *General Programming*: Python, Racket, Java, JavaScript, SQL\
-*Systems Programming*: C/C++, Bass, Rust\
+*Systems Programming*: C/C++, Bash, Rust\
 *Hardware*: Verilog, MASM
 
-*Trinity Game Engine*: A game engine and byte code VM for scripting [[source]](https://github.com/bhargavkulk/trinity)\
-*Logic in Coq*: Classical propositional logic and natural deduction in Coq/Rocq [[source]](https://github.com/bhargavkulk/logic-in-Coq)\
-*CheemScheme*: Scheme dialect in C++ with tail recursion and error reporting [[source]](https://github.com/bhargavkulk/cheem-scheme/tree/C%2B%2B)
+*Trinity Game Engine*: A game engine and byte code VM for scripting [`[source]`](https://github.com/bhargavkulk/trinity)\
+*Logic in Coq*: Classical propositional logic and natural deduction in Coq/Rocq [`[source]`](https://github.com/bhargavkulk/logic-in-Coq)\
+*CheemScheme*: Scheme dialect in C++ with tail recursion and error reporting [`[source]`](https://github.com/bhargavkulk/cheem-scheme/tree/C%2B%2B)

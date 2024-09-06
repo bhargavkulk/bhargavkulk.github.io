@@ -24,7 +24,7 @@
             href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap"
             rel="stylesheet"
         />
-        <link rel="stylesheet" href="./assets/style.css" />
+        <link rel="stylesheet" href="/assets/style.css" />
         <script>
                 document.addEventListener("DOMContentLoaded", function() {
                     var mathElements = document.querySelectorAll("div.math");
@@ -62,7 +62,15 @@
                 <nav>${site_map.getvalue()}</nav>
             </header>
             <main>
-                <div class="intro">${content}</div>
+                <div class="intro blog">
+                    <h1 class="blogtitle">Blog</h1>
+                    <p class="blogdate"></p>
+% for date in dates:
+    <p class="bloglistdate">${date.strftime('%B %-m, %Y')}</p>
+    <a href="/blog/${date.strftime('%Y-%m-%d')}.html" class="bloglisttitle">${data[date]['title']}</a>
+    <p>${data[date]['abstract']}<a href="/blog/${date.strftime('%Y-%m-%d')}.html">&hellip;</a></p>
+% endfor
+                </p>
             </main>
             <footer>
                 <hr />

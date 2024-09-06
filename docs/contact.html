@@ -5,10 +5,45 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>Bhargav Kulkarni</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+            integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+"
+            crossorigin="anonymous"
+        />
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+            integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+            crossorigin="anonymous"
+        ></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
         <link rel="stylesheet" href="./assets/style.css" />
+        <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    var mathElements = document.querySelectorAll("div.math");
+                    for (var i = 0; i < mathElements.length; i++) {
+                        katex.render(mathElements[i].textContent, mathElements[i], {
+                            throwOnError: false,
+                            displayMode: true
+                        });
+                    }
+
+                    var mathInlines = document.querySelectorAll("span.math");
+                    for (var i = 0; i < mathInlines.length; i++) {
+                        katex.render(mathInlines[i].textContent, mathInlines[i], {
+                            throwOnError: false,
+                            displayMode: false
+                        });
+                    }
+                });
+            </script>
     </head>
     <body>
         <div class="container">
@@ -24,17 +59,15 @@
                         <a href="http://www.utah.edu/">University of Utah</a>
                     </address>
                 </div>
-                <nav>
-                    <a href="/">/home</a>
+                <nav><a href="/">/home</a>
 <a href="/research.html">/research</a>
+<a href="/blog.html">/blog</a>
 <a href="/cv.html">/cv</a>
 <a href="/contact.html" class="active">/contact</a>
-
-                </nav>
+</nav>
             </header>
             <main>
-                <div class="intro">
-                    <p>The fastest way to reach out to me is via my e-mail: <a
+                <div class="intro"><p>The fastest way to reach out to me is via my e-mail: <a
 href="mailto:bhargavkishork@gmail.com"><code>bhargavkishork@gmail.com</code></a>.
 I am also active on these sites but I may not answer as quickly:</p>
 <ul>
@@ -42,10 +75,15 @@ I am also active on these sites but I may not answer as quickly:</p>
 <li><a
 href="https://www.linkedin.com/in/bhargav-kulkarni-600983192/">LinkedIn</a></li>
 </ul>
-
-                </div>
+</div>
             </main>
-            <footer><hr/>Website styling adapted from <a href="https://www.cs.cornell.edu/~asampson/">Adrian Sampson</a></footer>
+            <footer>
+                <hr />
+                Website styling adapted from
+                <a href="https://www.cs.cornell.edu/~asampson/"
+                    >Adrian Sampson</a
+                >
+            </footer>
         </div>
     </body>
 </html>

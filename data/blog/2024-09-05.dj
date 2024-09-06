@@ -1,0 +1,14 @@
+This blog post is _hopefully_ the start of me keeping track of what I am doing,
+learning, and accomplishing during my PhD.
+
+This blog and the website as a whole is built from scratch, that's right no
+static site generators 😤. I use [Djot](https://djot.net/) as my markup
+language, and [Mako](https://www.makotemplates.org/) as my templating engine as
+choice. I don't like how widely-used static site generators either use a markup
+language I don't like or a templating engine that I don't like. I always like
+writing things from scratch however painful it ends up being. But this wasn't
+too bad. Parsing Djot was easy because of [Pandoc](https://pandoc.org/), and
+Mako is very easy to use because it's just Python!
+
+I am looking forward to filling this blog up pretty frequently; I already have
+one blog cooking up!

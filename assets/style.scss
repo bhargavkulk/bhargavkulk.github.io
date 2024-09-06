@@ -1,4 +1,5 @@
 @import url("https://cdn.jsdelivr.net/npm/charter-webfont@4/charter.min.css");
+@import url("https://fonts.cdnfonts.com/css/fantasque-sans-mono");
 @import "gruvbox";
 
 $font-size-base: 18px;
@@ -9,7 +10,7 @@ $column-width: 720px;
 $mobile-size: $column-width;
 $leftwidth: 310;
 $title-font: "Nanum Gothic Coding", sans-serif;
-$mono-font: "IBM Plex Mono", monospace;
+$mono-font: "Fantasque Sans Mono", monospace;
 $base-font: "Charter", sans-serif;
 
 //- COLORS ---------------------------------------------------------------------
@@ -74,7 +75,7 @@ body {
 }
 
 p {
-    margin: 0 0 calc($line-height-computed / 2);
+    margin: 0 0 calc(#{$line-height-computed} / 2);
 }
 
 a {
@@ -94,11 +95,15 @@ a:hover {
 blockquote {
     margin-left: 0;
     margin-right: 0;
-    border-left: 5px solid $main-dark;
+    margin-top: $line-height-computed;
+    margin-bottom: calc(#{$line-height-computed} / 2);
+    border-left: 5px solid $gray-light;
+    color: $gray-light;
     padding-left: 0.5rem;
     font-style: italic;
     @media (prefers-color-scheme: dark) {
-        border-color: $main-light;
+        border-color: $gray-dark;
+        color: $gray-dark;
     }
 }
 
@@ -110,7 +115,7 @@ pre {
 pre,
 code {
     font-family: $mono-font;
-    font-size: 80%;
+    //font-size: 80%;
 }
 
 main {
@@ -123,7 +128,7 @@ main {
         font-family: $title-font;
         color: $gray-light;
         margin-top: $line-height-computed;
-        margin-bottom: calc($line-height-computed / 2);
+        margin-bottom: calc(#{$line-height-computed} / 2);
         @media (prefers-color-scheme: dark) {
             color: $gray-dark;
         }
@@ -143,8 +148,31 @@ h1 {
     font-size: $font-size-h1;
 }
 
+$blogtitle-h1-size: floor(($font-size-base * 2));
+h1.blogtitle {
+    font-size: $blogtitle-h1-size;
+    border-bottom: none;
+    color: $main-dark;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    @media (prefers-color-scheme: dark) {
+        color: $main-light;
+    }
+}
+
+p.blogdate {
+    margin-top: 0;
+    margin-bottom: calc(#{$line-height-computed} / 2);
+    color: $gray-light;
+    font-family: $title-font;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-dark;
+    }
+}
+
 dl {
-    margin: 0 0 calc($line-height-computed / 2);
+    margin-top: $line-height-computed;
+    margin-bottom: calc(#{$line-height-computed} / 2);
 }
 
 dt {
@@ -177,6 +205,34 @@ aside {
 
 aside > p {
     margin: 0.5rem;
+}
+
+div.math {
+    margin-top: $line-height-computed;
+    margin-bottom: calc(#{$line-height-computed} / 2);
+    @media (prefers-color-scheme: dark) {
+        border-color: $main-light;
+    }
+}
+
+div .bloglistdate {
+    margin-top: $line-height-computed;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    font-family: $title-font;
+    color: $gray-light;
+    @media (prefers-color-scheme: dark) {
+        border-color: $gray-dark;
+    }
+}
+
+div a.bloglisttitle {
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: calc(#{$line-height-computed} / 2);
+    font-size: $font-size-h1;
+    font-family: $title-font;
+    text-decoration: none;
 }
 
 //- WEBPAGE HEADER -------------------------------------------------------------
@@ -345,14 +401,22 @@ span.linenos.special {
     background: $main-dark;
     color: $main-light;
     padding: 0.5em 1em;
+    margin-top: $line-height-computed;
+    margin-bottom: calc(#{$line-height-computed} / 2);
+    border-top: 5px solid $gray-light;
+    border-bottom: 5px solid $gray-light;
     @media (prefers-color-scheme: dark) {
         background: $main-light;
         color: $main-dark;
+        border-color: $gray-dark;
     }
 }
 .highlight .c {
-    color: #888888;
+    color: $gray-light;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-dark;
+    }
 } /* Comment */
 .highlight .err {
     border: 1px solid #ff0000;
@@ -364,26 +428,44 @@ span.linenos.special {
 .highlight .ch {
     color: $gray-light;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-dark;
+    }
 } /* Comment.Hashbang */
 .highlight .cm {
     color: $gray-light;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-dark;
+    }
 } /* Comment.Multiline */
 .highlight .cp {
     color: $gray-light;
     font-weight: bold;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-dark;
+    }
 } /* Comment.Preproc */
 .highlight .cpf {
     color: $gray-light;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-dark;
+    }
 } /* Comment.PreprocFile */
 .highlight .c1 {
     color: $gray-light;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-dark;
+    }
 } /* Comment.Single */
 .highlight .cs {
     color: $gray-light;
     font-weight: bold;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-dark;
+    }
 } /* Comment.Special */
 .highlight .kc {
     font-weight: bold;
@@ -413,6 +495,9 @@ span.linenos.special {
 .highlight .s {
     color: $gray-dark;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Literal.String */
 .highlight .nb {
     font-weight: bold;
@@ -422,26 +507,41 @@ span.linenos.special {
     color: $gray-dark;
     font-weight: bold;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Name.Class */
 .highlight .no {
     color: $gray-dark;
     font-weight: bold;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Name.Constant */
 .highlight .nf {
     color: $gray-dark;
     font-weight: bold;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Name.Function */
 .highlight .nn {
     color: $gray-dark;
     font-weight: bold;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Name.Namespace */
 .highlight .nv {
     color: $gray-dark;
     font-weight: bold;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Name.Variable */
 .highlight .ow {
     font-weight: bold;
@@ -449,54 +549,93 @@ span.linenos.special {
 .highlight .sa {
     color: $gray-dark;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Literal.String.Affix */
 .highlight .sb {
     color: $gray-dark;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Literal.String.Backtick */
 .highlight .sc {
     color: $gray-dark;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Literal.String.Char */
 .highlight .dl {
     color: $gray-dark;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Literal.String.Delimiter */
 .highlight .sd {
     color: $gray-dark;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Literal.String.Doc */
 .highlight .s2 {
     color: $gray-dark;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Literal.String.Double */
 .highlight .se {
     color: $gray-dark;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Literal.String.Escape */
 .highlight .sh {
     color: $gray-dark;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Literal.String.Heredoc */
 .highlight .si {
     color: $gray-dark;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Literal.String.Interpol */
 .highlight .sx {
     color: $gray-dark;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Literal.String.Other */
 .highlight .sr {
     color: $gray-dark;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Literal.String.Regex */
 .highlight .s1 {
     color: $gray-dark;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Literal.String.Single */
 .highlight .ss {
     color: $gray-dark;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Literal.String.Symbol */
 .highlight .bp {
     font-weight: bold;
@@ -506,24 +645,39 @@ span.linenos.special {
     color: $gray-dark;
     font-weight: bold;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Name.Function.Magic */
 .highlight .vc {
     color: $gray-dark;
     font-weight: bold;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Name.Variable.Class */
 .highlight .vg {
     color: $gray-dark;
     font-weight: bold;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Name.Variable.Global */
 .highlight .vi {
     color: $gray-dark;
     font-weight: bold;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Name.Variable.Instance */
 .highlight .vm {
     color: $gray-dark;
     font-weight: bold;
     font-style: italic;
+    @media (prefers-color-scheme: dark) {
+        color: $gray-light;
+    }
 } /* Name.Variable.Magic */

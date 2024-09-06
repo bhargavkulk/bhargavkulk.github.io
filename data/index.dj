@@ -1,6 +1,3 @@
-{% template = "default.html"
-   dir = "home" %}
-
 I am Bhargav Kulkarni, a PhD student at the University of Utah since
 2023. I am advised by [Pavel Panchekha](https://www.pavpanchekha.com/).
 

@@ -62,7 +62,13 @@
                 <nav>${site_map.getvalue()}</nav>
             </header>
             <main>
-                <div class="intro">${content}</div>
+                <div class="intro">
+                    ${content}
+                    <p class="bloglistdate">Latest Blogpost - ${latest_date.strftime('%B %-m, %Y')} -
+                        <a href="/blog.html">More Blogposts</a></p>
+                    <a href="/blog/${latest_date.strftime('%Y-%m-%d')}.html" class="bloglisttitle">${latest_data['title']}</a>
+                    <p>${latest_data['abstract']}<a href="/blog/${latest_date.strftime('%Y-%m-%d')}.html">&hellip;</a></p>
+                </div>
             </main>
             <footer>
                 <hr />

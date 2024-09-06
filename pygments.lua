@@ -10,3 +10,11 @@ function CodeBlock(el)
         return el
     end
 end
+
+function Math(el)
+    if el.mathtype == "InlineMath" then
+        return pandoc.Span(el.text, { class = "math" })
+    else
+        return el
+    end
+end
