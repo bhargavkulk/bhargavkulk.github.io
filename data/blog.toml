@@ -1,3 +1,11 @@
 ["2024-09-05"]
 title = "First Blog Post!"
 abstract = "This blog post is hopefully the start of me keeping track of what I am doing, learning, and accomplishing during my PhD."
+
+["2024-09-12"]
+title = "Floating Point and Rounding Error"
+abstract = """Floating point numbers are how we squeeze the infinite world of real numbers \
+into a finite space on our computers. As programmers, we use them all the time \
+to mimic real-world calculations, often without really thinking about the \
+consequences of approximating infinite numbers with finite ones. This can lead \
+to some pretty funny and unexpected situations."""

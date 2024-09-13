@@ -1,0 +1,240 @@
+Floating-point numbers are how we squeeze the infinite world of real numbers
+into a finite space on our computers. As programmers, we use them all the time
+to mimic real-world calculations, often without really thinking about the
+consequences of approximating infinite numbers with finite ones. This can lead
+to some pretty funny and unexpected situations. Check out this Python function
+for an example:
+
+```pycon
+>>> def fun(x):
+...     (x + 1) - x
+```
+
+This function should trivially return `1.0` for any input. Lets try with the
+integer `5`.
+
+```pycon
+>>> fun(5)
+1
+```
+
+That's exactly what we expected. Now let's try using the floating-point `5.0`.
+
+```pycon
+>>> fun(5.0)
+1.0
+```
+
+We are still getting the expected result. What about a large number like `1e50`?
+
+```pycon
+>>> fun(1e50)
+0.0
+```
+
+Well, that's weird. What's happening here? It turns out that `1e50 + 1` is `1e50`
+in floating-point. Which then allows `1e50 + 1` and `1e50` to completely
+"cancel"[^1]. This error happens due to how floating-point numbers are
+represented. A floating-point number comprises 3 numbers: the sign $`s`, the
+mantissa $`m`, and the exponent $`e`[^2].
+
+```math
+f = -1^{s} \cdot m \cdot 2^{e}
+```
+
+The key thing to remember is that the mantissa is limited to a certain number
+of bits, which determines the precision of the floating point system (53 bits
+for what we call double-precision floating point). Because of this limited
+precision, we can't accurately represent a number like `1e50 + 1`. It just
+doesn't fit! A limited mantissa introduces some error whenever you
+try to represent a real number as a floating-point number. It is this *rounding*
+error that is the primary source of potential inaccuracies when you perform
+floating-point computations. But what do we even know about rounding errors?
+
+## Errors, errors everywhere
+
+To be confident that we are performing a floating-point computation accurately,
+we would want to know whether or not it has a high rounding error. In other words,
+we are interested in bounding the rounding error of our computation. A quick
+Google search on this topic lands us at the
+[Wikipedia page for rounding error](https://en.wikipedia.org/wiki/Round-off_error#Machine_epsilon).
+
+> The machine epsilon, denoted $`\varepsilon_{mach}` is the maximum possible
+> absolute relative error in representing a nonzero real number $`x`
+> in a floating-point number system.
+
+```math
+\left|\frac{x - \hat x}{x}\right| \le \varepsilon_{mach}
+```
+
+$`\varepsilon_{mach}` is more or less equivalent to $`2^{1 - p}` where $`p` is
+the precision of the floating point system[^3]. So, we have a bound for our
+rounding error. But wait, something does not add up. In our Python example, the
+error for the input `1e50` is greater than $`\varepsilon_{mach}`. So what's
+going on?
+
+Our Python example not only represents real numbers in floating point but also
+performs operations on them. Floating point operations also introduce some
+rounding errors. If we trust the people behind the IEEE floating point standard
+to be competent, then there is no way floating point operations introduce more
+than $`\varepsilon_{mach}` of error. Sothere is *something* that is blowing up
+these small $`\varepsilon_{mach}`s that are being introduced. To hunt for that
+*something* let's write down what a rounding error looks like.
+
+```math
+\begin{align*}
+\left|\frac{x - \hat x}{x}\right| &= \varepsilon \\
+\left|x - \hat x\right| &= \varepsilon|x|
+\end{align*}
+```
+
+Let's assume that the rounding error is always positive.
+
+```math
+\begin{align*}
+x - \hat x &= \varepsilon\cdot x \\
+\hat x &= x(1 + \varepsilon_x)
+\end{align*}
+```
+
+We now have a relationship between a real number $`x` and its floating point
+representation $`\hat x`. Similarly for a real-valued function $`f`,
+
+```math
+\begin{align*}
+\hat f(\hat x) &= f(\hat x)(1 + \varepsilon_f) \\
+\hat f(\hat x) &= f(x(1 + \varepsilon_x))(1 + \varepsilon_f) \\
+\end{align*}
+```
+
+We can already see the rounding errors accumulating. So with a more general
+notation, let us say we have a floating point program $`\hat P`. $`\hat P` takes
+in some inputs, which we will aggregate as $`\bar x`. Let $`F` be the set of
+functions that make up $`P`. We can then say that $`\hat P` is also
+parameterized over a collection of rounding errors $`\bar\varepsilon`,
+introduced by all the inputs and every $`f \in F`. Let's try to bound the
+relative error of $`\hat P` to see how the rounding errors accumulate. An easy
+way to do this would be to find a linear approximation of $`\hat P`. Keep in
+mind that $`\hat P` is parameterized w.r.t both $`\bar x` and
+$`\bar\varepsilon`.
+
+## Shake it off: Maclaurin's version
+
+Assuming that every $`f \in F` is twice-differentiable, let's try to write down
+the [Taylor expansion](https://en.wikipedia.org/wiki/Taylor_series#Taylor_series_in_several_variables)
+of $`\hat P(\bar x;\bar\varepsilon)` w.r.t to all the $`\varepsilon`s around
+$`\bar\varepsilon = 0` for a fixed input $`\bar x`[^4].
+
+```math
+\hat P(\bar x; \bar \varepsilon = 0) = P(\bar x) +
+  \underbrace{\sum_{\varepsilon \in \bar \varepsilon}
+    \varepsilon \frac{\partial P}{\partial \varepsilon} \Bigr|_{\bar x}}_{\text{First Order Term}} +
+  \underbrace{\frac{1}{2!}\sum_{\varepsilon \in \bar \varepsilon}\sum_{\varepsilon' \in \bar \varepsilon}
+    \varepsilon\varepsilon'\frac{\partial^2 P}{\partial \varepsilon\partial \varepsilon'} \Bigr|_{\bar x} +
+  \ldots}_{\text{Higher Order Terms}}
+```
+
+Now we can find the relative error of $`\hat P` at the point $`\bar x`.
+
+```math
+\begin{align*}
+E(\bar x) &= \left|\frac{\hat P(\bar x) - P(\bar x)}{P(\bar x)}\right| \\
+          &= \sum_i \epsilon_i \frac{\partial P}{\partial \varepsilon_i} \Bigr|_{\bar x} \frac{1}{P(\bar x)} +
+          O(\varepsilon^2)
+\end{align*}
+```
+
+Ignoring the higher order terms[^5] we now have a bound for the relative error.
+
+```math
+E(\bar x) \le \epsilon_{mach} \sum_i A_i(\bar x)
+```
+
+We are not done yet. We still need to simplify the coefficients of the sum.
+
+```math
+A_i(\bar x) = \frac{\partial P}{\partial \varepsilon_i} \Bigr|_{\bar x} \frac{1}{P(\bar x)}
+```
+
+It might be helpful to take a small example here. Let us assume $`P` just takes
+one argument $`x` and is equal to $`f(g(h(x)))`. Then $`\hat P` would look like,[^6]
+
+```math
+\hat P(x) = f(g(h(x)(1 + \varepsilon_h))(1 + \varepsilon_g))(1 + \varepsilon_f)
+```
+
+Lets find $`A_h(\bar x)`.
+
+```math
+A_h(\bar x) = \frac{g(h(x))}{f(g(h(x)))}\frac{\partial f(g(h(x)))}{g(h(x))} \cdot
+              \frac{h(x)}{g(h(x))}\frac{\partial g(h(x))}{h(x)}
+```
+
+We can see terms of a certain form here.
+
+```math
+\left|\frac{xf'(x)}{f(x)}\right| = \Gamma_f(x)
+```
+
+## Terms and Conditions Apply
+
+What we just saw is the condition number of a function $`f`. The condition
+number is the factor by which a function increases the error in its input. And
+if we squint at our bound for the relative error of $`\hat P` we can see that
+the rounding error introduced by the operation $`f` is multiplied by all the
+condition numbers that lie on the "path" from $`f` to $`P`. If we look at the
+data flow path arising from the function $`f` and multiply all the condition
+numbers we encounter on the path, we can find out how much the rounding error
+introduced by $`f` is amplified. This means a function with a high condition
+number at some input is usually the culprit of large floating-point innacuracies
+at that input[^7]. Now, not only can we calculate a much tighter bound for the
+relative error of a floating point program, but also "guess" which functions
+contribute the most to the overall error.
+
+Looking back at the Python example, the condition number for minus is
+
+```math
+\left|\frac{x}{x - y}\right|
+```
+
+For `1e50`, the condition number equals `1e50`. The machine epsilon, which
+I am assuming the max introduced rounding error is just `1e-16`. The minus
+amplifies this error to a whopping `1e34`. So clearly, for significant inputs,
+the minus operation is terrible, so to fix it, we should try to rewrite away the
+minus. [Herbie](https://herbie.uwplse.org), a tool that rewrites floating point
+expressions for increased accuracy, agrees with my diagnosis and performs the
+trivial rewrite of `1`.
+
+## Conclusion
+
+So to answer the question posed earlier, the rounding error is also being
+amplified by the inherent unstableness of the function which we measure by its
+condition number. We can then concisely write down the error of $`z = f(x)` as
+
+```math
+\epsilon_z = \Gamma_f\epsilon_x + \epsilon_f
+```
+
+Its important to note that this error model does not account for overflows
+and underflows which make up another set of floating-point footguns.
+Nevertheless with this blogpost we now know what the hell is (mostly) up with
+rounding error.
+
+[^1]: "Cancel" means exactly what you think. The bits of the two floating point
+numbers exactly match each other and cancel each other out on subtraction.
+
+[^2]: The exponent is usually biased, but this is not crucial to our discussion.
+
+[^3]: The exact value may change with the rounding mode, but this is again not
+crucial to our discussion. The
+[Wikipedia page](https://en.wikipedia.org/wiki/Round-off_error) goes into a bit
+more detail.
+
+[^4]: Taking a Taylor expansion at 0 is called a Maclaurin expansion.
+
+[^5]: This is not a good idea because it makes our reasoning less sound.
+
+[^6]: I am assuming for simplicity's sake that inputs don't introduce any error
+
+[^7]: I say usually because condition numbers of different functions on the data
+flow path may interact weirdly. But emperically this does not happen much.

@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Bhargav Kulkarni</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+            integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+"
+            crossorigin="anonymous"
+        />
+        <script
+            defer
+            src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+            integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+            crossorigin="anonymous"
+        ></script>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="/assets/style.css" />
+        <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    var mathElements = document.querySelectorAll("div.math");
+                    for (var i = 0; i < mathElements.length; i++) {
+                        katex.render(mathElements[i].textContent, mathElements[i], {
+                            throwOnError: false,
+                            displayMode: true
+                        });
+                    }
+
+                    var mathInlines = document.querySelectorAll("span.math");
+                    for (var i = 0; i < mathInlines.length; i++) {
+                        katex.render(mathInlines[i].textContent, mathInlines[i], {
+                            throwOnError: false,
+                            displayMode: false
+                        });
+                    }
+                });
+            </script>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <div id="name">
+                    <h1>
+                        <a href="/">Bhargav Kulkarni</a>
+                    </h1>
+                    <address>
+                        <a href="https://www.cs.utah.edu/"
+                            >Kahlert School of Computing</a
+                        ><br />
+                        <a href="http://www.utah.edu/">University of Utah</a>
+                    </address>
+                </div>
+                <nav><a href="/">/home</a>
+<a href="/research.html">/research</a>
+<a href="/blog.html" class="active">/blog</a>
+<a href="/cv.html">/cv</a>
+<a href="/contact.html">/contact</a>
+</nav>
+            </header>
+            <main>
+                <div class="intro">
+                    <h1 class="blogtitle">Floating Point and Rounding Error</h1>
+                    <p class="blogdate">September 9, 2024</p>
+                    <p>Floating-point numbers are how we squeeze the infinite world of real
+numbers into a finite space on our computers. As programmers, we use
+them all the time to mimic real-world calculations, often without really
+thinking about the consequences of approximating infinite numbers with
+finite ones. This can lead to some pretty funny and unexpected
+situations. Check out this Python function for an example:</p>
+<div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span>
+</pre></div>
+
+<p>This function should trivially return <code>1.0</code> for any input.
+Lets try with the integer <code>5</code>.</p>
+<div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fun</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">1</span>
+</pre></div>
+
+<p>That’s exactly what we expected. Now let’s try using the
+floating-point <code>5.0</code>.</p>
+<div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fun</span><span class="p">(</span><span class="mf">5.0</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+
+<p>We are still getting the expected result. What about a large number
+like <code>1e50</code>?</p>
+<div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">fun</span><span class="p">(</span><span class="mf">1e50</span><span class="p">)</span>
+<span class="go">0.0</span>
+</pre></div>
+
+<p>Well, that’s weird. What’s happening here? It turns out that
+<code>1e50 + 1</code> is <code>1e50</code> in floating-point. Which then
+allows <code>1e50 + 1</code> and <code>1e50</code> to completely
+“cancel”<a href="#fn1" class="footnote-ref" id="fnref1"
+role="doc-noteref"><sup>1</sup></a>. This error happens due to how
+floating-point numbers are represented. A floating-point number
+comprises 3 numbers: the sign <span class="math">s</span>, the mantissa
+<span class="math">m</span>, and the exponent <span
+class="math">e</span><a href="#fn2" class="footnote-ref" id="fnref2"
+role="doc-noteref"><sup>2</sup></a>.</p>
+<div class="math">
+f = -1^{s} \cdot m \cdot 2^{e}
+</div>
+<p>The key thing to remember is that the mantissa is limited to a
+certain number of bits, which determines the precision of the floating
+point system (53 bits for what we call double-precision floating point).
+Because of this limited precision, we can’t accurately represent a
+number like <code>1e50 + 1</code>. It just doesn’t fit! A limited
+mantissa introduces some error whenever you try to represent a real
+number as a floating-point number. It is this <strong>rounding</strong>
+error that is the primary source of potential inaccuracies when you
+perform floating-point computations. But what do we even know about
+rounding errors?</p>
+<section id="Errors-errors-everywhere" data-wrapper="1">
+<h2>Errors, errors everywhere</h2>
+<p>To be confident that we are performing a floating-point computation
+accurately, we would want to know whether or not it has a high rounding
+error. In other words, we are interested in bounding the rounding error
+of our computation. A quick Google search on this topic lands us at the
+<a
+href="https://en.wikipedia.org/wiki/Round-off_error#Machine_epsilon">Wikipedia
+page for rounding error</a>.</p>
+<blockquote>
+<p>The machine epsilon, denoted <span
+class="math">\varepsilon_{mach}</span> is the maximum possible absolute
+relative error in representing a nonzero real number <span
+class="math">x</span> in a floating-point number system.</p>
+</blockquote>
+<div class="math">
+\left|\frac{x - \hat x}{x}\right| \le \varepsilon_{mach}
+</div>
+<p><span class="math">\varepsilon_{mach}</span> is more or less
+equivalent to <span class="math">2^{1 - p}</span> where <span
+class="math">p</span> is the precision of the floating point system<a
+href="#fn3" class="footnote-ref" id="fnref3"
+role="doc-noteref"><sup>3</sup></a>. So, we have a bound for our
+rounding error. But wait, something does not add up. In our Python
+example, the error for the input <code>1e50</code> is greater than <span
+class="math">\varepsilon_{mach}</span>. So what’s going on?</p>
+<p>Our Python example not only represents real numbers in floating point
+but also performs operations on them. Floating point operations also
+introduce some rounding errors. If we trust the people behind the IEEE
+floating point standard to be competent, then there is no way floating
+point operations introduce more than <span
+class="math">\varepsilon_{mach}</span> of error. Sothere is
+<strong>something</strong> that is blowing up these small <span
+class="math">\varepsilon_{mach}</span>s that are being introduced. To
+hunt for that <strong>something</strong> let’s write down what a
+rounding error looks like.</p>
+<div class="math">
+\begin{align*} \left|\frac{x - \hat x}{x}\right| &amp;= \varepsilon \\
+\left|x - \hat x\right| &amp;= \varepsilon|x| \end{align*}
+</div>
+<p>Let’s assume that the rounding error is always positive.</p>
+<div class="math">
+\begin{align*} x - \hat x &amp;= \varepsilon\cdot x \\ \hat x &amp;= x(1
++ \varepsilon_x) \end{align*}
+</div>
+<p>We now have a relationship between a real number <span
+class="math">x</span> and its floating point representation <span
+class="math">\hat x</span>. Similarly for a real-valued function <span
+class="math">f</span>,</p>
+<div class="math">
+\begin{align*} \hat f(\hat x) &amp;= f(\hat x)(1 + \varepsilon_f) \\
+\hat f(\hat x) &amp;= f(x(1 + \varepsilon_x))(1 + \varepsilon_f) \\
+\end{align*}
+</div>
+<p>We can already see the rounding errors accumulating. So with a more
+general notation, let us say we have a floating point program <span
+class="math">\hat P</span>. <span class="math">\hat P</span> takes in
+some inputs, which we will aggregate as <span class="math">\bar
+x</span>. Let <span class="math">F</span> be the set of functions that
+make up <span class="math">P</span>. We can then say that <span
+class="math">\hat P</span> is also parameterized over a collection of
+rounding errors <span class="math">\bar\varepsilon</span>, introduced by
+all the inputs and every <span class="math">f \in F</span>. Let’s try to
+bound the relative error of <span class="math">\hat P</span> to see how
+the rounding errors accumulate. An easy way to do this would be to find
+a linear approximation of <span class="math">\hat P</span>. Keep in mind
+that <span class="math">\hat P</span> is parameterized w.r.t both <span
+class="math">\bar x</span> and <span
+class="math">\bar\varepsilon</span>.</p>
+</section>
+<section id="Shake-it-off:-Maclaurin’s-version" data-wrapper="1">
+<h2>Shake it off: Maclaurin’s version</h2>
+<p>Assuming that every <span class="math">f \in F</span> is
+twice-differentiable, let’s try to write down the <a
+href="https://en.wikipedia.org/wiki/Taylor_series#Taylor_series_in_several_variables">Taylor
+expansion</a> of <span class="math">\hat P(\bar
+x;\bar\varepsilon)</span> w.r.t to all the <span
+class="math">\varepsilon</span>s around <span
+class="math">\bar\varepsilon = 0</span> for a fixed input <span
+class="math">\bar x</span><a href="#fn4" class="footnote-ref"
+id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
+<div class="math">
+\hat P(\bar x; \bar \varepsilon = 0) = P(\bar x) +
+\underbrace{\sum_{\varepsilon \in \bar \varepsilon} \varepsilon
+\frac{\partial P}{\partial \varepsilon} \Bigr|_{\bar x}}_{\text{First
+Order Term}} + \underbrace{\frac{1}{2!}\sum_{\varepsilon \in \bar
+\varepsilon}\sum_{\varepsilon' \in \bar \varepsilon}
+\varepsilon\varepsilon'\frac{\partial^2 P}{\partial \varepsilon\partial
+\varepsilon'} \Bigr|_{\bar x} + \ldots}_{\text{Higher Order Terms}}
+</div>
+<p>Now we can find the relative error of <span class="math">\hat
+P</span> at the point <span class="math">\bar x</span>.</p>
+<div class="math">
+\begin{align*} E(\bar x) &amp;= \left|\frac{\hat P(\bar x) - P(\bar
+x)}{P(\bar x)}\right| \\ &amp;= \sum_i \epsilon_i \frac{\partial
+P}{\partial \varepsilon_i} \Bigr|_{\bar x} \frac{1}{P(\bar x)} +
+O(\varepsilon^2) \end{align*}
+</div>
+<p>Ignoring the higher order terms<a href="#fn5" class="footnote-ref"
+id="fnref5" role="doc-noteref"><sup>5</sup></a> we now have a bound for
+the relative error.</p>
+<div class="math">
+E(\bar x) \le \epsilon_{mach} \sum_i A_i(\bar x)
+</div>
+<p>We are not done yet. We still need to simplify the coefficients of
+the sum.</p>
+<div class="math">
+A_i(\bar x) = \frac{\partial P}{\partial \varepsilon_i} \Bigr|_{\bar x}
+\frac{1}{P(\bar x)}
+</div>
+<p>It might be helpful to take a small example here. Let us assume <span
+class="math">P</span> just takes one argument <span
+class="math">x</span> and is equal to <span
+class="math">f(g(h(x)))</span>. Then <span class="math">\hat P</span>
+would look like,<a href="#fn6" class="footnote-ref" id="fnref6"
+role="doc-noteref"><sup>6</sup></a></p>
+<div class="math">
+\hat P(x) = f(g(h(x)(1 + \varepsilon_h))(1 + \varepsilon_g))(1 +
+\varepsilon_f)
+</div>
+<p>Lets find <span class="math">A_h(\bar x)</span>.</p>
+<div class="math">
+A_h(\bar x) = \frac{g(h(x))}{f(g(h(x)))}\frac{\partial
+f(g(h(x)))}{g(h(x))} \cdot \frac{h(x)}{g(h(x))}\frac{\partial
+g(h(x))}{h(x)}
+</div>
+<p>We can see terms of a certain form here.</p>
+<div class="math">
+\left|\frac{xf'(x)}{f(x)}\right| = \Gamma_f(x)
+</div>
+</section>
+<section id="Terms-and-Conditions-Apply" data-wrapper="1">
+<h2>Terms and Conditions Apply</h2>
+<p>What we just saw is the condition number of a function <span
+class="math">f</span>. The condition number is the factor by which a
+function increases the error in its input. And if we squint at our bound
+for the relative error of <span class="math">\hat P</span> we can see
+that the rounding error introduced by the operation <span
+class="math">f</span> is multiplied by all the condition numbers that
+lie on the “path” from <span class="math">f</span> to <span
+class="math">P</span>. If we look at the data flow path arising from the
+function <span class="math">f</span> and multiply all the condition
+numbers we encounter on the path, we can find out how much the rounding
+error introduced by <span class="math">f</span> is amplified. This means
+a function with a high condition number at some input is usually the
+culprit of large floating-point innacuracies at that input<a href="#fn7"
+class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>.
+Now, not only can we calculate a much tighter bound for the relative
+error of a floating point program, but also “guess” which functions
+contribute the most to the overall error.</p>
+<p>Looking back at the Python example, the condition number for minus
+is</p>
+<div class="math">
+\left|\frac{x}{x - y}\right|
+</div>
+<p>For <code>1e50</code>, the condition number equals <code>1e50</code>.
+The machine epsilon, which I am assuming the max introduced rounding
+error is just <code>1e-16</code>. The minus amplifies this error to a
+whopping <code>1e34</code>. So clearly, for significant inputs, the
+minus operation is terrible, so to fix it, we should try to rewrite away
+the minus. <a href="https://herbie.uwplse.org">Herbie</a>, a tool that
+rewrites floating point expressions for increased accuracy, agrees with
+my diagnosis and performs the trivial rewrite of <code>1</code>.</p>
+</section>
+<section id="Conclusion" data-wrapper="1">
+<h2>Conclusion</h2>
+<p>So to answer the question posed earlier, the rounding error is also
+being amplified by the inherent unstableness of the function which we
+measure by its condition number. We can then concisely write down the
+error of <span class="math">z = f(x)</span> as</p>
+<div class="math">
+\epsilon_z = \Gamma_f\epsilon_x + \epsilon_f
+</div>
+<p>Its important to note that this error model does not account for
+overflows and underflows which make up another set of floating-point
+footguns. Nevertheless with this blogpost we now know what the hell is
+(mostly) up with rounding error.</p>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>“Cancel” means exactly what you think. The bits of the
+two floating point numbers exactly match each other and cancel each
+other out on subtraction.<a href="#fnref1" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>The exponent is usually biased, but this is not crucial
+to our discussion.<a href="#fnref2" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>The exact value may change with the rounding mode, but
+this is again not crucial to our discussion. The <a
+href="https://en.wikipedia.org/wiki/Round-off_error">Wikipedia page</a>
+goes into a bit more detail.<a href="#fnref3" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Taking a Taylor expansion at 0 is called a Maclaurin
+expansion.<a href="#fnref4" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>This is not a good idea because it makes our reasoning
+less sound.<a href="#fnref5" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>I am assuming for simplicity’s sake that inputs don’t
+introduce any error<a href="#fnref6" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn7"><p>I say usually because condition numbers of different
+functions on the data flow path may interact weirdly. But emperically
+this does not happen much.<a href="#fnref7" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+                </div>
+            </main>
+            <footer>
+                <hr />
+                Website styling adapted from
+                <a href="https://www.cs.cornell.edu/~asampson/"
+                    >Adrian Sampson</a
+                >
+            </footer>
+        </div>
+    </body>
+</html>

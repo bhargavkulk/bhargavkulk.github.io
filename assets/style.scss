@@ -74,6 +74,21 @@ body {
     }
 }
 
+hr {
+    border: none;
+    border-bottom: 1px solid $main-dark;
+    overflow: visible;
+    text-align: center;
+    height: 5px;
+    @media (prefers-color-scheme: dark) {
+        border-color: $main-light;
+    }
+}
+
+section hr {
+    margin: 0;
+}
+
 p {
     margin: 0 0 calc(#{$line-height-computed} / 2);
 }
@@ -189,7 +204,7 @@ dd {
     }
 }
 
-aside {
+div.aside {
     width: 30%;
     padding-left: 0.5rem;
     margin-left: 0.5rem;
@@ -203,7 +218,7 @@ aside {
     }
 }
 
-aside > p {
+div.aside > p {
     margin: 0.5rem;
 }
 
@@ -233,6 +248,18 @@ div a.bloglisttitle {
     font-size: $font-size-h1;
     font-family: $title-font;
     text-decoration: none;
+}
+
+a.footnote-ref {
+    text-decoration: none;
+}
+
+a.footnote-ref sup:before {
+    content: "[";
+}
+
+a.footnote-ref sup:after {
+    content: "]";
 }
 
 //- WEBPAGE HEADER -------------------------------------------------------------
@@ -350,7 +377,6 @@ footer {
 footer hr {
     border: none;
     border-top: 3px double $main-dark;
-    color: #333;
     overflow: visible;
     text-align: center;
     height: 5px;
