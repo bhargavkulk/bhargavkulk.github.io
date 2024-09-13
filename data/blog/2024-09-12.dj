@@ -196,7 +196,9 @@ at that input[^7]. Now, not only can we calculate a much tighter bound for the
 relative error of a floating-point program, but also "guess" which functions
 contribute the most to the overall error.
 
-Looking back at the Python example, the condition number for minus is
+Looking back at the Python example, the condition number for minus (The
+[Wikipedia page for condition numbers](https://en.wikipedia.org/wiki/Condition_number)
+has a table of common functions and their condition numbers) is
 
 ```math
 \left|\frac{x}{x - y}\right|
