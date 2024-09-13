@@ -7,7 +7,7 @@ for an example:
 
 ```pycon
 >>> def fun(x):
-...     (x + 1) - x
+...     return (x + 1) - x
 ```
 
 This function should trivially return `1.0` for any input. Lets try with the
@@ -43,12 +43,12 @@ f = -1^{s} \cdot m \cdot 2^{e}
 ```
 
 The key thing to remember is that the mantissa is limited to a certain number
-of bits, which determines the precision of the floating point system (53 bits
-for what we call double-precision floating point). Because of this limited
+of bits, which determines the precision of the floating-point system (53 bits
+for what we call double-precision floating-point). Because of this limited
 precision, we can't accurately represent a number like `1e50 + 1`. It just
 doesn't fit! A limited mantissa introduces some error whenever you
 try to represent a real number as a floating-point number. It is this *rounding*
-error that is the primary source of potential inaccuracies when you perform
+error that is the primary source of potential innacuracies when you perform
 floating-point computations. But what do we even know about rounding errors?
 
 ## Errors, errors everywhere
@@ -68,15 +68,15 @@ Google search on this topic lands us at the
 ```
 
 $`\varepsilon_{mach}` is more or less equivalent to $`2^{1 - p}` where $`p` is
-the precision of the floating point system[^3]. So, we have a bound for our
+the precision of the floating-point system[^3]. So, we have a bound for our
 rounding error. But wait, something does not add up. In our Python example, the
 error for the input `1e50` is greater than $`\varepsilon_{mach}`. So what's
 going on?
 
-Our Python example not only represents real numbers in floating point but also
-performs operations on them. Floating point operations also introduce some
-rounding errors. If we trust the people behind the IEEE floating point standard
-to be competent, then there is no way floating point operations introduce more
+Our Python example not only represents real numbers in floating-point but also
+performs operations on them. Floating-point operations also introduce some
+rounding errors. If we trust the people behind the IEEE floating-point standard
+to be competent, then there is no way floating-point operations introduce more
 than $`\varepsilon_{mach}` of error. Sothere is *something* that is blowing up
 these small $`\varepsilon_{mach}`s that are being introduced. To hunt for that
 *something* let's write down what a rounding error looks like.
@@ -97,8 +97,8 @@ x - \hat x &= \varepsilon\cdot x \\
 \end{align*}
 ```
 
-We now have a relationship between a real number $`x` and its floating point
-representation $`\hat x`. Similarly for a real-valued function $`f`,
+We now have a relationship between a real number $`x` and its floating-point
+representation $`\hat x`. Similarly for a real-valued function $`f`,[^pavel]
 
 ```math
 \begin{align*}
@@ -108,17 +108,22 @@ representation $`\hat x`. Similarly for a real-valued function $`f`,
 ```
 
 We can already see the rounding errors accumulating. So with a more general
-notation, let us say we have a floating point program $`\hat P`. $`\hat P` takes
+notation, let us say we have a floatin-point program $`\hat P`. $`\hat P` takes
 in some inputs, which we will aggregate as $`\bar x`. Let $`F` be the set of
 functions that make up $`P`. We can then say that $`\hat P` is also
 parameterized over a collection of rounding errors $`\bar\varepsilon`,
 introduced by all the inputs and every $`f \in F`. Let's try to bound the
-relative error of $`\hat P` to see how the rounding errors accumulate. An easy
-way to do this would be to find a linear approximation of $`\hat P`. Keep in
-mind that $`\hat P` is parameterized w.r.t both $`\bar x` and
-$`\bar\varepsilon`.
+relative error of $`\hat P` to see how the rounding errors accumulate.
 
-## Shake it off: Maclaurin's version
+```math
+  E(\bar x) = \left|\frac{\hat P(\bar x; \bar\varepsilon) - P(\bar x)}{P(\bar x)}\right|
+```
+An easy to simplify this expression way to do this would be to find an
+approximation of $`\hat P`. An easy way to approximate $`\hat P` would be to
+find its Taylor expansion w.r.t to all the $`\varepsilon`s. Keep in mind that
+$`\hat P` is parameterized w.r.t both $`\bar x` and $`\bar\varepsilon`.
+
+## Taylor's version
 
 Assuming that every $`f \in F` is twice-differentiable, let's try to write down
 the [Taylor expansion](https://en.wikipedia.org/wiki/Taylor_series#Taylor_series_in_several_variables)
@@ -138,7 +143,7 @@ Now we can find the relative error of $`\hat P` at the point $`\bar x`.
 
 ```math
 \begin{align*}
-E(\bar x) &= \left|\frac{\hat P(\bar x) - P(\bar x)}{P(\bar x)}\right| \\
+E(\bar x) &= \left|\frac{\hat P(\bar x; \bar\varepsilon) - P(\bar x)}{P(\bar x)}\right| \\
           &= \sum_i \epsilon_i \frac{\partial P}{\partial \varepsilon_i} \Bigr|_{\bar x} \frac{1}{P(\bar x)} +
           O(\varepsilon^2)
 \end{align*}
@@ -186,9 +191,9 @@ condition numbers that lie on the "path" from $`f` to $`P`. If we look at the
 data flow path arising from the function $`f` and multiply all the condition
 numbers we encounter on the path, we can find out how much the rounding error
 introduced by $`f` is amplified. This means a function with a high condition
-number at some input is usually the culprit of large floating-point innacuracies
+number at some input is usually the culprit of large floating-point inaccuracies
 at that input[^7]. Now, not only can we calculate a much tighter bound for the
-relative error of a floating point program, but also "guess" which functions
+relative error of a floating-point program, but also "guess" which functions
 contribute the most to the overall error.
 
 Looking back at the Python example, the condition number for minus is
@@ -201,7 +206,7 @@ For `1e50`, the condition number equals `1e50`. The machine epsilon, which
 I am assuming the max introduced rounding error is just `1e-16`. The minus
 amplifies this error to a whopping `1e34`. So clearly, for significant inputs,
 the minus operation is terrible, so to fix it, we should try to rewrite away the
-minus. [Herbie](https://herbie.uwplse.org), a tool that rewrites floating point
+minus. [Herbie](https://herbie.uwplse.org), a tool that rewrites floating-point
 expressions for increased accuracy, agrees with my diagnosis and performs the
 trivial rewrite of `1`.
 
@@ -220,7 +225,7 @@ and underflows which make up another set of floating-point footguns.
 Nevertheless with this blogpost we now know what the hell is (mostly) up with
 rounding error.
 
-[^1]: "Cancel" means exactly what you think. The bits of the two floating point
+[^1]: "Cancel" means exactly what you think. The bits of the two floating-point
 numbers exactly match each other and cancel each other out on subtraction.
 
 [^2]: The exponent is usually biased, but this is not crucial to our discussion.
@@ -234,7 +239,11 @@ more detail.
 
 [^5]: This is not a good idea because it makes our reasoning less sound.
 
-[^6]: I am assuming for simplicity's sake that inputs don't introduce any error
+[^6]: I am assuming for simplicity's sake that inputs don't introduce any error.
 
 [^7]: I say usually because condition numbers of different functions on the data
-flow path may interact weirdly. But emperically this does not happen much.
+flow path may interact weirdly. But empirically this does not happen much.
+
+[^pavel]: [Pavel]() tells me that the following relation is only true when the
+function is "correctly rounded", which all the arithmetic operations are. But
+it might be slightly off when considering other functions like `sin` and `cos`.

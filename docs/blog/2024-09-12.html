@@ -68,7 +68,7 @@
             </header>
             <main>
                 <div class="intro">
-                    <h1 class="blogtitle">Floating Point and Rounding Error</h1>
+                    <h1 class="blogtitle">Floating-Point and Rounding Error</h1>
                     <p class="blogdate">September 9, 2024</p>
                     <p>Floating-point numbers are how we squeeze the infinite world of real
 numbers into a finite space on our computers. As programmers, we use
@@ -77,7 +77,7 @@ thinking about the consequences of approximating infinite numbers with
 finite ones. This can lead to some pretty funny and unexpected
 situations. Check out this Python function for an example:</p>
 <div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span>
+<span class="gp">... </span>    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">x</span>
 </pre></div>
 
 <p>This function should trivially return <code>1.0</code> for any input.
@@ -112,15 +112,15 @@ role="doc-noteref"><sup>2</sup></a>.</p>
 f = -1^{s} \cdot m \cdot 2^{e}
 </div>
 <p>The key thing to remember is that the mantissa is limited to a
-certain number of bits, which determines the precision of the floating
-point system (53 bits for what we call double-precision floating point).
-Because of this limited precision, we can’t accurately represent a
-number like <code>1e50 + 1</code>. It just doesn’t fit! A limited
-mantissa introduces some error whenever you try to represent a real
-number as a floating-point number. It is this <strong>rounding</strong>
-error that is the primary source of potential inaccuracies when you
-perform floating-point computations. But what do we even know about
-rounding errors?</p>
+certain number of bits, which determines the precision of the
+floating-point system (53 bits for what we call double-precision
+floating-point). Because of this limited precision, we can’t accurately
+represent a number like <code>1e50 + 1</code>. It just doesn’t fit! A
+limited mantissa introduces some error whenever you try to represent a
+real number as a floating-point number. It is this
+<strong>rounding</strong> error that is the primary source of potential
+innacuracies when you perform floating-point computations. But what do
+we even know about rounding errors?</p>
 <section id="Errors-errors-everywhere" data-wrapper="1">
 <h2>Errors, errors everywhere</h2>
 <p>To be confident that we are performing a floating-point computation
@@ -141,17 +141,17 @@ class="math">x</span> in a floating-point number system.</p>
 </div>
 <p><span class="math">\varepsilon_{mach}</span> is more or less
 equivalent to <span class="math">2^{1 - p}</span> where <span
-class="math">p</span> is the precision of the floating point system<a
+class="math">p</span> is the precision of the floating-point system<a
 href="#fn3" class="footnote-ref" id="fnref3"
 role="doc-noteref"><sup>3</sup></a>. So, we have a bound for our
 rounding error. But wait, something does not add up. In our Python
 example, the error for the input <code>1e50</code> is greater than <span
 class="math">\varepsilon_{mach}</span>. So what’s going on?</p>
-<p>Our Python example not only represents real numbers in floating point
-but also performs operations on them. Floating point operations also
+<p>Our Python example not only represents real numbers in floating-point
+but also performs operations on them. Floating-point operations also
 introduce some rounding errors. If we trust the people behind the IEEE
-floating point standard to be competent, then there is no way floating
-point operations introduce more than <span
+floating-point standard to be competent, then there is no way
+floating-point operations introduce more than <span
 class="math">\varepsilon_{mach}</span> of error. Sothere is
 <strong>something</strong> that is blowing up these small <span
 class="math">\varepsilon_{mach}</span>s that are being introduced. To
@@ -167,16 +167,17 @@ rounding error looks like.</p>
 + \varepsilon_x) \end{align*}
 </div>
 <p>We now have a relationship between a real number <span
-class="math">x</span> and its floating point representation <span
+class="math">x</span> and its floating-point representation <span
 class="math">\hat x</span>. Similarly for a real-valued function <span
-class="math">f</span>,</p>
+class="math">f</span>,<a href="#fn4" class="footnote-ref" id="fnref4"
+role="doc-noteref"><sup>4</sup></a></p>
 <div class="math">
 \begin{align*} \hat f(\hat x) &amp;= f(\hat x)(1 + \varepsilon_f) \\
 \hat f(\hat x) &amp;= f(x(1 + \varepsilon_x))(1 + \varepsilon_f) \\
 \end{align*}
 </div>
 <p>We can already see the rounding errors accumulating. So with a more
-general notation, let us say we have a floating point program <span
+general notation, let us say we have a floatin-point program <span
 class="math">\hat P</span>. <span class="math">\hat P</span> takes in
 some inputs, which we will aggregate as <span class="math">\bar
 x</span>. Let <span class="math">F</span> be the set of functions that
@@ -185,14 +186,21 @@ class="math">\hat P</span> is also parameterized over a collection of
 rounding errors <span class="math">\bar\varepsilon</span>, introduced by
 all the inputs and every <span class="math">f \in F</span>. Let’s try to
 bound the relative error of <span class="math">\hat P</span> to see how
-the rounding errors accumulate. An easy way to do this would be to find
-a linear approximation of <span class="math">\hat P</span>. Keep in mind
-that <span class="math">\hat P</span> is parameterized w.r.t both <span
-class="math">\bar x</span> and <span
+the rounding errors accumulate.</p>
+<div class="math">
+E(\bar x) = \left|\frac{\hat P(\bar x; \bar\varepsilon) - P(\bar
+x)}{P(\bar x)}\right|
+</div>
+<p>An easy to simplify this expression way to do this would be to find
+an approximation of <span class="math">\hat P</span>. An easy way to
+approximate <span class="math">\hat P</span> would be to find its Taylor
+expansion w.r.t to all the <span class="math">\varepsilon</span>s. Keep
+in mind that <span class="math">\hat P</span> is parameterized w.r.t
+both <span class="math">\bar x</span> and <span
 class="math">\bar\varepsilon</span>.</p>
 </section>
-<section id="Shake-it-off:-Maclaurin’s-version" data-wrapper="1">
-<h2>Shake it off: Maclaurin’s version</h2>
+<section id="Taylor’s-version" data-wrapper="1">
+<h2>Taylor’s version</h2>
 <p>Assuming that every <span class="math">f \in F</span> is
 twice-differentiable, let’s try to write down the <a
 href="https://en.wikipedia.org/wiki/Taylor_series#Taylor_series_in_several_variables">Taylor
@@ -200,8 +208,8 @@ expansion</a> of <span class="math">\hat P(\bar
 x;\bar\varepsilon)</span> w.r.t to all the <span
 class="math">\varepsilon</span>s around <span
 class="math">\bar\varepsilon = 0</span> for a fixed input <span
-class="math">\bar x</span><a href="#fn4" class="footnote-ref"
-id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
+class="math">\bar x</span><a href="#fn5" class="footnote-ref"
+id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
 <div class="math">
 \hat P(\bar x; \bar \varepsilon = 0) = P(\bar x) +
 \underbrace{\sum_{\varepsilon \in \bar \varepsilon} \varepsilon
@@ -214,13 +222,13 @@ Order Term}} + \underbrace{\frac{1}{2!}\sum_{\varepsilon \in \bar
 <p>Now we can find the relative error of <span class="math">\hat
 P</span> at the point <span class="math">\bar x</span>.</p>
 <div class="math">
-\begin{align*} E(\bar x) &amp;= \left|\frac{\hat P(\bar x) - P(\bar
-x)}{P(\bar x)}\right| \\ &amp;= \sum_i \epsilon_i \frac{\partial
-P}{\partial \varepsilon_i} \Bigr|_{\bar x} \frac{1}{P(\bar x)} +
-O(\varepsilon^2) \end{align*}
+\begin{align*} E(\bar x) &amp;= \left|\frac{\hat P(\bar x;
+\bar\varepsilon) - P(\bar x)}{P(\bar x)}\right| \\ &amp;= \sum_i
+\epsilon_i \frac{\partial P}{\partial \varepsilon_i} \Bigr|_{\bar x}
+\frac{1}{P(\bar x)} + O(\varepsilon^2) \end{align*}
 </div>
-<p>Ignoring the higher order terms<a href="#fn5" class="footnote-ref"
-id="fnref5" role="doc-noteref"><sup>5</sup></a> we now have a bound for
+<p>Ignoring the higher order terms<a href="#fn6" class="footnote-ref"
+id="fnref6" role="doc-noteref"><sup>6</sup></a> we now have a bound for
 the relative error.</p>
 <div class="math">
 E(\bar x) \le \epsilon_{mach} \sum_i A_i(\bar x)
@@ -235,8 +243,8 @@ A_i(\bar x) = \frac{\partial P}{\partial \varepsilon_i} \Bigr|_{\bar x}
 class="math">P</span> just takes one argument <span
 class="math">x</span> and is equal to <span
 class="math">f(g(h(x)))</span>. Then <span class="math">\hat P</span>
-would look like,<a href="#fn6" class="footnote-ref" id="fnref6"
-role="doc-noteref"><sup>6</sup></a></p>
+would look like,<a href="#fn7" class="footnote-ref" id="fnref7"
+role="doc-noteref"><sup>7</sup></a></p>
 <div class="math">
 \hat P(x) = f(g(h(x)(1 + \varepsilon_h))(1 + \varepsilon_g))(1 +
 \varepsilon_f)
@@ -266,10 +274,10 @@ function <span class="math">f</span> and multiply all the condition
 numbers we encounter on the path, we can find out how much the rounding
 error introduced by <span class="math">f</span> is amplified. This means
 a function with a high condition number at some input is usually the
-culprit of large floating-point innacuracies at that input<a href="#fn7"
-class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a>.
+culprit of large floating-point inaccuracies at that input<a href="#fn8"
+class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a>.
 Now, not only can we calculate a much tighter bound for the relative
-error of a floating point program, but also “guess” which functions
+error of a floating-point program, but also “guess” which functions
 contribute the most to the overall error.</p>
 <p>Looking back at the Python example, the condition number for minus
 is</p>
@@ -282,7 +290,7 @@ error is just <code>1e-16</code>. The minus amplifies this error to a
 whopping <code>1e34</code>. So clearly, for significant inputs, the
 minus operation is terrible, so to fix it, we should try to rewrite away
 the minus. <a href="https://herbie.uwplse.org">Herbie</a>, a tool that
-rewrites floating point expressions for increased accuracy, agrees with
+rewrites floating-point expressions for increased accuracy, agrees with
 my diagnosis and performs the trivial rewrite of <code>1</code>.</p>
 </section>
 <section id="Conclusion" data-wrapper="1">
@@ -304,7 +312,7 @@ role="doc-endnotes">
 <hr />
 <ol>
 <li id="fn1"><p>“Cancel” means exactly what you think. The bits of the
-two floating point numbers exactly match each other and cancel each
+two floating-point numbers exactly match each other and cancel each
 other out on subtraction.<a href="#fnref1" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>The exponent is usually biased, but this is not crucial
@@ -315,18 +323,24 @@ this is again not crucial to our discussion. The <a
 href="https://en.wikipedia.org/wiki/Round-off_error">Wikipedia page</a>
 goes into a bit more detail.<a href="#fnref3" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>Taking a Taylor expansion at 0 is called a Maclaurin
-expansion.<a href="#fnref4" class="footnote-back"
+<li id="fn4"><p><a href="">Pavel</a> tells me that the following
+relation is only true when the function is “correctly rounded”, which
+all the arithmetic operations are. But it might be slightly off when
+considering other functions like <code>sin</code> and
+<code>cos</code>.<a href="#fnref4" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
-<li id="fn5"><p>This is not a good idea because it makes our reasoning
-less sound.<a href="#fnref5" class="footnote-back"
+<li id="fn5"><p>Taking a Taylor expansion at 0 is called a Maclaurin
+expansion.<a href="#fnref5" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>I am assuming for simplicity’s sake that inputs don’t
-introduce any error<a href="#fnref6" class="footnote-back"
+<li id="fn6"><p>This is not a good idea because it makes our reasoning
+less sound.<a href="#fnref6" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
-<li id="fn7"><p>I say usually because condition numbers of different
-functions on the data flow path may interact weirdly. But emperically
-this does not happen much.<a href="#fnref7" class="footnote-back"
+<li id="fn7"><p>I am assuming for simplicity’s sake that inputs don’t
+introduce any error.<a href="#fnref7" class="footnote-back"
+role="doc-backlink">↩︎</a></p></li>
+<li id="fn8"><p>I say usually because condition numbers of different
+functions on the data flow path may interact weirdly. But empirically
+this does not happen much.<a href="#fnref8" class="footnote-back"
 role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
