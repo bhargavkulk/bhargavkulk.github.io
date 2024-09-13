@@ -127,6 +127,11 @@ pre {
     overflow-y: hidden;
 }
 
+div.math {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
 pre,
 code {
     font-family: $mono-font;
