@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/charter-webfont@4/charter.min.css");
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+$xxxlsize: 2.073rem;
+$xxlsize: 1.728rem;
+$xlsize: 1.44rem;
+$lsize: 1.2rem;
+$msize: 1rem;
+$ssize: 0.889rem;
+$xssize: 0.79rem;
+$xxssize: 0.702rem;
+
+$space-0: 0.5rem;
+$space-1: 1rem;
+$space-2: 2rem;
+$space-3: 3rem;
+
+// Page measure
+$measure: 38rem;
+$measure-m: $measure + 4;
+$measure-l: $measure + 8;
+$measure-xl: $measure-l + 16;
+
+$base-font-size: 20px; // The de facto standard is 16px
+$line-height: 1.44; // Equal to $xlsize
+$heading-line-height: 1.2; // Equal to $lsize
+$vertical-rhythm-0: #{$line-height}rem;
+$vertical-rhythm-1: #{$line-height * 1.5}rem;
+$vertical-rhythm-2: #{$line-height * 2.5}rem;
+$vertical-rhythm-3: #{$line-height * 3.5}rem;
+
+// Viewports
+$tablet: 44.375em;
+$desktop: 75em;
+$desktop-large: 90em;
+
+// Font stacks
+// -----------
+$font-stack-sans: 'Public Sans', sans-serif;
+$font-stack-serif: 'Charter', serif;
+$font-stack-mono: 'IBM Plex Mono', monospace;
+
+$font-family-body: $font-stack-sans;
+$font-family-heading: $font-stack-sans;
+$font-family-ui: $font-stack-sans;
+$font-family-code: $font-stack-mono;
+
+// mixin
+@mixin tablet {
+    @media screen and (min-width: #{$tablet}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media screen and (min-width: #{$desktop}) {
+        @content;
+    }
+}
+
+@mixin desktop-large {
+    @media screen and (min-width: #{$desktop-large}) {
+        @content;
+    }
+}

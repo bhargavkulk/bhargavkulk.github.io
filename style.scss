@@ -1,0 +1,337 @@
+@use "util" as *;
+
+:root {
+    // Check: <https://protesilaos.com/emacs/modus-themes-colors>
+    --modus-themes-color-black:              #000000;
+    --modus-themes-color-black-alt:          #595959;
+    --modus-themes-color-red:                #a60000;
+    --modus-themes-color-red-alt:            #972500;
+    --modus-themes-color-green:              #006800;
+    --modus-themes-color-green-alt:          #316500;
+    --modus-themes-color-yellow:             #6f5500;
+    --modus-themes-color-yellow-alt:         #884900;
+    --modus-themes-color-blue:               #0031a9;
+    --modus-themes-color-blue-alt:           #354fcf;
+    --modus-themes-color-magenta:            #8f0075;
+    --modus-themes-color-magenta-alt:        #531ab6;
+    --modus-themes-color-cyan:               #005e8b;
+    --modus-themes-color-cyan-alt:           #005f5f;
+    --modus-themes-color-white-alt:          #f0f0f0;
+    --modus-themes-color-white:              #ffffff;
+
+    --modus-themes-color-green-bg:           #e9f6df; // TODO: Add more backgrounds
+    --modus-themes-color-yellow-bg:          #f3eacf; // TODO: Add more backgrounds
+    --modus-themes-color-blue-bg:            #e9eaff; // TODO: Add more backgrounds
+    --modus-themes-color-magenta-bg:         #f3e3f1; // TODO: Add more backgrounds
+    --modus-themes-color-cyan-bg:            #daeff7; // TODO: Add more backgrounds
+
+    --modus-themes-color-calm:               #61284f;
+    --modus-themes-color-cold:               #093060;
+    --modus-themes-color-mild:               #184034;
+    --modus-themes-color-warm:               #5d3026;
+
+    --modus-themes-color-bgdim:              #f8f8f8;
+    --modus-themes-color-brandbg:            #ebebeb;
+    --modus-themes-color-brandfg:            #424242;
+    --modus-themes-color-brandlink:          #002f40;
+
+    --modus-themes-color-basebg:             var(--modus-themes-color-white);
+    --modus-themes-color-basebgalt:          var(--modus-themes-color-white-alt);
+    --modus-themes-color-basefg:             var(--modus-themes-color-black);
+    --modus-themes-color-basefgalt:          var(--modus-themes-color-black-alt);
+    --modus-themes-color-baselinkfg:         var(--modus-themes-color-blue);
+    --modus-themes-color-baselinkfgalt:      var(--modus-themes-color-cyan);
+    --modus-themes-color-baselinkfghover:    var(--modus-themes-color-blue-alt);
+    --modus-themes-color-baselinkfgalthover: var(--modus-themes-color-cyan-alt);
+    --modus-themes-color-inlinecodefg:       var(--modus-themes-color-magenta);
+    --modus-themes-color-inlinecodefgalt:    var(--modus-themes-color-cyan);
+    --modus-themes-color-codeblockbg:        var(--modus-themes-color-bgdim);
+    --modus-themes-color-codeblockfg:        var(--modus-themes-color-basefg);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --modus-themes-color-black:       #000000;
+        --modus-themes-color-black-alt:   #1e1e1e;
+        --modus-themes-color-red:         #ff5f59;
+        --modus-themes-color-red-alt:     #ff6b55;
+        --modus-themes-color-green:       #44bc44;
+        --modus-themes-color-green-alt:   #70b900;
+        --modus-themes-color-yellow:      #d0bc00;
+        --modus-themes-color-yellow-alt:  #fec43f;
+        --modus-themes-color-blue:        #2fafff;
+        --modus-themes-color-blue-alt:    #79a8ff;
+        --modus-themes-color-magenta:     #f78fe7;
+        --modus-themes-color-magenta-alt: #b6a0ff;
+        --modus-themes-color-cyan:        #00d3d0;
+        --modus-themes-color-cyan-alt:    #6ae4b9;
+        --modus-themes-color-white-alt:   #989898;
+        --modus-themes-color-white:       #ffffff;
+
+        --modus-themes-color-green-bg:    #172a12; // TODO: Add more backgrounds
+        --modus-themes-color-yellow-bg:   #2f270f; // TODO: Add more backgrounds
+        --modus-themes-color-blue-bg:     #1f2a43; // TODO: Add more backgrounds
+        --modus-themes-color-magenta-bg:  #291230; // TODO: Add more backgrounds
+        --modus-themes-color-cyan-bg:     #19323f; // TODO: Add more backgrounds
+
+        --modus-themes-color-calm:        #fbd6f4;
+        --modus-themes-color-cold:        #c6eaff;
+        --modus-themes-color-mild:        #bfebe0;
+        --modus-themes-color-warm:        #f8dec0;
+
+        --modus-themes-color-bgdim:       #110b11;
+        --modus-themes-color-brandbg:     #121212;
+        --modus-themes-color-brandfg:     #b2a2a2;
+        --modus-themes-color-brandlink:   #c8d4df;
+
+        --modus-themes-color-basebg:      var(--modus-themes-color-black);
+        --modus-themes-color-basebgalt:   var(--modus-themes-color-black-alt);
+        --modus-themes-color-basefg:      var(--modus-themes-color-white);
+        --modus-themes-color-basefgalt:   var(--modus-themes-color-white-alt);
+    }
+}
+
+html {
+    font-family: sans-serif;
+    font-size: $base-font-size;
+}
+
+body {
+    background-color: var(--modus-themes-color-basebg);
+    color: var(--modus-themes-color-basefg);
+    font-family: $font-family-body;
+    line-height: $line-height;
+    margin: 0;
+    word-wrap: break-word;
+}
+
+.infobar {
+    background: var(--modus-themes-color-brandbg);
+    color: var(--modus-themes-color-brandfg);
+    font-family: $font-stack-mono;
+
+    a {
+        color: var(--modus-themes-color-brandlink);
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+            background: var(--modus-themes-color-brandlink);
+            color: var(--modus-themes-color-brandbg);
+        }
+    }
+
+    @include desktop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: calc(100% / 5);
+    }
+}
+
+.infobar-inner {
+    margin: 0 auto;
+    padding: $space-1;
+
+    @include desktop {
+        position: absolute;
+        right: $space-1;
+        left: $space-1;
+        bottom: $space-1;
+    }
+}
+
+.infobar-heading {
+    padding: 0;
+    margin: 0;
+    font-size: $lsize;
+}
+
+.infobar-nav {
+    padding: $space-1 0;
+    padding-bottom: 0;
+    ul {
+        display: inline;
+        list-style-type: none;
+        margin: $space-0 0 0;
+        padding: 0;
+
+        li {
+            display: inline-block;
+            line-height: $space-2;
+            margin-right: $space-0;
+
+            &:last-child {
+                margin-right: 0;
+                padding-right: 0;
+            }
+            @include desktop {
+                display: block;
+                line-height: $vertical-rhythm-0;
+
+                &:last-child:before {
+                    content: "└── "; /* Last item in the branch */
+                }
+
+                &:not(:last-child):before {
+                    content: "├── "; /* Connecting lines for middle items */
+                }
+            }
+        }
+
+        @include desktop {
+            display: block;
+            margin: 0;
+        }
+    }
+
+    @include desktop {
+        padding: 0;
+    }
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.container {
+    margin: $vertical-rhythm-0 auto;
+    @include tablet {
+        max-width: $measure-m;
+    }
+
+    @include desktop {
+        max-width: $measure-l;
+        position: relative;
+        margin-left: calc(calc(100% / 5) + #{$vertical-rhythm-2}); // 100% / 5 is the width of the .infobar
+    }
+
+    @include desktop-large {
+        max-width: $measure-xl;
+    }
+}
+
+.content {
+    padding: 1rem;
+}
+
+p {
+    margin: 0 0 $vertical-rhythm-0;
+    padding: 0;
+    max-width: $measure-l;
+    text-align: justify;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $font-family-heading;
+    line-height: $heading-line-height;
+    padding: 0;
+    margin-bottom: $space-0;
+}
+
+h1,
+.h1 {
+    font-size: $xxxlsize;
+    font-weight: 700;
+}
+
+h2,
+.h2 {
+    font-size: $xxlsize;
+    font-weight: 700;
+    color: var(--modus-themes-color-warm);
+}
+
+h3,
+.h3 {
+    font-size: $xlsize;
+    font-weight: 700;
+    color: var(--modus-themes-color-cold);
+}
+
+h4,
+.h4 {
+    font-size: $lsize;
+    font-weight: 700;
+    color: var(--modus-themes-color-mild);
+}
+
+h5,
+.h5 {
+    font-size: $lsize;
+    font-weight: 700;
+    color: var(--modus-themes-color-calm);
+}
+
+h6,
+.h6 {
+    font-size: $msize;
+    font-weight: 700;
+    color: var(--modus-themes-color-basefgalt);
+}
+
+a {
+    color: var(--modus-themes-color-baselinkfg);
+    text-decoration: underline;
+
+    &:hover,
+    &:focus {
+        background: var(--modus-themes-color-baselinkfghover);
+        color: var(--modus-themes-color-basebg);
+        outline: none;
+        text-decoration: none;
+    }
+
+    &:visited {
+        color: var(--modus-themes-color-baselinkfgalt);
+
+        &:hover,
+        &:focus {
+            background: var(--modus-themes-color-baselinkfgalthover);
+            color: var(--modus-themes-color-basebg);
+        }
+    }
+}
+
+pre,
+code,
+samp {
+    font-family: $font-family-code;
+}
+
+pre {
+    background: var(--modus-themes-color-codeblockbg);
+    font-size: $ssize;
+    margin: $vertical-rhythm-0 0;
+    padding: $space-1;
+    padding-left: $vertical-rhythm-0;
+    white-space: pre-wrap;
+    overflow-x: auto;
+    word-break: normal;
+    word-wrap: inherit;
+    border-top: 5px solid var(--modus-themes-color-basebgalt);
+    border-bottom: 5px solid var(--modus-themes-color-basebgalt);
+}
+
+blockquote {
+    font-family: $font-stack-serif;
+    color: var(--modus-themes-color-brandfg);
+    padding: $space-0 $space-1 $space-0 $space-1;
+    margin: $vertical-rhythm-0 0;
+    max-width: $measure-l;
+    border-left: 10px solid var(--modus-themes-color-brandfg);
+
+    footer {
+        &::before {
+            content: "~ ";
+        }
+        font-style: italic;
+        font-size: $ssize;
+    }
+}
