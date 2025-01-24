@@ -1,4 +1,4 @@
-@use "util" as *;
+@import "util";
 
 :root {
     // Check: <https://protesilaos.com/emacs/modus-themes-colors>
@@ -223,6 +223,22 @@ p {
     text-align: justify;
 }
 
+li p {
+    margin: 0;
+}
+
+.line-block {
+    margin: 0 0 $vertical-rhythm-0;
+    padding: 0;
+    max-width: $measure-l;
+    text-align: justify;
+
+    .line {
+        margin-bottom: 0.2rem;
+        //margin-bottom: $line-height;
+    }
+}
+
 h1,
 h2,
 h3,
@@ -327,10 +343,11 @@ blockquote {
     max-width: $measure-l;
     border-left: 10px solid var(--modus-themes-color-brandfg);
 
-    footer {
-        &::before {
-            content: "~ ";
-        }
+    p {
+        margin: 0;
+    }
+
+    p.attribution {
         font-style: italic;
         font-size: $ssize;
     }
