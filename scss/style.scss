@@ -5,21 +5,35 @@
     --prussian-blue: #1d2d44;
     --payne-gray: #3E5C76;
     --cadet-gray: #93a4b7;
-    --french-gray: #B2BCC2;
-    --eggshell: #F0EBD8;
-    --gunmetal: #253746;
     --white: #ffffff;
-    --platinum: #cfd7dd;
     --black: #000000;
     --palatinate-blue: #3939f2;
-    --marian-blue: #304891;
     --periwinkle: #c6c6fb;
+    --fire-brick: #B22222;
+    --pantone-red: #E63946;
+    --platinum: #E0E1DD;
+    --mikado-yellow: #FFC300;
+    --schoolbus-yellow: #ffd800;
+    --india-green: #138808;
+    --jade: #00A86B;
 
     --site-bg: var(--white);
     --site-border: var(--platinum);
     --site-navbar: var(--cadet-gray);
     --site-fg: var(--black);
     --site-link: var(--palatinate-blue);
+    --site-red: var(--pantone-red);
+    --site-yellow: var(--mikado-yellow);
+    --site-green: var(--jade);
+
+    --icon-pencil: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>');
+    --icon-abstract: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 5h16v2H4V5m0 4h16v2H4V9m0 4h16v2H4v-2m0 4h10v2H4v-2z"/></svg>');
+    --icon-info: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 9h-2V7h2m0 10h-2v-6h2m-1-9A10 10 0 002 12a10 10 0 0010 10 10 10 0 0010-10A10 10 0 0012 2z"/></svg>');
+    --icon-flame: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.55 11.2c-.23-.3-.5-.56-.76-.82-.65-.6-1.4-1.03-2.03-1.66C13.3 7.26 13 4.85 13.91 3c-.91.23-1.75.75-2.45 1.32-2.54 2.08-3.54 5.75-2.34 8.9.04.1.08.2.08.33 0 .22-.15.42-.35.5-.22.1-.46.04-.64-.12a.83.83 0 01-.15-.17c-1.1-1.43-1.28-3.48-.53-5.12C5.89 10 5 12.3 5.14 14.47c.04.5.1 1 .27 1.5.14.6.4 1.2.72 1.73 1.04 1.73 2.87 2.97 4.84 3.22 2.1.27 4.35-.12 5.96-1.6 1.8-1.66 2.45-4.32 1.5-6.6l-.13-.26c-.2-.46-.47-.87-.8-1.25l.05-.01m-3.1 6.3c-.28.24-.73.5-1.08.6-1.1.4-2.2-.16-2.87-.82 1.19-.28 1.89-1.16 2.09-2.05.17-.8-.14-1.46-.27-2.23-.12-.74-.1-1.37.18-2.06.17.38.37.76.6 1.06.76 1 1.95 1.44 2.2 2.8.04.14.06.28.06.43.03.82-.32 1.72-.92 2.27h.01z"/></svg>');
+    --icon-question: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M15.07 11.25l-.9.92C13.45 12.89 13 13.5 13 15h-2v-.5c0-1.11.45-2.11 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41a2 2 0 00-2-2 2 2 0 00-2 2H8a4 4 0 014-4 4 4 0 014 4 3.2 3.2 0 01-.93 2.25M13 19h-2v-2h2M12 2A10 10 0 002 12a10 10 0 0010 10 10 10 0 0010-10c0-5.53-4.5-10-10-10z"/></svg>');
+    --icon-warning: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14h-2v-4h2m0 8h-2v-2h2M1 21h22L12 2 1 21z"/></svg>');
+    --icon-failure: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2c5.53 0 10 4.47 10 10s-4.47 10-10 10S2 17.53 2 12 6.47 2 12 2m3.59 5L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41 15.59 7z"/></svg>');
+    --icon-spark: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M11.5 20l4.86-9.73H13V4l-5 9.73h3.5V20M12 2c2.75 0 5.1 1 7.05 2.95C21 6.9 22 9.25 22 12s-1 5.1-2.95 7.05C17.1 21 14.75 22 12 22s-5.1-1-7.05-2.95C3 17.1 2 14.75 2 12s1-5.1 2.95-7.05C6.9 3 9.25 2 12 2z"/></svg>');
 
     @media (prefers-color-scheme: dark) {
         --site-bg: var(--payne-gray);
@@ -27,6 +41,9 @@
         --site-navbar: var(--rich-black);
         --site-fg: var(--white);
         --site-link: var(--periwinkle);
+        --site-red: var(--fire-brick);
+        --site-yellow: var(--schoolbus-yellow);
+        --site-green: var(--india-green);
     }
 }
 
@@ -174,7 +191,11 @@ li p {
     margin: 0 0 $vertical-rhythm-0;
     padding: 0;
     max-width: $measure-l;
-    text-align: justify;
+    text-align: left;
+
+    .line::before {
+        content: "» "
+    }
 
     .line {
         margin-bottom: 0.2rem;
@@ -260,31 +281,39 @@ a {
 
 pre,
 code,
-samp {
-    font-family: $font-family-code;
+samp,
+.literal {
+    font-family: $font-stack-mono;
 }
 
 pre {
-    background: var(--modus-themes-color-codeblockbg);
+    border-radius: 0.125rem;
+    background: var(--site-border);
     font-size: $ssize;
     margin: $vertical-rhythm-0 0;
     padding: $space-1;
     padding-left: $vertical-rhythm-0;
-    white-space: pre-wrap;
+    max-width: $measure-l;
     overflow-x: auto;
-    word-break: normal;
-    word-wrap: inherit;
+    overflow-y: hidden;
     border-top: 5px solid var(--modus-themes-color-basebgalt);
     border-bottom: 5px solid var(--modus-themes-color-basebgalt);
+
+    .ln {
+        opacity: 0.6;
+    }
 }
 
 blockquote {
     font-family: $font-stack-serif;
     color: var(--modus-themes-color-brandfg);
-    padding: $space-0 $space-1 $space-0 $space-1;
     margin: $vertical-rhythm-0 0;
     max-width: $measure-l;
+    border: 2px solid var(--site-fg);
     border-left: 10px solid var(--site-fg);
+    padding: $space-1;
+    background-color: var(--site-border);
+    border-radius: 0.125rem;
 
     p {
         margin: 0;
@@ -293,5 +322,139 @@ blockquote {
     p.attribution {
         font-style: italic;
         font-size: $ssize;
+    }
+}
+
+ul,
+ol,
+dl {
+    margin: 0 0 $vertical-rhythm-0;
+    padding: 0 0 0 $vertical-rhythm-0;
+}
+
+ul li::marker {
+  content: '» ';
+}
+
+dt {
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+}
+
+dd {
+    margin-left: $space-0;
+}
+
+dd p,
+dd .line-block{
+    margin: 0 0 $vertical-rhythm-small;
+}
+
+.literal {
+    font-size: $ssize;
+    background-color: var(--site-border);
+    padding: 0 $space-small;
+    border-radius: 0.125rem;
+}
+
+div.admonition {
+    margin: $vertical-rhythm-0 0;
+    padding: $space-1;
+    max-width: $measure-l;
+    background-color: var(--site-border);
+    border-radius: 0.125rem;
+    border: 2px solid var(--site-navbar);
+    border-left: 10px solid var(--site-navbar);
+
+    *:last-child {
+        margin: 0;
+    }
+}
+
+div.admonition {
+    border: 2px solid var(--site-navbar);
+    border-left: 10px solid var(--site-navbar);
+}
+
+div.attention {
+    border: 2px solid var(--site-red);
+    border-left: 10px solid var(--site-red);
+}
+
+div.warning {
+    border: 2px solid var(--site-yellow);
+    border-left: 10px solid var(--site-yellow);
+}
+
+div.tip {
+    border: 2px solid var(--site-green);
+    border-left: 10px solid var(--site-green);
+}
+
+div.admonition > p.admonition-title {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: $vertical-rhythm-small;
+}
+
+p.admonition-title::before {
+    content: "";
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    margin-left: -2rem;
+}
+
+div.admonition > p.admonition-title::before {
+    background-color: var(--site-navbar);
+    -webkit-mask-image: var(--icon-abstract);
+    mask-image: var(--icon-abstract);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+}
+
+div.attention > p.admonition-title::before {
+    background-color: var(--site-red);
+    -webkit-mask-image: var(--icon-flame);
+    mask-image: var(--icon-flame);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+}
+
+div.warning > p.admonition-title::before {
+    background-color: var(--site-yellow);
+    -webkit-mask-image: var(--icon-warning);
+    mask-image: var(--icon-warning);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+}
+
+div.tip > p.admonition-title::before {
+    background-color: var(--site-green);
+    -webkit-mask-image: var(--icon-info);
+    mask-image: var(--icon-info);
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+}
+
+a.footnote-reference {
+    text-decoration: none;
+}
+
+.footnotes {
+    padding-top: $vertical-rhythm-small;
+    max-width: $measure-l;
+    border-top: 2px dashed var(--site-fg);
+
+    a {
+        text-decoration: none;
     }
 }

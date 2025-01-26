@@ -58,10 +58,22 @@ Birla Institute of Technology and Science, Pilani
 Skills & Projects
 =================
 
-| *General Programming*: Python, Racket, Java, JavaScript, SQL
-| *Systems Programming*: C/C++, Bash, Rust
-| *Hardware*: Verilog, MASM
+General Programming
+    Python, Racket, Java, JavaScript, SQL
 
-| *Trinity Game Engine*: A game engine and byte code VM for scripting `source <https://github.com/bhargavkulk/trinity>`__
-| *Logic in Coq*: Classical propositional logic and natural deduction in Coq/Rocq `source <https://github.com/bhargavkulk/logic-in-Coq>`__
-| *CheemScheme*: Scheme dialect in C++ with tail recursion and error reporting `source <https://github.com/bhargavkulk/cheem-scheme/tree/C%2B%2B>`__
+Systems Programming
+    C/C++, Bash, Rust
+
+Hardware
+    Verilog, MASM
+
+..
+
+Trinity Game Engine
+    A game engine and byte code VM for scripting `source <https://github.com/bhargavkulk/trinity>`__
+
+Logic in Coq
+    Classical propositional logic and natural deduction in Coq/Rocq `source <https://github.com/bhargavkulk/logic-in-Coq>`__
+
+CheemScheme
+    Scheme dialect in C++ with tail recursion and error reporting `source <https://github.com/bhargavkulk/cheem-scheme/tree/C%2B%2B>`__

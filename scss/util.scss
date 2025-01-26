@@ -11,6 +11,7 @@ $ssize: 0.889rem;
 $xssize: 0.79rem;
 $xxssize: 0.702rem;
 
+$space-small: 0.25rem;
 $space-0: 0.5rem;
 $space-1: 1rem;
 $space-2: 2rem;
@@ -26,6 +27,7 @@ $base-font-size: 20px; // The de facto standard is 16px
 $line-height: 1.44; // Equal to $xlsize
 $heading-line-height: 1.2; // Equal to $lsize
 $vertical-rhythm-0: #{$line-height}rem;
+$vertical-rhythm-small: #{$line-height * 0.5}rem;
 $vertical-rhythm-1: #{$line-height * 1.5}rem;
 $vertical-rhythm-2: #{$line-height * 2.5}rem;
 $vertical-rhythm-3: #{$line-height * 3.5}rem;
