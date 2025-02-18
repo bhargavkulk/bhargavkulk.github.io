@@ -1,115 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
-@import url("https://cdn.jsdelivr.net/npm/charter-webfont@4/charter.min.css");
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=Inria+Serif:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* commit-mono-latin-200-normal */
-@font-face {
-  font-family: 'Commit Mono';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 200;
-  src: url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-200-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-200-normal.woff) format('woff');
-}
-
-/* commit-mono-latin-300-normal */
-@font-face {
-  font-family: 'Commit Mono';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 300;
-  src: url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-300-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-300-normal.woff) format('woff');
-}
-
-/* commit-mono-latin-400-normal */
-@font-face {
-  font-family: 'Commit Mono';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 400;
-  src: url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-400-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-400-normal.woff) format('woff');
-}
-
-/* commit-mono-latin-500-normal */
-@font-face {
-  font-family: 'Commit Mono';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 500;
-  src: url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-500-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-500-normal.woff) format('woff');
-}
-
-/* commit-mono-latin-600-normal */
-@font-face {
-  font-family: 'Commit Mono';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 600;
-  src: url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-600-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-600-normal.woff) format('woff');
-}
-
-/* commit-mono-latin-700-normal */
-@font-face {
-  font-family: 'Commit Mono';
-  font-style: normal;
-  font-display: swap;
-  font-weight: 700;
-  src: url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-700-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-700-normal.woff) format('woff');
-}
-
-/* commit-mono-latin-200-italic */
-@font-face {
-  font-family: 'Commit Mono';
-  font-style: italic;
-  font-display: swap;
-  font-weight: 200;
-  src: url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-200-italic.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-200-italic.woff) format('woff');
-}
-
-/* commit-mono-latin-300-italic */
-@font-face {
-  font-family: 'Commit Mono';
-  font-style: italic;
-  font-display: swap;
-  font-weight: 300;
-  src: url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-300-italic.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-300-italic.woff) format('woff');
-}
-
-/* commit-mono-latin-400-italic */
-@font-face {
-  font-family: 'Commit Mono';
-  font-style: italic;
-  font-display: swap;
-  font-weight: 400;
-  src: url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-400-italic.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-400-italic.woff) format('woff');
-}
-
-/* commit-mono-latin-500-italic */
-@font-face {
-  font-family: 'Commit Mono';
-  font-style: italic;
-  font-display: swap;
-  font-weight: 500;
-  src: url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-500-italic.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-500-italic.woff) format('woff');
-}
-
-/* commit-mono-latin-600-italic */
-@font-face {
-  font-family: 'Commit Mono';
-  font-style: italic;
-  font-display: swap;
-  font-weight: 600;
-  src: url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-600-italic.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-600-italic.woff) format('woff');
-}
-
-/* commit-mono-latin-700-italic */
-@font-face {
-  font-family: 'Commit Mono';
-  font-style: italic;
-  font-display: swap;
-  font-weight: 700;
-  src: url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-700-italic.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/commit-mono@latest/latin-700-italic.woff) format('woff');
-}
-
+$titlesize: 2.4876rem;
 $xxxlsize: 2.073rem;
 $xxlsize: 1.728rem;
 $xlsize: 1.44rem;
@@ -148,8 +39,8 @@ $desktop-large: 90em;
 // Font stacks
 // -----------
 $font-stack-sans: 'Public Sans', sans-serif;
-$font-stack-serif: 'Charter', serif;
-$font-stack-mono: 'Commit Mono', monospace;
+$font-stack-serif: 'Inria Serif', serif;
+$font-stack-mono: 'Fira Mono', monospace;
 
 $font-family-body: $font-stack-sans;
 $font-family-heading: $font-stack-sans;

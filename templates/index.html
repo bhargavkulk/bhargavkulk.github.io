@@ -1,3 +1,6 @@
+<%!
+import datetime
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,6 +30,15 @@
      <div class="container">
        <div class="content">
 ${self.body()}
+         <h1>Recent Blog Posts</h1>
+         <ul class="blogindex">
+% for date, metadata in _blog[:5]:
+           <li class="blogrow">
+             <span class="blogdate">${date.strftime("%b %d, %Y")}</span>
+             <a href="${metadata['path']}" class="blogtitle">${metadata['title']}</a>
+           </li>
+% endfor
+         </ul>
        </div>
      </div>
    </main>

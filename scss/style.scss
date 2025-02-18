@@ -90,12 +90,22 @@
 
     --uchu-yin-raw: 14.38% 0.007 256.88;
     --uchu-yin: oklch(var(--uchu-yin-raw));
+
+    --uchu-blue-1-raw: 89.66% 0.046 260.67;
+    --uchu-blue-1: oklch(var(--uchu-blue-1-raw));
+
+    --uchu-blue-3-raw: 70.94% 0.136 258.06;
+    --uchu-blue-3: oklch(var(--uchu-blue-3-raw));
+
+    --uchu-blue-5-raw: 54.87% 0.222 260.33;
+    --uchu-blue-5: oklch(var(--uchu-blue-5-raw));
 }
 
 :root {
     --site-bg: var(--uchu-yang);
-    --site-ib-bg: var(--uchu-gray);
-    --site-ib-border: var(--uchu-light-gray);
+    --site-ib-fg: var(--uchu-light-blue);
+    --site-ib-bg: var(--uchu-dark-blue);
+    --site-ib-border: var(--uchu-blue);
     --site-ad-border: var(--uchu-gray);
     --site-ad-bg: var(--uchu-light-gray);
     --site-code-bg: var(--uchu-light-gray);
@@ -108,6 +118,7 @@
     --site-at-bg: var(--uchu-light-red);
     --site-wr-bg: var(--uchu-light-orange);
     --site-tp-bg: var(--uchu-light-green);
+    --site-bl-date: var(--uchu-dark-gray);
 
     --icon-pencil: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>');
     --icon-abstract: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 5h16v2H4V5m0 4h16v2H4V9m0 4h16v2H4v-2m0 4h10v2H4v-2z"/></svg>');
@@ -135,19 +146,19 @@ body {
 
 .infobar {
     background: var(--site-ib-bg);
-    color: var(--site-fg);
+    color: var(--site-ib-fg);
     font-family: $font-stack-mono;
     border-bottom: 10px solid var(--site-ib-border);
     border-right: none;
 
     a {
-        color: var(--site-fg);
+        color: var(--site-ib-fg);
         text-decoration: none;
 
         &:hover,
         &:focus,
         &:visited {
-            color: var(--site-fg);
+            color: var(--site-ib-fg);
         }
     }
 
@@ -287,14 +298,27 @@ h6 {
     margin-bottom: $space-0;
 }
 
-h1.title {
-    margin-top: 0;
-}
+
 
 h1,
 .h1 {
     font-size: $xxxlsize;
     font-weight: 700;
+}
+
+h1.title {
+    margin-top: 0;
+    font-size: $titlesize;
+}
+
+h1.blog {
+    margin-bottom: 0;
+}
+
+div.date {
+    color: var(--site-bl-date);
+    margin-bottom: $space-0;
+    font-style: italic;
 }
 
 h2,
@@ -438,6 +462,33 @@ dl {
 
 ul li::marker {
   content: '» ';
+}
+
+.blogindex {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: table;
+
+    .blogrow {
+        display: table-row;
+
+        .blogdate,
+        .blogtitle {
+            display: table-cell;
+        }
+
+        .blogdate {
+            color: var(--site-bl-date);
+            padding: 0 $space-1 0 0;
+            margin: 0;
+            min-width: 6em;
+        }
+    }
+
+    ::marker {
+        content: '';
+    }
 }
 
 dt {

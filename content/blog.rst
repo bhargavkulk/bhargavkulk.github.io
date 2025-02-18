@@ -1,8 +1,6 @@
 .. meta::
-   :template: base.html
+   :template: blogindex.html
 
 ====
 Blog
 ====
-
-Work in Progress ;)

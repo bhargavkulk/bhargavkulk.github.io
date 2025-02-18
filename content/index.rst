@@ -1,5 +1,5 @@
 .. meta::
-   :template: base.html
+   :template: index.html
 
 ==================
  Bhargav Kulkarni
