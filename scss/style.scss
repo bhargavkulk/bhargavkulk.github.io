@@ -144,6 +144,14 @@ body {
     word-wrap: break-word;
 }
 
+.serif {
+    font-family: $font-stack-serif;
+}
+
+.mono {
+    font-family: $font-stack-mono;
+}
+
 .infobar {
     background: var(--site-ib-bg);
     color: var(--site-ib-fg);
@@ -458,10 +466,6 @@ ol,
 dl {
     margin: 0 0 $vertical-rhythm-0;
     padding: 0 0 0 $vertical-rhythm-0;
-}
-
-ul li::marker {
-  content: '» ';
 }
 
 .blogindex {
