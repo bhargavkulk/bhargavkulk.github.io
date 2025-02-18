@@ -15,7 +15,7 @@ also currently contributing to the Herbie project.
 
 Before joining the PhD program at the U, I got my bachelor’s in
 Computer Science from the Birla Institute of Technology and Sciences.
-There I worked with Prof. Anup Basil Mathew on adapting the Coq
+There I worked with Prof. Anup Basil Mathew on adapting the ``Coq``
 interactive theorem prover in an educational environment.
 
 You can find ways to contact me `here </contact.html>`_.
