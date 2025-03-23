@@ -1,0 +1,38 @@
+.. meta::
+   :template: blog.html
+   :title: A Fast and Accurate(ish) Floating-point debugger
+   :date: 2025-03-05
+
+.. container:: banner
+
+   This blog is an abridged version of `Pavel <https://pavpanchekha.com>`__ and
+   my paper “Mixing Condition Numbers and Oracles for Accurate Floating-point
+   Debugging”, which was accepted at `ARITH'25 <https://www.arith2025.org/>`__.
+
+Floating-point numbers are how we squeeze the infinite world of
+real numbers into a finite space on our computers. As programmers, we use them
+all the time to mimic real-world calculations. But it turns out there are
+consequences for approximating infinite numbers with finite ones. These
+consequences trouble programmers in the form of rounding and over/underflow
+errors among others.
+
+Programmers debug non-numerical errors like runtime or memory bugs by tracking
+down the cause, often with tools like ``gdb`` or ``valgrind``. But what about
+numerical code? There are, in fact, two main classes of tools designed to help
+programmers reason about floating-point error: floating-point static analyzers
+(like, ``FPTaylor``) and floating-point debuggers (like, ``Herbgrind``). Static
+analyzers look at the entire input space of a floating-point program and provide
+(possibly sound) guarantees of its numerical error. Debuggers on the other hand
+observe an actual execution of the program and warn programmers about potential
+numerical errors.
+
+Both tools have their own strengths and drawbacks. Static analyzers are accurate
+but slow and debuggers are fast but inaccurate. Both of these approaches to
+floating-point error detection cover each other's weaknesses pretty nicely.
+Wouldn't it be nice to combine the advances in both of these approaches to come
+up with a tool that is both fast and accurate?
+
+
+..
+   , often without really thinking about the
+   consequences of approximating infinite numbers with finite ones. It turns

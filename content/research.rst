@@ -1,10 +1,17 @@
 .. meta::
    :template: base.html
 
+.. role:: serif
+
 ==========
  Research
 ==========
 
-    Progress means getting nearer to the place you want to be. And if you have taken a wrong turn, then to go forward does not get you any nearer. If you are on the wrong road, progress means doing an about-turn and walking back to the right road; and in that case the man who turns back soonest is the most progressive man.
+Conference Paper
+================
 
-    --- C. S. Lewis
+- :serif:`"Mixing Condition Numbers and Oracles for Accurate Floating-point Debugging"`
+
+  - Bhargav Kulkarni, Pavel Panchekha
+  - In IEEE ARITH'25
+  - arXiv: `arxiv.org/abs/2503.11884 <https://arxiv.org/abs/2503.11884>`__

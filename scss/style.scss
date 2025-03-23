@@ -108,6 +108,8 @@
     --site-ib-border: var(--uchu-blue);
     --site-ad-border: var(--uchu-gray);
     --site-ad-bg: var(--uchu-light-gray);
+    --site-bn-border: var(--uchu-blue);
+    --site-bn-bg: var(--uchu-light-blue);
     --site-code-bg: var(--uchu-light-gray);
     --site-bq-bg: var(--uchu-light-gray);
     --site-link: var(--uchu-blue);
@@ -199,6 +201,7 @@ body {
     padding: 0;
     margin: 0;
     font-size: $lsize;
+    font-family: $font-devanagari;
 }
 
 .infobar-nav {
@@ -248,7 +251,7 @@ main {
     flex: 1 0 auto;
 }
 
-.container {
+.outer {
     margin: $vertical-rhythm-0 auto;
     @include tablet {
         max-width: $measure-m;
@@ -396,7 +399,7 @@ tt {
 pre {
     border-radius: 0.125rem;
     background: var(--site-code-bg);
-    font-size: $ssize;
+    //font-size: $ssize;
     margin: $vertical-rhythm-0 0;
     padding: $space-1;
     padding-left: $vertical-rhythm-0;
@@ -513,7 +516,7 @@ dd .line-block{
 }
 
 tt {
-    font-size: $ssize;
+    //font-size: $ssize;
     background-color: var(--site-code-bg);
     padding: 0 $space-small;
     border-radius: 0.125rem;
@@ -527,6 +530,20 @@ div.admonition {
     border-radius: 0.125rem;
     border: 2px solid var(--site-ad-border);
     border-left: 10px solid var(--site-ad-border);
+
+    *:last-child {
+        margin: 0;
+    }
+}
+
+div.banner {
+    margin: $vertical-rhythm-0 0;
+    padding: $space-1;
+    max-width: $measure-l;
+    background-color: var(--site-bn-bg);
+    border-radius: 0.125rem;
+    border: 2px solid var(--site-bn-border);
+    border-left: 10px solid var(--site-bn-border);
 
     *:last-child {
         margin: 0;

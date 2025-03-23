@@ -5,21 +5,20 @@
  Bhargav Kulkarni
 ==================
 
-I am Bhargav Kulkarni, a PhD student at the University of Utah since 2023.
-I am advised by `Pavel Panchekha <https://www.pavpanchekha.com/>`_.
+I am a PhD student at the University of Utah since 2023. I am advised by `Pavel
+Panchekha <https://www.pavpanchekha.com/>`_.
 
-My goal is to make it easier for developers to write more correct and
-more robust code. To that end I have been currently working on sound
-attribution of floating point error in floating point programs. I am
-also currently contributing to the Herbie project.
+My goal is to make it easier for developers to write more correct and more
+robust code. To that end I have been currently working on sound attribution of
+floating point error in floating point programs. I am also currently
+contributing to the Herbie project.
 
-Before joining the PhD program at the U, I got my bachelor’s in
-Computer Science from the Birla Institute of Technology and Sciences.
-There I worked with Prof. Anup Basil Mathew on adapting the ``Rocq``
-interactive theorem prover in an educational environment.
+Before joining the PhD program at the U, I got my bachelor’s in Computer Science
+from the Birla Institute of Technology and Sciences. There I worked with Prof.
+Anup Basil Mathew on adapting the ``Rocq`` interactive theorem prover in an
+educational environment.
 
 You can find ways to contact me `here </contact.html>`_.
-
 
     Once you learn to read, you will be forever free.
 
