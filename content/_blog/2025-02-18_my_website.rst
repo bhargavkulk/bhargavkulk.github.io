@@ -20,7 +20,7 @@ am using:
 
 - Public Sans, as my sans font. Find it `here <https://fonts.google.com/specimen/Public+Sans>`__.
 - :serif:`Inria Serif`, as my serif font. Find it `here <https://fonts.google.com/specimen/Inria+Serif>`__.
-- :mono:`Fira Mono`, as my mono-spaced font. Find it `here <https://fonts.google.com/specimen/Fira+Mono>`__.
+- :mono:`Roboto Mono`, as my mono-spaced font. Find it `here <https://fonts.google.com/specimen/Fira+Mono>`__.
 
 Moreover, this website is powered by a *bespoke* static site generator that I
 have called `haya <https://github.com/bhargavkulk/haya>`__. Haya uses

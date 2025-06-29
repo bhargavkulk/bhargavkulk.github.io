@@ -12,6 +12,5 @@ Conference Paper
 
 - :serif:`"Mixing Condition Numbers and Oracles for Accurate Floating-point Debugging"`
 
-  - Bhargav Kulkarni, Pavel Panchekha
-  - In IEEE ARITH'25
-  - arXiv: `arxiv.org/abs/2503.11884 <https://arxiv.org/abs/2503.11884>`__
+  - **[ARITH'25]** Bhargav Kulkarni, Pavel Panchekha
+  - `[paper] google.com`__ arXiv: `arxiv.org/abs/2503.11884 <https://arxiv.org/abs/2503.11884>`__

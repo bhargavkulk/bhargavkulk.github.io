@@ -154,6 +154,7 @@ body {
 
 .mono {
     font-family: $font-stack-mono;
+    font-size: $ssize;
 }
 
 .infobar {
@@ -394,6 +395,7 @@ code,
 samp,
 tt {
     font-family: $font-stack-mono;
+    font-size: $ssize;
 }
 
 pre {
