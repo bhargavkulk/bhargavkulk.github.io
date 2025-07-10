@@ -13,7 +13,7 @@ import datetime
 <body>
   <div class="infobar">
     <div class="infobar-inner">
-      <div class="infobar-heading">
+      <div class="infobar-heading" id="cycle-text">
         भार्गव कुल्कर्णी
       </div>
       <div class="infobar-nav">
@@ -44,5 +44,10 @@ ${self.body()}
        </div>
      </div>
    </main>
+   <script>
+     const choices = ["भार्गव कुल्कर्णी", "ಭಾರ್ಗವ ಕುಲಕರ್ಣಿ"]
+     const elem = document.getElementById("cycle-text")
+     elem.textContent = choices[Math.floor(Math.random() * choices.length)];
+   </script>
 </body>
 </html>
