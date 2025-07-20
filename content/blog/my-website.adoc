@@ -1,0 +1,6 @@
+= My Website
+:template: post.mako
+:date: 11-07-2001
+:summary: In which I redo my website. Again.
+
+First post. Hello, World!

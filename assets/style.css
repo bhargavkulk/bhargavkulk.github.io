@@ -1,0 +1,236 @@
+:root {
+    --blue: oklch(62.39% 0.181 258.33);
+    --dark-blue: oklch(43.48% 0.17 260.2);
+    --black: #444;
+    --offwhite: #c9d1d9;
+    --blackish: #0d1117;
+
+    --sans-serif: "Public Sans", sans-serif;
+    --monospace: "Iosevka Web", monospace;
+    --serif: "Bitter", serif;
+}
+
+body {
+	max-width: 650px;
+	margin: 20px auto;
+	padding: 0 10px;
+	font: var(--sans-serif);
+	color: #444;
+    font-size: 18px;
+}
+
+h1,
+h2,
+h3 {
+	line-height: 1.2;
+	margin-top: 0;
+    font-weight: normal;
+}
+
+@media(prefers-color-scheme:dark) {
+	body {
+		color: var(--offwhite);
+		background: var(--blackish);
+	}
+
+	a:link,
+    a:visited,
+    a,
+    a:hover {
+		color: var(--blue);
+		color: var(--blue);
+	}
+
+    header h1 > a {
+        color: var(--offwhite);
+    }
+
+    header h1 > a:visited {
+        color: var(--offwhite);
+    }
+
+    header h1 > a:hover {
+        color: var(--offwhite);
+    }
+}
+
+main a::after {
+    content: "+";
+    font-size: 0.8em;
+    line-height: 65%;
+    vertical-align: super;
+}
+
+a:link {
+    text-decoration: none;
+    color: var(--dark-blue);
+}
+
+a:hover {
+    text-decoration-line: underline;
+    text-decoration-style: dashed;
+    color: var(--dark-blue);
+}
+
+a:focus {
+    text-decoration-line: underline;
+    text-decoration-style: dashed;
+    color: var(--dark-blue)
+}
+
+a:visited {
+    color: oklch(43.48% 0.17 260.2)
+}
+
+header h1 {
+	font-size: 2.3em;
+    margin-bottom: 0.2em;
+}
+
+header h1 > a {
+    color: var(--black);
+    text-decoration: none;
+}
+
+header h1 > a:hover {
+    color: var(--black);
+    text-decoration: none;
+}
+
+header h1 > a:visited {
+    color: var(--black);
+    text-decoration: none;
+}
+
+.navbar {
+    margin-bottom: 0.2em;
+    font-size: 1em;
+}
+
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 1em;
+    font-family: var(--monospace);
+
+}
+
+.navbar li {
+    display: inline;
+}
+
+.navbar a {
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    text-decoration: none;
+}
+
+.navbar a:visited {
+    text-decoration: none;
+}
+
+.profile .content img {
+	float: right;
+	margin: 0 0.5em 0.5em 0;
+	border-radius: 50%;
+	object-fit: cover;
+	display: block;
+	width: 100%;
+	max-width: 150px;
+	height: auto;
+}
+
+.blogindex {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	display: table;
+}
+
+.blogindex ::marker{
+	content: '';
+}
+
+.blogrow1, .blogrow2 {
+	display: table-row;
+}
+
+main div.paragraph {
+    margin: 1.44rem 0;
+}
+
+main h1, h2, h3 {
+    margin: 1.44rem 0;
+}
+
+hr {
+    border-style: solid;
+}
+
+h1.blog {
+    margin-bottom: 0;
+}
+
+div.date {
+    color: gray;
+    font-style: italic;
+    margin-top: 0;
+}
+
+.test-entry {
+  display: flex;
+  align-items: baseline;
+  margin: 0;
+}
+
+.test-date {
+    flex: 0 0 auto;
+    width: 6em;
+    text-align: right;
+    padding-right: 1em;
+    margin-bottom: 0;
+    margin-top: 0;
+    font-family: var(--monospace);
+    font-size: 0.889rem;
+}
+
+.test-content {
+    flex: 1;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.test-title {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.test-summary {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-style: italic;
+    font-family: var(--monospace);
+    font-size: 0.889rem;
+}
+
+div.quoteblock {
+    font-family: var(--serif);
+    font-style: italic;
+}
+
+blockquote {
+    margin-top: 1.44rem;
+    margin-left: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+}
+
+blockquote div.attribution {
+    margin-top: 0;
+    margin-bottom: 1.44rem;
+    text-align: left;
+}

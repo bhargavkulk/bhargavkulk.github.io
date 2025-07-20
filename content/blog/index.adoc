@@ -1,0 +1,3 @@
+= Blog
+:template: blog_index.mako
+:date: 11-02-2001
