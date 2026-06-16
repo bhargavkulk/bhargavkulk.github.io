@@ -31,3 +31,22 @@ jobs:
 
       - name: Build site
         run: make all
+
+      - name: Upload site as artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: www/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
