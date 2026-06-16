@@ -28,6 +28,15 @@ nav {
     background-color: #FBEC5D;
 }
 
+.alert {
+    background-color: #FBEC5D;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+}
+
 .marquee > :first-child {
     display: inline-block;
     padding-left: 100%;

@@ -1,6 +1,11 @@
 {template="post.mako" date="2026-06-16"}
 # Speeding up Skia using E-graphs: A Retrospective
 
+::: alert
+A paper on this project has been (conditionally) accepted at OOPSLA'26. You can find a preprint to
+our paper [here](https://arxiv.org/abs/2603.23696)
+:::
+
 For the past year I have been working on a research project to try and speed up the rendering of
 webpages in Google Chrome.
 There are many ways in which one could achieve this, but as PL researchers, we -- my advisor Pavel, an
