@@ -31,6 +31,8 @@ nav {
 .alert {
     background-color: #FBEC5D;
     display: block;
+    overflow: hidden;
+    padding-inline: 0.75rem;
     margin-block-start: 1em;
     margin-block-end: 1em;
     margin-inline-start: 0;
