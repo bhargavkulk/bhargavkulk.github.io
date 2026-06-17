@@ -17,6 +17,7 @@ COPIED_ASSETS := $(patsubst $(assets)/%,$(www)/%,$(ASSET_FILES))
 COLLECTION_DIRS := $(shell find $(content) -mindepth 1 -maxdepth 1 -type d)
 COLLECTION_INDEXES := $(patsubst $(content)/%,$(cache)/%_index.json,$(COLLECTION_DIRS))
 EXTRA_METADATA_ARGS := $(if $(COLLECTION_INDEXES),-e $(COLLECTION_INDEXES),)
+BLOG_FEED_FILES := $(www)/blog_index_atom.xml $(www)/blog_index_rss.xml
 
 all: compile link
 
@@ -52,7 +53,7 @@ $(foreach collection,$(notdir $(COLLECTION_DIRS)),$(eval $(call COLLECTION_INDEX
 
 # - Link -------------------------------------------------------------------------------------------
 # Uses cached data to build actual website
-link: $(PAGES) $(COPIED_ASSETS)
+link: $(PAGES) $(COPIED_ASSETS) $(BLOG_FEED_FILES)
 
 serve:
 	uv run python scripts/serve.py $(www) -w $(content) $(filters) $(templates) $(assets) Makefile scripts
@@ -63,6 +64,9 @@ www:
 $(www)/%.html: $(cache)/%.html $(cache)/%.json scripts/fill_template.py $(TEMPLATE_FILES) $(COLLECTION_INDEXES) | www
 	@mkdir -p $(dir $@)
 	uv run python scripts/fill_template.py $< $(cache)/$*.json $(templates) $@ $(EXTRA_METADATA_ARGS)
+
+$(BLOG_FEED_FILES) &: cache/blog_index.json scripts/generate_feed.py | www
+	uv run python scripts/generate_feed.py cache/blog_index.json cache $(www)
 
 $(www)/%: $(assets)/% | www
 	@mkdir -p $(dir $@)

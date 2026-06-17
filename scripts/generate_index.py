@@ -52,7 +52,8 @@ def main():
             entry = json.load(fp)
 
         entry['slug'] = source_file.stem
-        entry['link'] = f'/{args.collection.name}/{source_file.stem}.html'
+        entry['path'] = f'{args.collection.name}/{source_file.stem}.html'
+        entry['link'] = f'/{entry["path"]}'
         collection_entries.append(entry)
 
     with args.output.open('w', encoding='utf-8') as fp:
