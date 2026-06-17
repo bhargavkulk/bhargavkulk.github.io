@@ -3,7 +3,7 @@
 from datetime import datetime
 %>
 
-<h1>Blog</h1>
+<h1>Blog <a href="/blog_index_rss.xml" style="font-size: 1rem; font-weight: normal;">[rss]</a> <a href="/blog_index_atom.xml" style="font-size: 1rem; font-weight: normal;">[atom]</a></h1>
 
 ${content | n}
 
