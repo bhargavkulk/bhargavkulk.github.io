@@ -1,2 +1,6 @@
 www/
+build.ninja
+.ninja_deps
+.ninja_log
 cache/
+__pycache__/

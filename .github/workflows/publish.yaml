@@ -42,7 +42,9 @@ jobs:
         run: uv sync
 
       - name: Build site
-        run: make all
+        run: |
+          uv run gen.py
+          ninja
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v4

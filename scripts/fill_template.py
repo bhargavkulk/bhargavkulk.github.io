@@ -37,11 +37,9 @@ def parse_args() -> Args:
     parser.add_argument('metadata', type=existing_path)
     parser.add_argument('templates', type=is_a_dir)
     parser.add_argument('output', type=Path)
-    parser.add_argument('-e', '--extra', type=existing_path, nargs='+', action='append', default=[])
+    parser.add_argument('extra', type=existing_path, nargs='*')
 
-    parsed_args = vars(parser.parse_args())
-    parsed_args['extra'] = [path for group in parsed_args['extra'] for path in group]
-    return Args(**parsed_args)
+    return Args(**vars(parser.parse_args()))
 
 
 def main():
@@ -73,7 +71,9 @@ def main():
     for extra_path in args.extra:
         variable_name = extra_path.stem
         if variable_name in template_metadata:
-            raise ValueError(f'extra metadata variable "{variable_name}" conflicts with page metadata')
+            raise ValueError(
+                f'extra metadata variable "{variable_name}" conflicts with page metadata'
+            )
 
         with extra_path.open('rb') as fp:
             template_metadata[variable_name] = json.load(fp)

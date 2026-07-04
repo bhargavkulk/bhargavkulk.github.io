@@ -2,6 +2,7 @@ local json = require 'pandoc.json'
 local metadata = {}
 local first_heading_processed = false
 
+-- TODO WTF is the diff between slug, link and path
 -- Capture page metadata from the first top-level Djot section and its heading.
 function Div(el)
   if first_heading_processed then
@@ -19,6 +20,14 @@ function Div(el)
 
     metadata.title = pandoc.utils.stringify(el.content[1].content)
     first_heading_processed = true
+
+    local input = PANDOC_STATE.input_files[1]
+    local relative = pandoc.path.make_relative(input, 'content')
+    metadata.path = relative:gsub('%.dj$', '.html')
+
+    metadata.link = '/' .. metadata.path
+
+    metadata.slug = pandoc.path.split_extension(pandoc.path.filename(input))
   end
 end
 
