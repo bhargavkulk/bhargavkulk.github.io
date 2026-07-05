@@ -3,99 +3,129 @@ import sys
 from pathlib import Path
 
 import ninja_syntax
-from utils import Folder
+from ninja_syntax import Rule
 
 # TODO make ninja_syntax.py work with Path
 
-# - Config -----------------------------------------------------------------------------------------
-CONTENT = Folder('content/')
-CACHE = Path('cache/')
-# Maps collection name to whether it needs a rss feed
-COLLECTIONS = {'blog': True}
-TEMPLATES = Folder('templates/')
-ASSETS = Folder('assets/')
-
-templates = [str(file) for file in TEMPLATES.iterdir()]
-
-# - Generator --------------------------------------------------------------------------------------
 gen = ninja_syntax.Writer(open('build.ninja', 'w'))
 
-# Regen build.ninja when this file changes
-gen.rule('regen_ninja', f'{sys.executable} $in > $out')
-gen.build('build.ninja', 'regen_ninja', __file__)
+# - General config -----------------------------------------------------------------------------------------
+CONTENT = Path('content/')
+CACHE = Path('cache/')
+TEMPLATES = Path('templates/')
+ASSETS = Path('assets/')
 
-# Fragments & Metadata
-gen.rule(
-    'djot2fragment',
-    'pandoc -f djot -t html --mathml --lua-filter filters/djot.lua $in -o $out',
-)
-gen.rule(
-    'djot2mdata',
-    'pandoc -f djot --lua-filter filters/djot-metadata.lua $in > $out',
-)
 
-for source in CONTENT.rglob('*.dj'):
-    frag = (CACHE / source.relative_to(CONTENT)).with_suffix('.html')
-    mdata = frag.with_suffix('.json')
-    gen.build(
-        str(frag),
-        'djot2fragment',
-        str(source),
-        implicit='filters/djot.lua',
-    )
-    gen.build(
-        str(mdata),
-        'djot2mdata',
-        str(source),
-        implicit='filters/djot-metadata.lua',
-    )
+# - File format config -----------------------------------------------------------------------------
+# Every file format must generate metadata, but some may not generate HTML fragments
+FILE_FORMATS = {
+    '.dj': {
+        'fragment': Rule(
+            gen,
+            'dj_fragment',
+            'pandoc -f djot -t html --mathml --lua-filter filters/djot.lua $in -o $out',
+            implicit='filters/djot.lua',
+        ),
+        'metadata': Rule(
+            gen,
+            'dj_mdata',
+            'pandoc -f djot --lua-filter filters/djot-metadata.lua $in > $out',
+            implicit='filters/djot-metadata.lua',
+        ),
+    },
+    '.json': {
+        'metadata': Rule(
+            gen,
+            'json_mdata',
+            'uv run scripts/copy_file.py $in $out',
+        ),
+    },
+}
 
-# Make collection indices
+# - Collections config -----------------------------------------------------------------------------
+COLLECTIONS = {
+    'blog': True,
+}
+
+
+# - Common data and functions ----------------------------------------------------------------------
+content_files = [path for path in CONTENT.rglob('*') if path.is_file()]
+templates = [str(path) for path in TEMPLATES.iterdir()]
+
+
+# ASSUMES path.suffix is arleady in FILE_FORMATS
+def is_fraggable(extn: str) -> bool:
+    return 'fragment' in FILE_FORMATS[extn]
+
+
+# - Build cache ------------------------------------------------------------------------------------
+for source in content_files:
+    if source.suffix not in FILE_FORMATS:
+        raise ValueError(f'Unknown content file format {source.suffix}.')
+
+    mdata = (CACHE / source.relative_to(CONTENT)).with_suffix('.json')
+    FILE_FORMATS[source.suffix]['metadata'].build(str(mdata), str(source))
+
+    if is_fraggable(source.suffix):
+        frag = mdata.with_suffix('.html')
+        FILE_FORMATS[source.suffix]['fragment'].build(str(frag), str(source))
+
+# - Generate collection indices --------------------------------------------------------------------
 gen.rule(
     'collection_index',
-    'uv run python scripts/generate_index.py $out $dir $in',
+    'uv run python scripts/generate_index.py $out $in',
 )
 
+# ASSUMES collections are flat, i.e. no folders within a collection
 collection_indices = []
 for collection in COLLECTIONS:
-    dir = CONTENT / collection
-    if dir.is_dir():
-        cache_dir = CACHE / collection
-        mdatas = [
-            str((cache_dir / file.name).with_suffix('.json'))
-            for file in dir.glob('*.dj')
-        ]
-        gen.build(
-            str(CACHE / f'{collection}_index.json'),
-            'collection_index',
-            mdatas,
-            implicit='scripts/generate_index.py',
-            variables={'dir': str(cache_dir)},
+    collection_dir = CONTENT / collection
+    # If declared in config, collection folder MUST exist
+    if not collection_dir.is_dir():
+        raise ValueError(
+            f'Collection directory {collection_dir} either does not exists or is a file.'
         )
 
-        collection_indices.append(str(CACHE / f'{collection}_index.json'))
+    cache_dir = CACHE / collection
+    # Collect all corresponding metadatas of the files in the collcetion
+    collection_metadatas = [
+        str((cache_dir / path.name).with_suffix('.json'))
+        for path in collection_dir.iterdir()
+        if path.is_file()
+    ]
+    gen.build(
+        str(CACHE / f'{collection}_index.json'),
+        'collection_index',
+        collection_metadatas,
+        implicit='scripts/generate_index.py',
+    )
+    collection_indices.append(str(CACHE / f'{collection}_index.json'))
 
-# Fill templates
+# - Fill templates ---------------------------------------------------------------------------------
 gen.rule(
     'fill_template',
-    'uv run python scripts/fill_template.py $in templates $out $extra',
+    'uv run python scripts/fill_template.py $in templates $out $extra $fragment',
 )
 
-for source in CONTENT.rglob('*.dj'):
-    frag = (CACHE / source.relative_to(CONTENT)).with_suffix('.html')
-    mdata = frag.with_suffix('.json')
+for source in content_files:
+    mdata = (CACHE / source.relative_to(CONTENT)).with_suffix('.json')
     page = Path('www') / source.relative_to(CONTENT).with_suffix('.html')
+    variables: dict[str, str | list[str] | None] = {
+        'extra': collection_indices,
+    }
+    if is_fraggable(source.suffix):
+        variables['fragment'] = f'--fragment {mdata.with_suffix(".html")}'
 
     gen.build(
         str(page),
         'fill_template',
-        [str(frag), str(mdata)],
+        str(mdata),
         implicit=[
             'scripts/fill_template.py',
             *templates,
             *collection_indices,
         ],
-        variables={'extra': collection_indices},
+        variables=variables,
     )
 
 # Blog feeds

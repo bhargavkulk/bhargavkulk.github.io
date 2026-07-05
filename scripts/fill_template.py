@@ -10,11 +10,11 @@ from mako.lookup import TemplateLookup
 
 @dataclass
 class Args:
-    input: Path
     metadata: Path
     templates: Path
     output: Path
-    extra: list[Path]
+    extra_metadata: list[Path]
+    fragment: Path | None
 
 
 def existing_path(input: str) -> Path:
@@ -33,11 +33,11 @@ def is_a_dir(input: str) -> Path:
 
 def parse_args() -> Args:
     parser = argparse.ArgumentParser()
-    parser.add_argument('input', type=existing_path)
     parser.add_argument('metadata', type=existing_path)
     parser.add_argument('templates', type=is_a_dir)
     parser.add_argument('output', type=Path)
-    parser.add_argument('extra', type=existing_path, nargs='*')
+    parser.add_argument('extra_metadata', type=existing_path, nargs='*')
+    parser.add_argument('-f', '--fragment', type=existing_path)
 
     return Args(**vars(parser.parse_args()))
 
@@ -55,35 +55,37 @@ def main():
         )
 
     if 'template' not in metadata:
+        if args.fragment is None:
+            raise ValueError('cannot render page without a template or fragment')
         print(
             'template not found in metadata, simply copying over the HTML fragment to output.',
             file=sys.stderr,
         )
-        shutil.copy2(args.input, args.output)
+        shutil.copy2(args.fragment, args.output)
         return
 
     template_file = metadata['template']
-    html_fragment = args.input.read_text(encoding='utf-8')
-    template_metadata: dict[str, object] = dict(metadata)
-    template_metadata['content'] = html_fragment
-    template_metadata.setdefault('title', metadata.get('id', ''))
+    if args.fragment is not None:
+        html_fragment = args.fragment.read_text(encoding='utf-8')
+        metadata['content'] = html_fragment
+    metadata.setdefault('title', metadata.get('id', ''))
 
-    for extra_path in args.extra:
+    for extra_path in args.extra_metadata:
         variable_name = extra_path.stem
-        if variable_name in template_metadata:
+        if variable_name in metadata:
             raise ValueError(
                 f'extra metadata variable "{variable_name}" conflicts with page metadata'
             )
 
         with extra_path.open('rb') as fp:
-            template_metadata[variable_name] = json.load(fp)
+            metadata[variable_name] = json.load(fp)
 
     lookup = TemplateLookup(
         directories=[str(args.templates)],
         input_encoding='utf-8',
     )
     template = lookup.get_template(template_file)
-    html = template.render(**template_metadata)
+    html = template.render(**metadata)
     args.output.write_text(html, encoding='utf-8')
 
 

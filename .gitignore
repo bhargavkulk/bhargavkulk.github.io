@@ -1,4 +1,7 @@
 www/
+.ruff_cache/
+.uv_cache/
+.venv/
 build.ninja
 .ninja_deps
 .ninja_log

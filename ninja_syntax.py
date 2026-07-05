@@ -234,3 +234,16 @@ def expand(string: str, vars: Dict[str, str], local_vars: Dict[str, str] = {}) -
         return local_vars.get(var, vars.get(var, ''))
 
     return re.sub(r'\$(\$|\w*)', exp, string)
+
+
+class Rule:
+    def __init__(self, gen: Writer, name: str, command: str, **build_kwargs):
+        self.gen = gen
+        self.name = name
+        self.build_kwargs = build_kwargs
+        gen.rule(name, command)
+
+    def build(self, outputs, inputs, **build_kwargs):
+        kwargs = dict(self.build_kwargs)
+        kwargs.update(build_kwargs)
+        return self.gen.build(outputs, self.name, inputs, **kwargs)

@@ -27,18 +27,11 @@ def parse_args() -> Args:
 
 def main():
     args = parse_args()
-
-    assert args.entries[0].is_dir(), f'{args.entries[0]} must be a dir'
-
-    index_file = args.entries[0] / 'index.json'
-    if not index_file.exists():
-        raise ValueError(f'{args.entries[0]} does not contain an index.json')
-
     args.output.parent.mkdir(parents=True, exist_ok=True)
 
     collection_entries: list[dict[str, object]] = []
 
-    for source_file in args.entries[1:]:
+    for source_file in args.entries:
         if source_file.stem == 'index':
             continue
 
