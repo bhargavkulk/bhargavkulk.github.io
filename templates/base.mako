@@ -15,7 +15,7 @@
                 <a href="/">Home</a>
                 <a href="/blog">Blog</a>
                 <a href="/research">Research</a>
-                <a href="/">CV</a>
+                <a href="/cv.pdf">CV</a>
             </nav>
         </header>
         <hr>
