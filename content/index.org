@@ -1,0 +1,40 @@
+#+title: About
+#+author: Bhargav Kulkarni
+#+date: 2001-07-11
+#+template: index.mako
+
+#+begin_marquee
+Our paper on a verified optimizer for Skia has been (conditionally) accepted to OOPSLA'26! Read more
+about it in [[/blog/skia-retro.html][this blog post]]
+#+end_marquee
+
+#+attr_html: :class profile :width 165px
+[[/images/bhargav.jpg]]
+
+Hi, I am Bhargav Kulkarni (bhārgav/भार्गव/ಭಾರ್ಗವ್)! I am a PhD student at the University of Utah
+since 2023. I am advised by [[https://pavpanchekha.com/][Pavel Panchekha]].
+
+My goal is to make it easier for developers to write more correct and more robust code. I am
+currently working on building a verified optimizer for the Skia graphics library used by Chrome.
+Previously I worked on sound attribution of floating point error in floating point programs.
+
+Before joining the PhD program at the U, I got my bachelor's in Computer Science from the [[https://www.bits-pilani.ac.in/goa/][Birla
+Institute of Technology and Sciences]]. There I worked with Prof. Anup Basil Mathew on adapting the
+Rocq interactive theorem prover in an educational environment.
+
+I am currently interning at Adobe, and have interned at the NASA Langley Formal Methods Group in the
+past.
+
+I am part of the vibrant [[https://pl.cs.utah.edu/][PLUtah]] community.
+
+I list all my [[/research][publications]] and my [[/][CV]] on this site.
+
+The fastest way to reach out to me is via my e-mail: [[mailto:adent@galaxy.net][=bhargavkishork@gmail.com=]]. I am also active on
+these sites but I may not answer as quickly:
+
+- [[https://github.com/bhargavkulk/][bhargavkulk@GitHub]]
+- [[https://www.linkedin.com/in/bhargav-kulkarni-600983192/][LinkedIn]]
+- [[https://mastodon.social/@bhargavkk][bhargavkk@mastodon.social]]
+
+This website hosts my (infrequently updated) [[/blog][blog]]. Give it a
+read!

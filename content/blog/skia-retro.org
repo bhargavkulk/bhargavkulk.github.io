@@ -1,0 +1,166 @@
+#+title: Speeding up Skia using E-graphs: A Retrospective
+#+template: post.mako
+#+date: 2026-06-16
+
+#+begin_alert
+A paper on this project has been (conditionally) accepted at OOPSLA'26. You can find a preprint to
+our paper [[https://arxiv.org/abs/2603.23696][here]].
+#+end_alert
+
+For the past year I have been working on a research project to try and speed up the rendering of
+webpages in Google Chrome.
+There are many ways in which one could achieve this, but as PL researchers, we -- my advisor Pavel, an
+undergrad I mentored Henry, and I -- focused on the graphics API of Skia, which is Chrome's
+rendering engine.
+The crux of this project was to treat Skia's graphics API as a programming language and optimize it
+like one.
+This was actually Pavel's second go at this project; he and a previous student already tried
+optimizing Skia with E-graphs, but that did not go anywhere and the project was dormant.
+I found the idea to be very interesting, and decided to have a go at it.
+A year later, we ended up with an optimizer that nets on average a 19% speedup on the most visited
+websites in the world.
+
+I wanted to write something about my effort, and that would mean I have to explain a lot of
+background about Skia.
+Turns out Pavel already wrote a blog post titled ["Speeding up Skia using E-graphs"](https://pavpanchekha.com/blog/skia-egraph.html) a while back.
+So instead of repeating Pavel's words, I decided that this blog post would be a retrospective of
+Pavel's blog post.
+I'll quote relevant parts of his blog post, while chiming in with new information we discovered on
+our second attempt.
+
+* Retrospective
+
+#+begin_quote
+Skia has three main types of structured data in its API.
+The first is *shape*.
+These are things you can draw, stuff like circles, rounded rectangles, and text (a very important
+type of shape).
+The second is *surfaces*.
+A surface is a 2D array of pixels, which is where you draw shapes.
+Note that Skia itself talks about surfaces using several different surface-level API calls, like
+SaveLayer and Surface, but internally at the end of the day Skia is either creating a 2D array of
+pixels or not.
+Finally, there are *paints*, which are ways of drawing a shape to a surface.
+#+end_quote
+
+In broad strokes this describes a basic working model for Skia.
+But in the course of trying to come up with /correct/ rewrites, we refined this model a bit more.
+Instead of *shapes* and *surfaces* you just have an *image*.
+An *image* is simply a 2D buffer of pixels.
+Skia API calls simply consume image(s) and return a modified image.
+For example, the ~DrawRect~ command consumes an image of a rectangle, the image we are drawing on, and
+returns a new image which is the old image with a rectangle drawn on top of it.
+Paints are just a collection of operators /on/ images.
+They describe how an image gets filled, filtered, or blended.
+
+#+begin_quote
+The sequence of shapes, surfaces, and paints is like a program.
+It's not written as source code—it is expressed temporally through Skia API calls—but nonetheless it
+can be executed, it produces an output (typically a collection of output surfaces), and it has a
+clear semantics.
+#+end_quote
+
+I am not sure why Pavel says that a Skia program has "clear semantics".
+It really does not, as a large part of this project was trying to clarify the semantics of Skia.
+Understanding the semantics of Skia is /very important/ to ensure we derive correct optimizations.
+By correct I mean optimizations that do not change the picture being drawn.
+While the model I described is very simple, we still have to reason about the various ways in which
+different parts of the model interact.
+This is hard to do without writing down the semantics of Skia (which we do in the project, in fact
+we mechanize it in Lean).
+
+#+begin_quote
+E-graphs seem like a good match for this kind of optimization.
+E-graphs are good at equational reasoning with purely-functional ASTs, and Skia is kind of like
+this.
+Many of the equivalence relationships seem kind of equational-ish, and while the API is not purely
+functional (since painting to a surface modifies the surface) it's potentially possible to treat
+those surfaces as linear data structures and to enforce linearity when we extract from the e-graph
+instead of when synthesizing alternative implementations inside the e-graph itself.
+Also, while Skia programs are relatively large, they are still much smaller than, say, LLVM IR, and
+should fit into an e-graph comfortably.
+#+end_quote
+
+An E-graph is a data structure that represents equivalent terms in a succinct manner.
+To use an E-graph, you would apply rewrites on an initial term, and once it saturates you can
+extract the least costly equivalent term out of the E-graph.
+E-graphs are cool, but it turns out that they are very slow for doing optimizations in the browser.
+Rendering only has a budget of a few microseconds, and E-graphs cannot optimize terms that
+quickly.[fn:1] So to ensure performing the optimization pays for itself, we instead chose to write a
+linear-time rewriter from scratch.
+It's really fast!
+For some large websites, our optimizer only takes 32μs.
+
+#+begin_quote
+Skia programs can be extracted from actual applications like Chrome.
+I am told that code for doing this and generating "SkPicture" files already exists.
+#+end_quote
+
+Extracting Skia programs (as ~SkPictures~) is very easy!
+You just call ~chrome.gpuBenchmarking.printToSkPicture(<path>)~ from Chrome's debug console.
+Skia also has utilities to convert the binary SKP format to human-readable JSON.
+Also, the Skia codebase was a treat to work on!
+
+#+begin_quote
+I think typically the goal should be optimizing for space, meaning number of surfaces.
+You could care about total surface memory or peak surface memory at any one time, but the reason
+this is the most important optimization goal is that surfaces typically live on the GPU, and GPU
+memory is limited.
+Moreover, at a higher level Chrome, the Skia client, will trade space for time (by caching more
+surfaces), so saving memory will turn into saving time as well.
+#+end_quote
+
+We were never able to measure memory wins from our optimizer, but using Skia's `nanobench`
+bench-marking harness, we learned that our optimizer is actually very good at optimizing rendering time!
+
+#+begin_quote
+One tricky bit to optimizing well is going to be handling error.
+When a shape is drawn to a surface, there is going to be some error due to rasterization.
+Error here means images don't look as sharp as they could.
+It's best to ignore this at least in the first attempt at this problem because my intuition is that
+programs that use fewer surfaces are also going to have less error (they rasterize less often).
+#+end_quote
+
+This phenomenon is called anti-aliasing and is caused by the engine trying to figure out how to
+draw curves and other weird stuff that cross pixel boundaries.
+We ignore this completely in our work 🙂.
+This was in fact not a big deal, because we did not find too many anti-aliasing differences that were
+very visible to the human eye after running websites through our optimizer.
+
+#+begin_quote
+I think writing down a semantics for Skia programs, proving some equivalences about it, and building
+the infrastructure to extract Skia programs from Chrome are all interesting research tasks.
+#+end_quote
+
+We did all of this!
+Pavel does not give much importance to the semantics aspect of this project in his blog post, but in
+our attempt, the majority of the project was about the semantics.
+We mechanize both the abstract model of Skia I described in the beginning and semantics that lower
+Skia's API to this abstract model.
+We then stared at websites for a long time and tried to come up with general rewrites that we proved
+correct w.r.t.
+our semantics in Lean.
+We then use these proven correct rewrites in an actual Skia optimizer that performs really well!
+As a cherry on top, we convert both unoptimized and optimized Skia programs back into Lean terms,
+and translation-validate them against our rewrites using our Lean semantics!
+
+#+begin_quote
+If there are any interesting missing optimizations (probably?)
+they could be communicated to either the Skia or Chrome folks.
+#+end_quote
+
+We did try to do this, but the Chrome and Skia team did not come to a consensus on who should
+implement the rewrites.
+We are still talking to them, and hopefully we can get our research up-streamed in some way.
+
+* Conclusion
+
+This was a fun project to work on, and the numbers we get seem to show it was also a successful one.
+I am excited for follow-up research, because we realized near the end of this project that most
+graphics APIs are very similar to Skia.[fn:2]
+It would be very exciting to extend our semantics work to other APIs and see what we can do with
+them.
+Be on the lookout for our paper on this project!
+
+[fn:1] I don't have concrete numbers to list here, but it's pretty slow!
+[fn:2] In some sense all of these 2D graphics APIs relate to PostScript in some manner.
