@@ -11,3 +11,14 @@ function Div(el)
     end
   end
 end
+
+-- Render Djot spans with an explicit class attribute as keyboard input.
+function Span(el)
+  local class_attr = el.attributes and el.attributes["class"]
+  if class_attr and class_attr:match("(^|%s)kbd($|%s)") then
+    local content = pandoc.List(el.content)
+    content:insert(1, pandoc.RawInline("html", "<kbd>"))
+    content:insert(pandoc.RawInline("html", "</kbd>"))
+    return content
+  end
+end

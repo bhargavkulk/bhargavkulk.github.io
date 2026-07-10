@@ -33,6 +33,20 @@ FILE_FORMATS = {
             implicit='filters/djot-metadata.lua',
         ),
     },
+    '.org': {
+        'fragment': Rule(
+            gen,
+            'org_fragment',
+            'pandoc -f org+smart --shift-heading-level-by=1 -t html --mathml --lua-filter filters/org.lua $in -o $out',
+            implicit='filters/org.lua',
+        ),
+        'metadata': Rule(
+            gen,
+            'org_mdata',
+            'pandoc -f org+smart --lua-filter filters/org-metadata.lua $in > $out',
+            implicit='filters/org-metadata.lua',
+        ),
+    },
     '.json': {
         'metadata': Rule(
             gen,
@@ -113,18 +127,21 @@ for source in content_files:
     variables: dict[str, str | list[str] | None] = {
         'extra': collection_indices,
     }
+    implicit = [
+        'scripts/fill_template.py',
+        *templates,
+        *collection_indices,
+    ]
     if is_fraggable(source.suffix):
-        variables['fragment'] = f'--fragment {mdata.with_suffix(".html")}'
+        fragment = mdata.with_suffix('.html')
+        variables['fragment'] = f'--fragment {fragment}'
+        implicit.append(str(fragment))
 
     gen.build(
         str(page),
         'fill_template',
         str(mdata),
-        implicit=[
-            'scripts/fill_template.py',
-            *templates,
-            *collection_indices,
-        ],
+        implicit=implicit,
         variables=variables,
     )
 
