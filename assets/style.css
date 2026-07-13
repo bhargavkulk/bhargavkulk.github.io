@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
 
 :root {
     --sans-fonts: "Public Sans", sans-serif;
-    --serif-fonts: "Libre Baskerville", serif;
+    --mono-fonts: "Inconsolata", monospace;
 }
 
 * {
@@ -20,8 +21,20 @@ body {
     line-height: 1.45 !important;
 }
 
+strong {
+    font-weight: 600;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+}
+
+code, pre, time {
+    font-family: var(--mono-fonts);
+}
+
+
 header h1 {
-    font-family: var(--sans-fonts);
     margin-bottom: 0;
 }
 
@@ -29,6 +42,7 @@ nav {
     display: flex;
     gap: 0.5em;
 }
+
 
 .marquee {
     overflow: hidden;
@@ -88,12 +102,6 @@ pre, blockquote {
     footer {
         display: none;
     }
-}
-
-pre,
-code,
-time {
-    font-family: monospace;
 }
 
 table {

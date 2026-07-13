@@ -63,7 +63,9 @@ COLLECTIONS = {
 
 
 # - Common data and functions ----------------------------------------------------------------------
-content_files = [path for path in CONTENT.rglob('*') if path.is_file()]
+content_files = [
+    path for path in CONTENT.rglob('*') if path.is_file() and path.name != '.dir-locals.el'
+]
 templates = [str(path) for path in TEMPLATES.iterdir()]
 
 
@@ -129,6 +131,7 @@ for source in content_files:
     }
     implicit = [
         'scripts/fill_template.py',
+        'scripts/date_utils.py',
         *templates,
         *collection_indices,
     ]

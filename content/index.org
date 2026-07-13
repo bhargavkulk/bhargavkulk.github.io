@@ -1,6 +1,6 @@
 #+title: About
 #+author: Bhargav Kulkarni
-#+date: 2001-07-11
+#+date: [2001-07-11 Wed]
 #+template: index.mako
 
 #+begin_marquee
