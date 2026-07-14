@@ -5,8 +5,13 @@ local function strip_file_scheme(path)
   return path
 end
 
+local function org_to_html(path)
+  path = strip_file_scheme(path)
+  return path:gsub('%.org$', '.html')
+end
+
 function Link(el)
-  el.target = strip_file_scheme(el.target)
+  el.target = org_to_html(el.target)
   return el
 end
 
