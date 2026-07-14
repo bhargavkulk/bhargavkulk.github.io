@@ -1,0 +1,272 @@
+#+title: M-x marks the spot
+#+template: index.mako
+#+date: [2001-11-08 Thu]
+
+* S-Expression Movement
+
+- =C-M-<right>= :: =forward-sexp=
+- =C-M-<left>= :: =backward-sexp=
+- =C-M-<backspace>= :: =backward-kill-sexp=
+- =C-M-@= :: =mark-sexp=
+- =C-M-b= :: =backward-sexp=
+- =C-M-f= :: =forward-sexp=
+- =C-M-k= :: =kill-sexp=
+- =C-M-t= :: =transpose-sexps=
+- =C-M-SPC= :: =mark-sexp=
+
+- =C-x TAB= :: =rectangle-mark-mode=
+- =C-x SPC= :: =rectangle-mark-mode=
+- =C-x (= :: =kmacro-start-macro=
+- =C-x )= :: =kmacro-end-macro=
+- =C-x [= :: =backward-page=
+- =C-x ]= :: =forward-page=
+- =C-x e= :: =kmacro-end-and-call-macro=
+- =C-x l= :: =count-lines-page=
+- =C-x q= :: =kbd-macro-query=
+- =C-x {= :: =shrink-window-horizontally=
+- =C-x }= :: =enlarge-window-horizontally=
+- =C-x C-+= :: =text-scale-adjust=
+- =C-x C--= :: =text-scale-adjust=
+- =C-x C-0= :: =text-scale-adjust=
+- =C-x C-== :: =text-scale-adjust=
+- =C-x C-;= :: =comment-line=
+- =C-x C-<left>= :: =previous-buffer=
+- =C-x C-<right>= :: =next-buffer=
+- =C-x <left>= :: =previous-buffer=
+- =C-x <right>= :: =next-buffer=
+- =C-M-h= :: =mark-defun=
+- =C-M-l= :: =reposition-window=
+- =C-M-o= :: =split-line=
+- =C-M-r= :: =isearch-backward-regexp=
+- =C-M-s= :: =isearch-forward-regexp=
+- =C-M-v= :: =scroll-other-window=
+- =M-SPC= :: =cycle-spacing=
+- =M-!= :: =shell-command=
+- =M-$= :: =ispell-word=
+- =M-%= :: =query-replace=
+- =M-&= :: =async-shell-command=
+- =M-,= :: =xref-go-back=
+- =M-.= :: =xref-find-definitions=
+- =M-;= :: =comment-dwim=
+- =M->= :: =end-of-buffer=
+- =M-^= :: =delete-indentation=
+- =M-c= :: =capitalize-word=
+- =M-l= :: =downcase-word=
+- =M-m= :: =back-to-indentation=
+- =M-u= :: =upcase-word=
+- =M-y= :: =yank-pop=
+- =M-|= :: =shell-command-on-region=
+- =C-M-%= :: =query-replace-regexp=
+- =C-M-,= :: =xref-go-forward=
+- =C-M-.= :: =xref-find-apropos=
+- =M-s .= :: =isearch-forward-symbol-at-point=
+- =M-s _= :: =isearch-forward-symbol=
+- =M-s o= :: =occur=
+- =M-s w= :: =isearch-forward-word=
+
+- =M-g TAB= :: =move-to-column=
+- =M-g c= :: =goto-char=
+- =M-g g= :: =goto-line=
+- =M-g i= :: =imenu=
+- =M-g n= :: =next-error=
+- =M-g p= :: =previous-error=
+- =M-g M-g= :: =goto-line=
+- =M-g M-n= :: =next-error=
+- =M-g M-p= :: =previous-error=
+
+- =C-x 6 2= :: =2C-two-columns=
+- =C-x 6 b= :: =2C-associate-buffer=
+- =C-x 6 s= :: =2C-split=
+
+- =C-x RET C-\= :: =set-input-method=
+
+- =C-x 4 C-f= :: =find-file-other-window=
+- =C-x 4 C-j= :: =dired-jump-other-window=
+- =C-x 4 C-o= :: =display-buffer=
+- =C-x 4 .= :: =xref-find-definitions-other-window=
+- =C-x 4 0= :: =kill-buffer-and-window=
+- =C-x 4 b= :: =switch-to-buffer-other-window=
+- =C-x 4 d= :: =dired-other-window=
+- =C-x 4 f= :: =find-file-other-window=
+- =C-x 4 p= :: =project-other-window-command=
+
+- =C-x 5= :: other frames
+- =C-x 8 RET= :: =insert-char=
+
+- =C-x n d= :: =narrow-to-defun=
+- =C-x n g= :: =goto-line-relative=
+- =C-x n n= :: =narrow-to-region=
+- =C-x n p= :: =narrow-to-page=
+- =C-x n w= :: =widen=
+
+- =C-x a C-a= :: =add-mode-abbrev=
+- =C-x a '= :: =expand-abbrev=
+- =C-x a += :: =add-mode-abbrev=
+- =C-x a -= :: =inverse-add-global-abbrev=
+- =C-x a e= :: =expand-abbrev=
+- =C-x a g= :: =add-global-abbrev=
+- =C-x a l= :: =add-mode-abbrev=
+- =C-x a n= :: =expand-jump-to-next-slot=
+- =C-x a p= :: =expand-jump-to-previous-slot=
+
+- =C-x p p= :: =project-switch-project=
+- =C-x p k= :: =project-kill-buffers=
+- =C-x p c= :: =project-compile=
+- =C-x p f= :: =project-find-file=
+
+- =M-s M-.= :: =isearch-forward-thing-at-point=
+
+ESC as M-
+
+- registers and bookmarks
+- =C-x t= :: tabs
+- =C-x v= :: VC
+
+* Movement
+
+- =M-{= :: =backward-paragraph=
+- =M-}= :: =forward-paragraph=
+- =C-M-a= :: =beginning-of-defun=
+- =C-M-e= :: =end-of-defun=
+
+* Weirdo
+
+- =C-x $= :: =set-selective-display=
+- =M-s h .= :: =highlight-symbol-at-point=
+- =M-s h f= :: =hi-lock-find-patterns=
+- =M-s h l= :: =highlight-lines-matching-regexp=
+- =M-s h p= :: =highlight-phrase=
+- =M-s h r= :: =highlight-regexp=
+- =M-s h u= :: =unhighlight-regexp=
+- =M-s h w= :: =hi-lock-write-interactive-patterns=
+
+* Windows
+
+- =C-x += :: =balance-windows=
+- =C-x -= :: =shrink-window-if-larger-than-buffer=
+
+- =C-a= :: =move-beginning-of-line=
+- =C-b= :: =backward-char=
+- =C-e= :: =move-end-of-line=
+- =C-f= :: =forward-char=
+- =C-n= :: =next-line=
+- =C-p= :: =previous-line=
+- =C-v= :: =scroll-up-command=
+- =C-M-<end>= :: =end-of-defun=
+- =C-M-<home>= :: =beginning-of-defun=
+- =C-M-<down>= :: =down-list=
+- =C-M-<up>= :: =backward-up-list=
+- =C-<down>= :: =forward-paragraph=
+- =C-<end>= :: =end-of-buffer=
+- =C-<home>= :: =beginning-of-buffer=
+- =M-<left>= :: =left-word=
+- =M-<next>= :: =scroll-other-window=
+- =M-<prior>= :: =scroll-other-window-down=
+- =M-<right>= :: =right-word=
+- =C-<right>= :: =right-word=
+- =C-<up>= :: =backward-paragraph=
+- =C-<left>= :: =left-word=
+
+- =C-x C-k C-a= :: =kmacro-add-counter=
+- =C-x C-k C-c= :: =kmacro-set-counter=
+- =C-x C-k C-d= :: =kmacro-delete-ring-head=
+- =C-x C-k C-e= :: =kmacro-edit-macro-repeat=
+- =C-x C-k C-f= :: =kmacro-set-format=
+- =C-x C-k TAB= :: =kmacro-insert-counter=
+- =C-x C-k C-k= :: =kmacro-end-or-call-macro-repeat=
+- =C-x C-k C-l= :: =kmacro-call-ring-2nd-repeat=
+- =C-x C-k RET= :: =kmacro-edit-macro=
+- =C-x C-k C-n= :: =kmacro-cycle-ring-next=
+- =C-x C-k C-p= :: =kmacro-cycle-ring-previous=
+- =C-x C-k C-s= :: =kmacro-start-macro=
+- =C-x C-k C-t= :: =kmacro-swap-ring=
+- =C-x C-k C-v= :: =kmacro-view-macro-repeat=
+- =C-x C-k SPC= :: =kmacro-step-edit-macro=
+- =C-x C-k b= :: =kmacro-bind-to-key=
+- =C-x C-k d= :: =kmacro-redisplay=
+- =C-x C-k e= :: =edit-kbd-macro=
+- =C-x C-k l= :: =kmacro-edit-lossage=
+- =C-x C-k n= :: =kmacro-name-last-macro=
+- =C-x C-k q= :: =kbd-macro-query=
+- =C-x C-k r= :: =apply-macro-to-region-lines=
+- =C-x C-k s= :: =kmacro-start-macro=
+- =C-x C-k x= :: =kmacro-to-register=
+
+- =C-x ESC ESC= :: =repeat-complex-command=
+- =C-x M-:= :: =repeat-complex-command=
+
+- =C-@= :: =set-mark-command=
+- =C-d= :: =delete-char=
+- =C-g= :: =keyboard-quit=
+- =TAB= :: =indent-for-tab-command=
+- =C-k= :: =kill-line=
+- =C-l= :: =recenter-top-bottom=
+- =RET= :: =newline=
+- =C-o= :: =open-line=
+- =C-q= :: =quoted-insert=
+- =C-r= :: =isearch-backward=
+- =C-s= :: =isearch-forward=
+- =C-t= :: =transpose-chars=
+- =C-u= :: =universal-argument=
+- =C-w= :: =kill-region=
+- =C-y= :: =yank=
+- =C-z= :: =suspend-frame=
+- =C-\= :: =toggle-input-method=
+- =C-]= :: =abort-recursive-edit=
+- =C-_= :: =undo=
+- =s-&= :: =kill-current-buffer=
+- =s-'= :: =next-window-any-frame=
+- =s-+= :: =text-scale-adjust=
+- =s-,= :: =customize=
+- =s--= :: =text-scale-adjust=
+- =s-0= :: =text-scale-adjust=
+- =s-:= :: =ispell=
+- =s-== :: =text-scale-adjust=
+- =s-?= :: =info=
+- =s-C= :: =ns-popup-color-panel=
+- =s-D= :: =dired=
+- =s-E= :: =edit-abbrevs=
+- =s-F= :: =isearch-backward=
+- =s-H= :: =ns-do-hide-others=
+- =s-L= :: =shell-command=
+- =s-M= :: =manual-entry=
+- =s-S= :: =ns-write-file-using-panel=
+- =s-^= :: =kill-some-buffers=
+- =s-`= :: =other-frame=
+- =s-a= :: =mark-whole-buffer=
+- =s-c= :: =ns-copy-including-secondary=
+- =s-d= :: =isearch-repeat-backward=
+- =s-e= :: =isearch-yank-kill=
+- =s-f= :: =isearch-forward=
+- =s-g= :: =isearch-repeat-forward=
+- =s-h= :: =ns-do-hide-emacs=
+- =s-j= :: =exchange-point-and-mark=
+- =s-k= :: =kill-current-buffer=
+- =s-l= :: =goto-line=
+- =s-m= :: =iconify-frame=
+- =s-n= :: =make-frame=
+- =s-o= :: =ns-open-file-using-panel=
+- =s-p= :: =ns-print-buffer=
+- =s-q= :: =save-buffers-kill-emacs=
+- =s-s= :: =save-buffer=
+- =s-t= :: =menu-set-font=
+- =s-u= :: =revert-buffer=
+- =s-v= :: =yank=
+- =s-w= :: =delete-frame=
+- =s-x= :: =kill-region=
+- =s-y= :: =ns-paste-secondary=
+- =s-z= :: =undo=
+- =s-|= :: =shell-command-on-region=
+- =s-~= :: =ns-prev-frame=
+- =C-SPC= :: =set-mark-command=
+- =C--= :: =negative-argument=
+- =C-/= :: =undo=
+- =C-0 .. C-9= :: =digit-argument=
+- =C-?= :: =undo-redo=
+
+- =C-x C-e= :: =eval-last-sexp=
+- =C-x C-o= :: =delete-blank-lines=
+- =C-x C-p= :: =mark-page=
+
+- =M-ESC ESC= :: =keyboard-escape-quit=
+- =M-ESC := :: =eval-expression=
