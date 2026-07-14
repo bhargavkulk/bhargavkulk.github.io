@@ -1,6 +1,6 @@
 #+title: Speeding up Skia using E-graphs: A Retrospective
-#+template: post.mako
 #+date: [2026-06-16 Tue]
+#+template: post.mako
 
 #+begin_alert
 A paper on this project has been (conditionally) accepted at OOPSLA'26. You can find a preprint to
