@@ -1,3 +1,4 @@
+import json
 import os
 import sys
 from pathlib import Path
@@ -58,7 +59,10 @@ FILE_FORMATS = {
 
 # - Collections config -----------------------------------------------------------------------------
 COLLECTIONS = {
-    'blog': True,
+    'blog': {
+        'template': 'blog_index.mako',
+        'title': 'Blog',
+    },
 }
 
 
@@ -94,7 +98,7 @@ gen.rule(
 
 # ASSUMES collections are flat, i.e. no folders within a collection
 collection_indices = []
-for collection in COLLECTIONS:
+for collection, config in COLLECTIONS.items():
     collection_dir = CONTENT / collection
     # If declared in config, collection folder MUST exist
     if not collection_dir.is_dir():
@@ -103,6 +107,19 @@ for collection in COLLECTIONS:
         )
 
     cache_dir = CACHE / collection
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    collection_metadata = {
+        'title': config['title'],
+        'template': config['template'],
+        'path': f'{collection}/index.html',
+        'link': f'/{collection}/index.html',
+        'slug': 'index',
+    }
+    (cache_dir / 'index.json').write_text(
+        json.dumps(collection_metadata),
+        encoding='utf-8',
+    )
+
     # Collect all corresponding metadatas of the files in the collcetion
     collection_metadatas = [
         str((cache_dir / path.name).with_suffix('.json'))
@@ -146,6 +163,23 @@ for source in content_files:
         str(mdata),
         implicit=implicit,
         variables=variables,
+    )
+
+# Fill collection index templates ------------------------------------------------------------------
+for collection in COLLECTIONS:
+    mdata = CACHE / collection / 'index.json'
+    page = Path('www') / collection / 'index.html'
+    gen.build(
+        str(page),
+        'fill_template',
+        str(mdata),
+        implicit=[
+            'scripts/fill_template.py',
+            'scripts/date_utils.py',
+            *templates,
+            *collection_indices,
+        ],
+        variables={'extra': collection_indices},
     )
 
 # Blog feeds

@@ -5,9 +5,7 @@ from datetime import datetime
 from date_utils import format_date_attr, parse_org_date
 %>
 
-<h1>Blog <a href="/blog_index_rss.xml" style="font-size: 1rem; font-weight: normal;">[rss]</a> <a href="/blog_index_atom.xml" style="font-size: 1rem; font-weight: normal;">[atom]</a></h1>
-
-${content | n}
+<h1>${title} <a href="/blog_index_rss.xml" style="font-size: 1rem; font-weight: normal;">[rss]</a> <a href="/blog_index_atom.xml" style="font-size: 1rem; font-weight: normal;">[atom]</a></h1>
 
 <table>
 % for entry in sorted(blog_index, key=lambda entry: parse_org_date(entry['date']) if entry.get('date') else datetime.min, reverse=True):

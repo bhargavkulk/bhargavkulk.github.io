@@ -22,7 +22,7 @@ websites in the world.
 
 I wanted to write something about my effort, and that would mean I have to explain a lot of
 background about Skia.
-Turns out Pavel already wrote a blog post titled ["Speeding up Skia using E-graphs"](https://pavpanchekha.com/blog/skia-egraph.html) a while back.
+Turns out Pavel already wrote a blog post titled [[https://pavpanchekha.com/blog/skia-egraph.html]["Speeding up Skia using E-graphs"]] a while back.
 So instead of repeating Pavel's words, I decided that this blog post would be a retrospective of
 Pavel's blog post.
 I'll quote relevant parts of his blog post, while chiming in with new information we discovered on
@@ -110,7 +110,7 @@ Moreover, at a higher level Chrome, the Skia client, will trade space for time (
 surfaces), so saving memory will turn into saving time as well.
 #+end_quote
 
-We were never able to measure memory wins from our optimizer, but using Skia's `nanobench`
+We were never able to measure memory wins from our optimizer, but using Skia's ~nanobench~
 bench-marking harness, we learned that our optimizer is actually very good at optimizing rendering time!
 
 #+begin_quote

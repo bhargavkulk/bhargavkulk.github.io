@@ -32,9 +32,6 @@ def main():
     collection_entries: list[dict[str, object]] = []
 
     for source_file in args.entries:
-        if source_file.stem == 'index':
-            continue
-
         with source_file.open('rb') as fp:
             entry = json.load(fp)
 
