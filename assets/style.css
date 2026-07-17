@@ -1,8 +1,50 @@
-@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@100..800&family=Anek+Kannada:wght@100..800&family=Charis+SIL:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@font-face {
+    font-family: "Cooper Hewitt";
+    font-style: normal;
+    font-weight: 400;
+    src: url('/fonts/CooperHewitt-Book.woff') format('woff');
+}
+
+@font-face {
+    font-family: "Cooper Hewitt";
+    font-style: italic;
+    font-weight: 400;
+    src: url('/fonts/CooperHewitt-BookItalic.woff') format('woff');
+}
+
+@font-face {
+    font-family: "Cooper Hewitt";
+    font-style: normal;
+    font-weight: 600;
+    src: url('/fonts/CooperHewitt-Semibold.woff') format('woff');
+}
+
+@font-face {
+    font-family: "Cooper Hewitt";
+    font-style: italic;
+    font-weight: 600;
+    src: url('/fonts/CooperHewitt-SemiboldItalic.woff') format('woff');
+}
+
+@font-face {
+    font-family: "Cooper Hewitt";
+    font-style: normal;
+    font-weight: 700;
+    src: url('/fonts/CooperHewitt-Bold.woff') format('woff');
+}
+
+@font-face {
+    font-family: "Cooper Hewitt";
+    font-style: italic;
+    font-weight: 700;
+    src: url('/fonts/CooperHewitt-BoldItalic.woff') format('woff');
+}
 
 :root {
-    --sans-fonts: "Public Sans", sans-serif;
+    --sans-fonts: "Cooper Hewitt", "Anek Kannada", "Anek Devanagari", sans-serif;
+    --serif-fonts: "Charis SIL", "Anek Kannada", "Anek Devanagari", serif;
     --mono-fonts: "Inconsolata", monospace;
 }
 
@@ -14,7 +56,7 @@
 }
 
 body {
-    font-family: var(--sans-fonts);
+    font-family: var(--serif-fonts);
     max-width: 80ch;
     padding-left: 20px;
     padding-right: 20px;
@@ -22,10 +64,11 @@ body {
 }
 
 strong {
-    font-weight: 600;
+    /* font-weight: 600; */
 }
 
 h1, h2, h3, h4, h5, h6 {
+    font-family: var(--sans-fonts);
     font-weight: 600;
 }
 
@@ -41,6 +84,7 @@ header h1 {
 nav {
     display: flex;
     gap: 0.5em;
+    font-family: var(--sans-fonts);
 }
 
 
