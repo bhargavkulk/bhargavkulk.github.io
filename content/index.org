@@ -8,6 +8,11 @@ Our paper on a verified optimizer for Skia has been (conditionally) accepted to 
 about it in [[/blog/skia-retro.html][this blog post]]
 #+end_marquee
 
+#+begin_quote
+Once you learn to read, you will be forever free.\\
+-- /Frederick Douglass/
+#+end_quote
+
 #+attr_html: :class profile :width 165px
 [[/images/bhargav.jpg]]
 

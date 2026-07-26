@@ -1,6 +1,4 @@
 import json
-import os
-import sys
 from pathlib import Path
 
 import ninja_syntax
@@ -38,7 +36,7 @@ FILE_FORMATS = {
         'fragment': Rule(
             gen,
             'org_fragment',
-            'pandoc -f org+smart --shift-heading-level-by=1 -t html --mathml --lua-filter filters/org.lua $in -o $out',
+            'pandoc -f org+smart --shift-heading-level-by=1 --syntax-highlighting default -t html --mathml --lua-filter filters/org.lua $in -o $out',
             implicit='filters/org.lua',
         ),
         'metadata': Rule(
@@ -68,7 +66,9 @@ COLLECTIONS = {
 
 # - Common data and functions ----------------------------------------------------------------------
 content_files = [
-    path for path in CONTENT.rglob('*') if path.is_file() and path.name != '.dir-locals.el'
+    path
+    for path in CONTENT.rglob('*')
+    if path.is_file() and not path.name.startswith('.')
 ]
 templates = [str(path) for path in TEMPLATES.iterdir()]
 
