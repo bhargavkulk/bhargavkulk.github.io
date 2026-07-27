@@ -126,6 +126,15 @@ nav {
     margin-right: 20px;
 }
 
+aside {
+    float: right;
+    width: 30%;
+    margin-left: 20px;
+    font-size: 0.9em;
+    background-color: #eee;
+    padding-left: 10px;
+}
+
 blockquote {
   margin-left: 0;
   margin-right: 0;
