@@ -19,3 +19,15 @@ function Image(el)
   el.src = strip_file_scheme(el.src)
   return el
 end
+
+-- Convert Org's aside div into a semantic HTML aside element.
+function Div(el)
+  if el.classes:includes('aside') then
+    return {
+      pandoc.RawBlock('html', '<aside>'),
+      table.unpack(el.content),
+      pandoc.RawBlock('html', '</aside>')
+    }
+  end
+  return el
+end
