@@ -25,6 +25,10 @@ function Meta(meta)
     metadata.author = pandoc.utils.stringify(meta.author)
   end
 
+  if meta.description then
+    metadata.description = pandoc.utils.stringify(meta.description)
+  end
+
   local input = PANDOC_STATE.input_files[1]
   local relative = input:match('content/(.+)$') or pandoc.path.filename(input)
   metadata.path = relative:gsub('%.org$', '.html')

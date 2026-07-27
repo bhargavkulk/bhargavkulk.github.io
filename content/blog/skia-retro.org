@@ -1,6 +1,7 @@
 #+title: Speeding up Skia using E-graphs: A Retrospective
 #+date: [2026-06-16 Tue]
 #+template: post.mako
+#+description: A retrospective on optimizing the Skia Graphics API.
 
 #+begin_alert
 A paper on this project has been (conditionally) accepted at OOPSLA'26. You can find a preprint to

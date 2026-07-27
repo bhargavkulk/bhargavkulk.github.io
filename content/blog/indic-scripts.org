@@ -1,6 +1,7 @@
 #+title: Writing Indian scripts with Emacs
 #+date: [2026-07-26 Sun]
 #+template: post.mako
+#+description: How Emacs makes it easy to type Indian languages.
 
 I have always had a problem with how my name (Bhargav) is written in English (or rather Roman
 script).

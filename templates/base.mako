@@ -7,6 +7,7 @@
         <title>${title}</title>
         <link rel="me" href="https://mastodon.social/@bhargavkk">
         <link rel="stylesheet" href="/style.css">
+        <%block name="head_extra"></%block>
     </head>
     <body>
         <header>
