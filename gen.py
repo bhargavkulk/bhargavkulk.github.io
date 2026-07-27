@@ -187,11 +187,16 @@ gen.rule(
     'blog_feed',
     'uv run python scripts/generate_feed.py cache/blog_index.json cache www',
 )
+blog_fragments = [
+    str((CACHE / source.relative_to(CONTENT)).with_suffix('.html'))
+    for source in content_files
+    if source.parent == CONTENT / 'blog' and is_fraggable(source.suffix)
+]
 gen.build(
     ['www/blog_index_atom.xml', 'www/blog_index_rss.xml'],
     'blog_feed',
     'cache/blog_index.json',
-    implicit='scripts/generate_feed.py',
+    implicit=['scripts/generate_feed.py', *blog_fragments],
 )
 
 # Copy assets

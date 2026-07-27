@@ -55,7 +55,7 @@ def main():
         feed_entry.title(entry['title'])
         feed_entry.link(href=URL + entry['path'])
 
-        post_html = Path('cache/' + entry['path']).read_text(encoding='utf-8')
+        post_html = args.fragments.joinpath(entry['path']).read_text(encoding='utf-8')
         feed_entry.content(post_html, type='CDATA')
 
     args.output.mkdir(parents=True, exist_ok=True)
