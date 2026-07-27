@@ -1,0 +1,98 @@
+#+title: Writing Indian scripts with Emacs
+#+date: [2026-07-26 Sun]
+#+template: post.mako
+
+I have always had a problem with how my name (Bhargav) is written in English (or rather Roman
+script).
+The 3^{rd} letter, "a", is not pronounced the way one would usually pronounce the letter "a".
+Instead of "a" it's supposed to be a "aa" sound.
+
+#+begin_aside
+By "a" I mean the IPA =/ə/= and by "aa" I mean the IPA =/aː/=, if this makes the difference any clearer.
+But who even reads IPA?
+#+end_aside
+
+I can't even think of an actual word in English that uses "aa" in the way my name uses "aa" other
+than the word "baa", a sound made by sheep.
+The root cause of this issue is the inadequate default [[https://en.wikipedia.org/wiki/Hunterian_transliteration][Hunterian transliteration]] of Indian
+languages.
+The main issue of the Hunterian scheme is that it is lossy.
+Both the "a" and "aa" sounds, which are distinct in nearly all Indian languages, map to the same
+letter "a" in the Hunterian scheme.
+This lossy mapping is used throughout the scheme.
+Even the clearly different ड (retroflex =/ɖ/=, as in Hindi ḍāl, "branch") and द (dental =/d̪/=, as in
+Hindi dāl, "lentils") map to the same "d".
+This leads to frustrating and ambiguous transliterations of Indian words into Roman script.
+
+* A better world ...
+
+How do we fix this?
+We just use a better transliteration scheme!
+The [[https://en.wikipedia.org/wiki/International_Alphabet_of_Sanskrit_Transliteration][IAST]] scheme has been used for a very long time to transcribe Sanskrit text.
+It solves ambiguities with diacritics.
+Diacritics are small marks added to letters, that change how they sound.
+If you speak Spanish you must be familiar with the diacritic version of n, "ñ".
+In IAST, the "a" sound stays "a" and the "aa" sound maps to "ā".
+The dental "d" stays "d" and the retroflex "d" maps to "ḍ".
+The problem with IAST is that it is made for Sanskrit transliteration.
+You cannot use it for, say,  Punjabi (Punjabī) or Tamil (Tamiḻ).
+But nearly all Indian scripts (including the ones I mentioned before) descend from the [[https://en.wikipedia.org/wiki/Brahmi_script][Brahmi (Brāhmī)
+script]].
+Which means with few modifications and additions, something similar to IAST can be used to write all
+Brāhmic scripts.
+This is what the [[https://en.wikipedia.org/wiki/ISO_15919][ISO-15919]] scheme is (horrible name).
+But how do you type using this very diacritic intensive script?
+
+* ... with Emacs
+
+Enter the venerable [[https://www.gnu.org/savannah-checkouts/gnu/emacs/emacs.html][Emacs]].
+If you did not know, Emacs is a text editor.\\
+And a browser.\\
+And a RSS/mail reader.\\
+And a tetris console.\\
+But /mostly/ a text editor.
+Emacs has a way to interactively convert characters into other characters.
+This is controlled by an input method.
+You can change your input method by doing =C-x RET C-\= or =M-x set-input-method=.
+An example of an input method is TeX, which when enabled converts TeX macros (like =\alpha=) into
+their associated Unicode glyphs (like =α=).
+We simply create a new input method for ISO-15919 to make it easier to write the diacritic letters.
+Using the =quail= package, you can easily define your own input method:
+
+#+begin_src emacs-lisp
+(require 'quail)
+(quail-define-package
+ "iso-postfix" "UTF-8" "InR<" t
+ "Input method for Indian languages. Diacritics are added through postfix."
+ nil t nil nil nil nil nil nil nil nil t)
+
+(quail-define-rules
+ ("aa" "ā")     ; आ, ಆ
+ ("ii" "ī")     ; ई, ಈ
+ ("uu" "ū")     ; ऊ, ಊ
+ ("r," "ṛ")     ; ऋ, ಋ
+ ("m." "ṃ")     ; ं, ಂ
+ ("h." "ḥ")     ; ः, ಃ
+ ("n;" "ṅ")     ; ङ, ಙ
+ ("n~" "ñ")     ; ञ, ಞ
+ ("t." "ṭ")     ; ट, ಟ
+ ("th." ["ṭh"]) ; ठ, ಠ
+ ("d." "ḍ")     ; ड, ಡ
+ ("dh." ["ḍh"]) ; ढ, ಢ
+ ("n." "ṇ")     ; ण, ಣ
+ ("l." "ḷ")     ; ळ, ಳ
+ ("sh" "ś")     ; श, ಶ
+ ("s." "ṣ")     ; ष, ಷ
+ ("gy" ["jñ"])) ; ज्ञ, ಜ್ಞ (conjunct consonant)
+#+end_src
+
+Now, I have not defined the entire ISO-15919 spec, I've only listed the diacritics used by the two
+languages I know: Marathi (Marāṭhī) and Kannada (Kannaḍā).
+One could easily extend this code snippet to support the full spec.
+You can also use =quail= to define an input method that directly converts this post-fix scheme into
+Indian characters.
+This is slightly involved, as you would need to map every combination of consonant and vowel (and
+also all the conjunct consonants).
+
+Now, thanks to amazing extensibility of Emacs, I can write Indian words the way they are /supposed/ to
+be written.
