@@ -61,6 +61,8 @@ body {
     padding-left: 20px;
     padding-right: 20px;
     line-height: 1.45 !important;
+    text-align: justify;
+    hyphens: auto;
 }
 
 strong {
@@ -143,6 +145,10 @@ blockquote {
 pre, blockquote {
   border-left: 3px groove;
   padding-left: 1rem;
+}
+
+pre {
+  text-align: left;
 }
 
 @media print {
