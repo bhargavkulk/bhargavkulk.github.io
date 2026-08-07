@@ -29,7 +29,7 @@ This leads to frustrating and ambiguous transliterations of Indian words into Ro
 
 How do we fix this?
 We just use a better transliteration scheme!
-The [[https://en.wikipedia.org/wiki/International_Alphabet_of_Sanskrit_Transliteration][IAST]] scheme has been used for a very long time to transcribe Sanskrit text.
+The [[https://en.wikipedia.org/wiki/International_Alphabet_of_Sanskrit_Transliteration][IAST]] scheme has been used for a very long time to transcribe Sanskrit (Saṃskṛth) text.
 It solves ambiguities with diacritics.
 Diacritics are small marks added to letters, that change how they sound.
 If you speak Spanish you must be familiar with the diacritic version of n, "ñ".

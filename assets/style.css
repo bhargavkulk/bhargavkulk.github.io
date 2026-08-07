@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@100..800&family=Anek+Kannada:wght@100..800&family=Charis+SIL:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@100..800&family=Anek+Kannada:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gentium+Plus:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @font-face {
     font-family: "Cooper Hewitt";
     font-style: normal;
     font-weight: 400;
     src: url('/fonts/CooperHewitt-Book.woff') format('woff');
 }
+
+/*ajshdkahsdkjashd*/
 
 @font-face {
     font-family: "Cooper Hewitt";
@@ -44,7 +47,7 @@
 
 :root {
     --sans-fonts: "Cooper Hewitt", "Anek Kannada", "Anek Devanagari", sans-serif;
-    --serif-fonts: "Charis SIL", "Anek Kannada", "Anek Devanagari", serif;
+    --serif-fonts: "Gentium Plus", "Anek Kannada", "Anek Devanagari", serif;
     --mono-fonts: "Inconsolata", monospace;
 }
 
@@ -56,8 +59,9 @@
 }
 
 body {
+    font-size: 112%;
     font-family: var(--serif-fonts);
-    max-width: 80ch;
+    max-width: 90ch;
     padding-left: 20px;
     padding-right: 20px;
     line-height: 1.45 !important;
@@ -135,6 +139,7 @@ aside {
     font-size: 0.9em;
     background-color: #eee;
     padding-left: 10px;
+    padding-right: 10px;
 }
 
 blockquote {
