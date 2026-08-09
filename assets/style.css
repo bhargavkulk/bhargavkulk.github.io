@@ -8,8 +8,6 @@
     src: url('/fonts/CooperHewitt-Book.woff') format('woff');
 }
 
-/*ajshdkahsdkjashd*/
-
 @font-face {
     font-family: "Cooper Hewitt";
     font-style: italic;
@@ -75,7 +73,7 @@ strong {
 
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--sans-fonts);
-    font-weight: 600;
+    font-weight: normal;
 }
 
 code, pre, time {
