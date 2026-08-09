@@ -46,6 +46,16 @@ jobs:
           uv run gen.py
           ninja
 
+      - name: Set up Typst
+        uses: typst-community/setup-typst@v5
+
+      - name: Build resume PDF and website
+        run: |
+          rm -rf www/resume
+          mkdir -p www/resume
+          typst compile --font-path resume/fonts resume/main.typ www/resume/resume.pdf
+          typst compile --features html --format html --font-path resume/fonts resume/main.typ www/resume/index.html
+
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:

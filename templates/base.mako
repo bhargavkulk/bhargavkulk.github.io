@@ -13,10 +13,10 @@
         <header>
             <h1><em>Bhargav Kulkarni</em></h1>
             <nav>
-                <a href="/">Home</a>
-                <a href="/blog">Blog</a>
-                <a href="/research">Research</a>
-                <a href="/cv.pdf">CV</a>
+                <a href="/"><code>/home</code></a>
+                <a href="/blog"><code>/blog</code></a>
+                <a href="/research"><code>/research</code></a>
+                <a href="/resume/"><code>/cv</code></a>
             </nav>
         </header>
         <hr>
