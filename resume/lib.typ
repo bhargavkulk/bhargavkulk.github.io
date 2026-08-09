@@ -1,12 +1,5 @@
 #let author = "Bhargav Kulkarni"
 
-#let urls_map = (
-  ("bhargavkishork@gmail.com", "mailto://bhargavkishork@gmail.com"),
-  ("github.com/bhargavkulk", "https://github.com/bhargavkulk"),
-  ("linkedin.com/bhargavkulk", "https://linkedin.com/in/bhargavkulk"),
-  ("bhargavkulk.github.io", "https://bhargavkulk.github.io"),
-)
-
 #let html-css = ```css
   body {
     box-sizing: border-box;
