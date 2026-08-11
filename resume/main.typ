@@ -45,7 +45,6 @@
 #employment([University of Utah], [2023---Present], [Research Assistant])
 - Currently building a verified optimizer for the Skia vector graphics engine that powers Chrome
   rendering.
-  - Formalized Skia’s semantics in the Lean theorem prover to verify optimizing rewrites.
 - Previously adapted floating-point static analysis techniques to build an accurate floating-point
   debugger.
 
