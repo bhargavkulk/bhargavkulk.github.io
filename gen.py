@@ -61,6 +61,10 @@ COLLECTIONS = {
         'template': 'blog_index.mako',
         'title': 'Blog',
     },
+    'research': {
+        'template': 'research_index.mako',
+        'title': 'Research',
+    },
 }
 
 

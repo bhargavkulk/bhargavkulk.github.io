@@ -30,6 +30,7 @@ strong {
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--heading-fonts);
     font-weight: normal;
+    text-align: left;
 }
 
 code, pre, time {
@@ -126,11 +127,16 @@ pre {
 table {
     border-collapse: separate;
     border-spacing: 0.5rem 0.25rem;
+    text-align: left;
 }
 
 th,
 td {
     padding: 0;
+}
+
+dt {
+    font-weight: bold;
 }
 
 table p {

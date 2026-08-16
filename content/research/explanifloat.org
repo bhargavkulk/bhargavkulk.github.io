@@ -1,0 +1,35 @@
+#+title: Mixing Condition Numbers and Oracles for Accurate Floating-point Debugging
+#+date: [2025-05-04 Sun]
+#+template: research.mako
+#+authors: Bhargav Kulkarni, Pavel Panchekha
+#+doi: 10.1109/ARITH64983.2025.00025
+#+arxiv: https://arxiv.org/abs/2503.11884
+#+slides: https://www.arith2025.org/slides/presentation-101.pdf
+#+conf: IEEE ARITH'25
+
+* Abstract
+
+Recent advances have made numeric debugging tools much faster by using double-double oracles, and
+numeric analysis tools much more accurate by using condition numbers.
+But these techniques have downsides: double-double oracles have correlated error so miss
+floating-point errors while condition numbers cannot cleanly handle over- and under- flow.
+We combine both techniques to avoid these downsides.
+Our combination, @@html:<span style="font-variant: small-caps">EXPLANIFLOAT</span>@@, computes condition numbers using double-double arithmetic, which
+avoids correlated errors.
+To handle over- and under-flow, it introduces a separate logarithmic oracle.
+As a result, @@html:<span style="font-variant: small-caps">EXPLANIFLOAT</span>@@ achieves a precision of 80.0% and a recall of 96.1% on a collection of 546
+difficult numeric benchmarks: more accurate than double-double oracles yet dramatically faster than
+arbitrary-precision condition number computations.
+
+* BibTeX
+
+#+begin_src bibtex
+@inproceedings{explanifloat,
+  author={Kulkarni, Bhargav and Panchekha, Pavel},
+  booktitle={2025 IEEE 32nd Symposium on Computer Arithmetic (ARITH)},
+  title={Mixing Condition Numbers and Oracles for Accurate Floating-point Debugging},
+  year={2025},
+  pages={101-108},
+  doi={10.1109/ARITH64983.2025.00025}
+}
+#+end_src
