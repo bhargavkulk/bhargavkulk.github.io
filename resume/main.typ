@@ -8,7 +8,7 @@
     (("bhargavkishork@gmail.com", "mailto:bhargavkishork@gmail.com"),
     ("github.com/bhargavkulk", "https://github.com/bhargavkulk"),
     ("linkedin.com/bhargavkulk", "https://linkedin.com/in/bhargavkulk"),
-    ("bhargavkulk.github.io", "https://bhargavkulk.github.io"),
+    ("bhargavkulk.github.io", "https://bhargavkk.com"),
 ))
 
 == Education
