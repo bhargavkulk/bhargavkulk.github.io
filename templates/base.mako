@@ -23,10 +23,10 @@
         ${self.body()}
         <hr>
         <footer>
-            <img loading="lazy" width="88" height="31" fetchpriority="low" src="/images/emacs.gif"/>
-            <img loading="lazy" width="88" height="31" fetchpriority="low" src="/images/sanehtml.gif"/>
-            <img loading="lazy" width="88" height="31" fetchpriority="low" src="/images/firefox3.gif"/>
-            <img loading="lazy" width="80" height="15" fetchpriority="low" src="/images/ccby.png"/>
+            <img loading="lazy" width="88" height="31" fetchpriority="low" src="/images/emacs.gif" style="image-rendering: pixelated"/>
+            <img loading="lazy" width="88" height="31" fetchpriority="low" src="/images/sanehtml.gif" style="image-rendering: pixelated"/>
+            <img loading="lazy" width="88" height="31" fetchpriority="low" src="/images/firefox3.gif" style="image-rendering: pixelated"/>
+            <img loading="lazy" width="80" height="15" fetchpriority="low" src="/images/ccby.png" style="image-rendering: pixelated"/>
         </footer>
     </body>
 </html>
