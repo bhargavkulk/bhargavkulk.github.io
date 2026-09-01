@@ -37,7 +37,7 @@ I am part of the vibrant [[https://pl.cs.utah.edu/][PLUtah]] community.
 
 I list all my [[/research][publications]] and my [[/][CV]] on this site.
 
-The fastest way to reach out to me is via my e-mail: [[mailto:adent@galaxy.net][=bhargavkishork@gmail.com=]].
+The fastest way to reach out to me is via my e-mail: [[mailto:bhargavkishork@gmail.com][=bhargavkishork@gmail.com=]].
 I am also active on these sites but I may not answer as quickly:
 
 - [[https://github.com/bhargavkulk/][bhargavkulk@GitHub]]
