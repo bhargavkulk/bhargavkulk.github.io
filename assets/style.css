@@ -16,6 +16,7 @@ body {
     font-size: 110%;
     font-family: var(--body-fonts);
     max-width: 80ch;
+    margin-inline: auto;
     padding-left: 20px;
     padding-right: 20px;
     line-height: 1.45 !important;
