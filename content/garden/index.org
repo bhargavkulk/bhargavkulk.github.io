@@ -1,0 +1,7 @@
+#+title: A garden of notes
+#+author: Bhargav Kulkarni
+#+date: [2026-09-03 Thu]
+
+* Compilers
+
+- [[denote:20260903T170643][Lattices]]

@@ -10,9 +10,37 @@ local function org_to_html(path)
   return path:gsub('%.org$', '.html')
 end
 
-function Link(el)
+local denote_links = {}
+
+local function load_denote_links(meta)
+  local links = meta['denote-links']
+  if links then
+    for identifier, link in pairs(links) do
+      -- Smart punctuation turns the `--` in Denote filenames into an en dash
+      -- when it reads the JSON metadata file.
+      denote_links[identifier] = pandoc.utils.stringify(link):gsub('–', '--')
+    end
+  end
+end
+
+local function resolve_link(el)
+  local identifier = el.target:match('^denote:([%w]+)$')
+  if identifier and denote_links[identifier] then
+    el.target = denote_links[identifier]
+    return el
+  end
+
   el.target = org_to_html(el.target)
   return el
+end
+
+function Link(el)
+  return resolve_link(el)
+end
+
+function Pandoc(doc)
+  load_denote_links(doc.meta)
+  return doc:walk({Link = resolve_link})
 end
 
 function Image(el)

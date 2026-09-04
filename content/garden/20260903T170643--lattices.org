@@ -1,0 +1,7 @@
+#+title:      Lattices
+#+date:       [2026-09-03 Thu 17:06]
+#+identifier: 20260903T170643
+
+* Partial Orders
+
+(S, ⊑) forms a partial order when:

@@ -13,6 +13,7 @@ CONTENT = Path('content/')
 CACHE = Path('cache/')
 TEMPLATES = Path('templates/')
 ASSETS = Path('assets/')
+DENOTE_LINKS = CACHE / 'denote-links.json'
 
 
 # - File format config -----------------------------------------------------------------------------
@@ -36,8 +37,8 @@ FILE_FORMATS = {
         'fragment': Rule(
             gen,
             'org_fragment',
-            'pandoc -f org+smart --shift-heading-level-by=1 --syntax-highlighting default -t html --mathml --lua-filter filters/org.lua $in -o $out',
-            implicit='filters/org.lua',
+            f'pandoc -f org+smart --shift-heading-level-by=1 --syntax-highlighting default -t html --mathml --metadata-file {DENOTE_LINKS} --lua-filter filters/org.lua $in -o $out',
+            implicit=['filters/org.lua', str(DENOTE_LINKS)],
         ),
         'metadata': Rule(
             gen,
@@ -67,6 +68,10 @@ COLLECTIONS = {
     },
 }
 
+SILOS = {
+    'garden',
+}
+
 
 # - Common data and functions ----------------------------------------------------------------------
 content_files = [
@@ -75,6 +80,29 @@ content_files = [
     if path.is_file() and not path.name.startswith('.')
 ]
 templates = [str(path) for path in TEMPLATES.iterdir()]
+
+
+gen.rule(
+    'denote_links',
+    f'uv run scripts/generate_denote_links.py $out {CONTENT} $in',
+)
+
+denote_sources = []
+for silo in SILOS:
+    silo_dir = CONTENT / silo
+    if not silo_dir.is_dir():
+        raise ValueError(f'Denote silo {silo_dir} does not exist.')
+
+    denote_sources.extend(
+        str(source) for source in content_files if source.parent == silo_dir
+    )
+
+gen.build(
+    str(DENOTE_LINKS),
+    'denote_links',
+    sorted(denote_sources),
+    implicit='scripts/generate_denote_links.py',
+)
 
 
 # ASSUMES path.suffix is arleady in FILE_FORMATS

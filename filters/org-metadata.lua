@@ -29,6 +29,8 @@ function Meta(meta)
     metadata.description = pandoc.utils.stringify(meta.description)
   end
 
+  metadata.template = metadata.template or 'page.mako'
+
   local input = PANDOC_STATE.input_files[1]
   local relative = input:match('content/(.+)$') or pandoc.path.filename(input)
   metadata.path = relative:gsub('%.org$', '.html')

@@ -15,6 +15,7 @@
             <nav>
                 <a href="/"><code>/home</code></a>
                 <a href="/blog"><code>/blog</code></a>
+                <a href="/garden"><code>/garden</code></a>
                 <a href="/research"><code>/research</code></a>
                 <a href="/resume/"><code>/cv</code></a>
             </nav>
