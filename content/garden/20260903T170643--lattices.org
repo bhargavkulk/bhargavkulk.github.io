@@ -4,4 +4,12 @@
 
 * Partial Orders
 
-(S, ⊑) forms a partial order when:
+(S, ⊑) forms a partial order when ⊑ is:
+- reflexive :: ∀ x ∈ S, x ⊑ x
+- transitive :: ∀ x, y, z ∈ S, x ⊑ y ∧ y ⊑ z → x ⊑ z
+- anti-symmetric :: ∀ x, y ∈ S, x ⊑ y ∧ y ⊑ x → x = y
+
+When x ⊑ y then it x is a /safe approximation/ of y or x is /as precise as/ y.
+
+Say we have X ⊆ S.
+Then,
