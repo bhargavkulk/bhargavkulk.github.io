@@ -6,5 +6,6 @@ build.ninja
 .ninja_deps
 .ninja_log
 .DS_Store
+.amp/portals/*
 cache/
 __pycache__/

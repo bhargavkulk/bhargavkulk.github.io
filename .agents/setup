@@ -1,0 +1,96 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+readonly PANDOC_VERSION='3.9.0.2'
+readonly NINJA_VERSION='1.13.2'
+readonly TYPST_VERSION='0.15.1'
+readonly TOOLCHAIN_DIR="$HOME/.local/share/bhargavkulk.github.io"
+readonly BIN_DIR="$HOME/.local/bin"
+
+export PATH="$BIN_DIR:$PATH"
+
+step() {
+  printf '\n==> %s\n' "$*"
+}
+
+install_apt_packages() {
+  local packages=()
+  local package
+
+  for package in ca-certificates curl unzip xz-utils; do
+    dpkg-query -W -f='${db:Status-Status}' "$package" 2>/dev/null |
+      grep -qx 'installed' || packages+=("$package")
+  done
+
+  if ((${#packages[@]})); then
+    step "Installing system packages: ${packages[*]}"
+    apt-get update
+    apt-get install --no-install-recommends --yes "${packages[@]}"
+  fi
+}
+
+install_archive() {
+  local name="$1"
+  local version="$2"
+  local archive_url="$3"
+  local archive_type="$4"
+  local executable_path="$5"
+  local destination="$TOOLCHAIN_DIR/$name-$version"
+
+  if [[ ! -x "$destination/$executable_path" ]]; then
+    local archive
+    local content_directory
+    local temporary_directory
+    temporary_directory="$(mktemp -d)"
+    trap 'rm -rf "$temporary_directory"' RETURN
+    archive="$temporary_directory/archive"
+    content_directory="$temporary_directory/content"
+    mkdir "$content_directory"
+
+    step "Installing $name $version"
+    curl --fail --location --silent --show-error --retry 3 --output "$archive" "$archive_url"
+    case "$archive_type" in
+      tar.gz) tar -xzf "$archive" --strip-components=1 -C "$content_directory" ;;
+      tar.xz) tar -xJf "$archive" --strip-components=1 -C "$content_directory" ;;
+      zip) unzip -q "$archive" -d "$content_directory" ;;
+      *)
+        printf 'Unsupported archive type: %s\n' "$archive_type" >&2
+        return 1
+        ;;
+    esac
+
+    rm -rf "$destination"
+    mkdir -p "$(dirname "$destination")"
+    mv "$content_directory" "$destination"
+    rm -rf "$temporary_directory"
+    trap - RETURN
+  fi
+
+  mkdir -p "$BIN_DIR"
+  ln -sfn "$destination/$executable_path" "$BIN_DIR/$name"
+}
+
+install_apt_packages
+
+install_archive \
+  pandoc "$PANDOC_VERSION" \
+  "https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-linux-amd64.tar.gz" \
+  tar.gz bin/pandoc
+install_archive \
+  ninja "$NINJA_VERSION" \
+  "https://github.com/ninja-build/ninja/releases/download/v${NINJA_VERSION}/ninja-linux.zip" \
+  zip ninja
+install_archive \
+  typst "$TYPST_VERSION" \
+  "https://github.com/typst/typst/releases/download/v${TYPST_VERSION}/typst-x86_64-unknown-linux-musl.tar.xz" \
+  tar.xz typst
+
+step 'Installing the locked Python environment'
+uv python install 3.14
+uv sync --frozen --all-groups
+
+step 'Verifying toolchain'
+pandoc --version | head -n 1
+ninja --version
+typst --version
+uv run python --version
