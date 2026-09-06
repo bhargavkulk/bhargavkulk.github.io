@@ -2,6 +2,10 @@
 #+author: Bhargav Kulkarni
 #+date: [2026-09-03 Thu]
 
+* Languages
+
+- [[denote:20260904T161214][Lean]]
+
 * Compilers
 
 - [[denote:20260903T170643][Lattices]]
