@@ -11,7 +11,7 @@
     </head>
     <body>
         <header>
-            <h1><em>Bhargav Kulkarni</em></h1>
+            <h2><em>Bhargav Kulkarni</em></h2>
             <nav>
                 <a href="/"><code>/home</code></a>
                 <a href="/blog"><code>/blog</code></a>

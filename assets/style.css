@@ -1,8 +1,12 @@
 @import url('/fonts.css');
+
+/* Foundations */
 :root {
     --heading-fonts: "Cooper Hewitt", "Anek Kannada", "Anek Devanagari", sans-serif;
     --body-fonts: "CharisW", "Anek Kannada", "Anek Devanagari", serif;
     --mono-fonts: "Fira Mono", monospace;
+    background-color: #151519;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cpath d='M48 0 96 48 48 96 0 48Z' fill='none' stroke='%234c566a' stroke-opacity='.4'/%3E%3Cpath d='M0 0 96 96M96 0 0 96' stroke='%233b4252' stroke-opacity='.22'/%3E%3C/svg%3E");
 }
 
 * {
@@ -12,22 +16,23 @@
     font-kerning: auto;
 }
 
+/* Page layout */
 body {
+    background: #FFFFFF;
     font-size: 110%;
     font-family: var(--body-fonts);
     max-width: 80ch;
+    margin-top: 0;
+    margin-bottom: 0;
     margin-inline: auto;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 20px;
     line-height: 1.45 !important;
     text-align: justify;
     hyphens: auto;
+    min-height: 100dvh;
 }
 
-strong {
-    font-weight: 600;
-}
-
+/* Typography */
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--heading-fonts);
     font-weight: normal;
@@ -51,8 +56,12 @@ code, pre, time {
     font-size: 90%;
 }
 
+strong {
+    font-weight: 600;
+}
 
-header h1 {
+/* Site header and navigation */
+header h2 {
     margin-bottom: 0;
 }
 
@@ -61,40 +70,7 @@ nav {
     gap: 0.5em;
 }
 
-.marquee {
-    overflow: hidden;
-    white-space: nowrap;
-    background-color: #FBEC5D;
-}
-
-.alert {
-    background-color: #FBEC5D;
-    display: block;
-    overflow: hidden;
-    padding-inline: 0.75rem;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0;
-    margin-inline-end: 0;
-}
-
-.marquee > :first-child {
-    display: inline-block;
-    padding-left: 100%;
-    animation: marquee 35s linear infinite;
-    white-space: nowrap;
-}
-
-@keyframes marquee {
-    from {
-        transform: translateX(0);
-    }
-
-    to {
-        transform: translateX(-100%);
-    }
-}
-
+/* Floated content */
 .profile {
     float: left;
     margin-right: 20px;
@@ -110,6 +86,7 @@ aside {
     padding-right: 10px;
 }
 
+/* Content elements */
 blockquote {
   margin-left: 0;
   margin-right: 0;
@@ -125,17 +102,21 @@ pre {
   overflow-x: auto;
 }
 
-@media print {
-    body {
-        max-width: none;
-    }
-
-    header,
-    footer {
-        display: none;
-    }
+kbd {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #e5e7eb;
+    background-color: #ffffff;
+    padding: 0.1rem 0.4rem;
+    vertical-align: middle;
+    box-shadow: inset 0 -2px 0 0 #e5e7eb;
 }
 
+kbd::before {
+    content: none;
+}
+
+/* Tables and definition lists */
 table {
     border-collapse: separate;
     border-spacing: 0.5rem 0.25rem;
@@ -156,18 +137,51 @@ table p {
     padding: 0;
 }
 
-kbd {
-    position: relative;
-    display: inline-block;
-    border: 1px solid #e5e7eb;
-    background-color: #ffffff;
-    padding: 0.1rem 0.4rem;
-    vertical-align: middle;
-    box-shadow: inset 0 -2px 0 0 #e5e7eb;
+/* Components */
+.alert {
+    background-color: #FBEC5D;
+    display: block;
+    overflow: hidden;
+    padding-inline: 0.75rem;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
 }
 
-kbd::before {
-    content: none;
+.marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    background-color: #FBEC5D;
+}
+
+.marquee > :first-child {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 35s linear infinite;
+    white-space: nowrap;
+}
+
+@keyframes marquee {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+/* Print */
+@media print {
+    body {
+        max-width: none;
+    }
+
+    header,
+    footer {
+        display: none;
+    }
 }
 
 /* Pandoc default syntax highlighting */
