@@ -5,6 +5,12 @@
     --heading-fonts: "Cooper Hewitt", "Anek Kannada", "Anek Devanagari", sans-serif;
     --body-fonts: "CharisW", "Anek Kannada", "Anek Devanagari", serif;
     --mono-fonts: "Fira Mono", monospace;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
     background-color: #151519;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cpath d='M48 0 96 48 48 96 0 48Z' fill='none' stroke='%234c566a' stroke-opacity='.4'/%3E%3Cpath d='M0 0 96 96M96 0 0 96' stroke='%233b4252' stroke-opacity='.22'/%3E%3C/svg%3E");
 }
@@ -41,14 +47,24 @@ h1, h2, h3, h4, h5, h6 {
     margin-inline: 0;
 }
 
-h1 {
+main h1 {
     font-size: 2.3rem;
-    margin-block: 0 0.75rem;
+    margin-block: 0 var(--space-4);
 }
 
-h2, h3, h4, h5, h6 {
+main h2 {
     font-size: 1.6rem;
-    margin-block: 0.75rem 0.25rem;
+    margin-block: var(--space-8) var(--space-3);
+}
+
+main h3 {
+    font-size: 1.6rem;
+    margin-block: var(--space-6) var(--space-2);
+}
+
+main h4, main h5, main h6 {
+    font-size: 1.6rem;
+    margin-block: var(--space-4) var(--space-2);
 }
 
 code, pre, time {
@@ -62,12 +78,13 @@ strong {
 
 /* Site header and navigation */
 header h2 {
-    margin-bottom: 0;
+    margin-block: 0;
 }
 
 nav {
     display: flex;
     gap: 0.5em;
+    margin-block-start: var(--space-2);
 }
 
 /* Floated content */
@@ -79,6 +96,7 @@ nav {
 aside {
     float: right;
     width: 30%;
+    margin-block: 0 var(--space-4);
     margin-left: 20px;
     font-size: 0.9em;
     background-color: #eee;
@@ -87,19 +105,59 @@ aside {
 }
 
 /* Content elements */
+main > p {
+    margin-block: 0 var(--space-4);
+}
+
+main :is(ul, ol, dl, blockquote, pre, table, figure, .sourceCode) {
+    margin-block: 0 var(--space-4);
+}
+
+main :is(ul, ol) {
+    padding-inline-start: 2rem;
+}
+
+main li {
+    margin-block-end: var(--space-2);
+}
+
+main dd {
+    margin-block: 0 var(--space-4);
+    margin-inline-start: var(--space-6);
+}
+
+main dt {
+    margin-block: var(--space-4) var(--space-1);
+}
+
+main dl > dt:first-child {
+    margin-block-start: 0;
+}
+
 blockquote {
-  margin-left: 0;
-  margin-right: 0;
+    margin-inline: 0;
 }
 
 pre, blockquote {
-  border-left: 3px groove;
-  padding-left: 1rem;
+    border-left: 3px groove;
+    padding-left: 1rem;
 }
 
 pre {
-  text-align: left;
-  overflow-x: auto;
+    text-align: left;
+    overflow-x: auto;
+}
+
+main .sourceCode pre {
+    margin-block: 0;
+}
+
+main figure {
+    margin-inline: 0;
+}
+
+main figcaption {
+    margin-block-start: var(--space-2);
 }
 
 kbd {
@@ -132,7 +190,7 @@ dt {
     font-weight: bold;
 }
 
-table p {
+main table p {
     margin: 0;
     padding: 0;
 }
@@ -149,10 +207,16 @@ table p {
     margin-inline-end: 0;
 }
 
+.alert > p,
+.marquee > p {
+    margin-block: 1em;
+}
+
 .marquee {
     overflow: hidden;
     white-space: nowrap;
     background-color: #FBEC5D;
+    margin-block: 0 var(--space-4);
 }
 
 .marquee > :first-child {

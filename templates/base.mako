@@ -21,7 +21,9 @@
             </nav>
         </header>
         <hr>
-        ${self.body()}
+        <main>
+            ${self.body()}
+        </main>
         <hr>
         <footer>
             <img loading="lazy" width="88" height="31" fetchpriority="low" src="/images/emacs.gif" style="image-rendering: pixelated"/>
