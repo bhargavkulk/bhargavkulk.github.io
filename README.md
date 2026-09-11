@@ -9,4 +9,4 @@ Depends on
 # TODO
 
 - [x] move from djot to org mode
-- [ ] make sure denote org files work well
+- [x] make sure denote org files work well
