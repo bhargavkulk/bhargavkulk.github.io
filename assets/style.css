@@ -173,7 +173,7 @@ a[href^="https://arxiv.org/"]::after {
     content: "AR";
 }
 
-a[href^="https://www.inkedin.com/"]::after {
+a[href^="https://www.linkedin.com/"]::after {
     background: blue;
     content: "LI";
 }
