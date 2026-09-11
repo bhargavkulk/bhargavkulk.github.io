@@ -3,13 +3,13 @@
 #+date: [2026-09-03 Thu]
 
 This is my digital garden.
-No when you search for the term "digital garden" you'll get a lot of hits about "second brains" and
+Now when you search for the term "digital garden" you'll get a lot of hits about "second brains" and
 "mindmaps" and stuff like that.
 This is not that.
 This is just a dumping ground for my thoughts.
 If I need to search for something, I wont rely on links, tags, graphs, or fancy stuff like that.
 Just =grep= is enough.
-My thoughts may be of use to others, so I have unleashed this on to the world.
+My thoughts may be of use to others, so I have unleashed them to the world.
 
 * Web Stuff
 
