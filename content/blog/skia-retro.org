@@ -4,8 +4,8 @@
 #+description: A retrospective on optimizing the Skia Graphics API.
 
 #+begin_alert
-A paper on this project has been (conditionally) accepted at OOPSLA'26. You can find a preprint to
-our paper [[https://arxiv.org/abs/2603.23696][here]].
+A paper on this project has been accepted at OOPSLA'26.
+You can find a preprint to our paper [[https://arxiv.org/abs/2603.23696][here]].
 #+end_alert
 
 For the past year I have been working on a research project to try and speed up the rendering of
