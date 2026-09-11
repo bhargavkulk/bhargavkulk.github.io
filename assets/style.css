@@ -1,144 +1,75 @@
-@import url('/fonts.css');
+@import url("/fonts.css");
 
-/* Foundations */
 :root {
-    --heading-fonts: "Cooper Hewitt", "Anek Kannada", "Anek Devanagari", sans-serif;
-    --body-fonts: "CharisW", "Anek Kannada", "Anek Devanagari", serif;
-    --mono-fonts: "Fira Mono", monospace;
-    --space-1: 0.25rem;
-    --space-2: 0.5rem;
-    --space-3: 0.75rem;
-    --space-4: 1rem;
-    --space-6: 1.5rem;
-    --space-8: 2rem;
     background-color: #151519;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cpath d='M48 0 96 48 48 96 0 48Z' fill='none' stroke='%234c566a' stroke-opacity='.4'/%3E%3Cpath d='M0 0 96 96M96 0 0 96' stroke='%233b4252' stroke-opacity='.22'/%3E%3C/svg%3E");
+    --heading-fonts:
+        "Cooper Hewitt", "Anek Kannada", "Anek Devanagari", sans-serif;
+    --body-fonts: "CharisW", "Anek Kannada", "Anek Devanagari", serif;
 }
 
-* {
-    box-sizing: border-box;
-    text-rendering: optimizeLegibility;
-    font-variant-ligatures: common-ligatures;
-    font-kerning: auto;
+:target {
+    background: whitesmoke;
 }
 
-/* Page layout */
 body {
-    background: #FFFFFF;
-    font-size: 110%;
-    font-family: var(--body-fonts);
-    max-width: 80ch;
-    margin-top: 0;
-    margin-bottom: 0;
-    margin-inline: auto;
-    padding: 20px;
-    line-height: 1.45 !important;
-    text-align: justify;
+    box-sizing: border-box;
+    background: #ffffff;
+    /* max-width: 80ch; */
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
     hyphens: auto;
     min-height: 100dvh;
+    font-family: var(--body-fonts);
+    /* line-height: 1.45 !important; */
+    /* text-align: justify; */
 }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 0;
+    display: flex;
+    flex-direction: row;
+}
+
+nav ul li {
+    padding-right: 0.5rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--heading-fonts);
     font-weight: normal;
-    line-height: 1.25;
+    /* line-height: 1.25; */
     text-align: left;
-    margin-inline: 0;
+    /* margin-inline: 0; */
 }
 
-main h1 {
-    font-size: 2.3rem;
-    margin-block: 0 var(--space-4);
+h1:has(+ .subtitle) {
+    margin-bottom: 0;
 }
 
-main h2 {
-    font-size: 1.6rem;
-    margin-block: var(--space-8) var(--space-3);
+.subtitle {
+    margin-bottom: 1em;
 }
 
-main h3 {
-    font-size: 1.6rem;
-    margin-block: var(--space-6) var(--space-2);
-}
-
-main h4, main h5, main h6 {
-    font-size: 1.6rem;
-    margin-block: var(--space-4) var(--space-2);
-}
-
-code, pre, time {
-    font-family: var(--mono-fonts);
-    font-size: 90%;
-}
-
-strong {
-    font-weight: 600;
-}
-
-/* Site header and navigation */
-header h2 {
-    margin-block: 0;
-}
-
-nav {
-    display: flex;
-    gap: 0.5em;
-    margin-block-start: var(--space-2);
-}
-
-/* Floated content */
-.profile {
+.me {
     float: left;
     margin-right: 20px;
-}
-
-aside {
-    float: right;
-    width: 30%;
-    margin-block: 0 var(--space-4);
-    margin-left: 20px;
-    font-size: 0.9em;
-    background-color: #eee;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-/* Content elements */
-main > p {
-    margin-block: 0 var(--space-4);
-}
-
-main :is(ul, ol, dl, blockquote, pre, table, figure, .sourceCode) {
-    margin-block: 0 var(--space-4);
-}
-
-main :is(ul, ol) {
-    padding-inline-start: 2rem;
-}
-
-main li {
-    margin-block-end: var(--space-2);
-}
-
-main dd {
-    margin-block: 0 var(--space-4);
-    margin-inline-start: var(--space-6);
-}
-
-main dt {
-    margin-block: var(--space-4) var(--space-1);
-}
-
-main dl > dt:first-child {
-    margin-block-start: 0;
 }
 
 blockquote {
     margin-inline: 0;
 }
 
-pre, blockquote {
+pre,
+blockquote {
     border-left: 3px groove;
     padding-left: 1rem;
 }
@@ -148,82 +79,103 @@ pre {
     overflow-x: auto;
 }
 
-main .sourceCode pre {
-    margin-block: 0;
-}
-
-main figure {
-    margin-inline: 0;
-}
-
-main figcaption {
-    margin-block-start: var(--space-2);
-}
-
-kbd {
-    position: relative;
-    display: inline-block;
-    border: 1px solid #e5e7eb;
-    background-color: #ffffff;
-    padding: 0.1rem 0.4rem;
-    vertical-align: middle;
-    box-shadow: inset 0 -2px 0 0 #e5e7eb;
-}
-
-kbd::before {
-    content: none;
-}
-
-/* Tables and definition lists */
-table {
-    border-collapse: separate;
-    border-spacing: 0.5rem 0.25rem;
-    text-align: left;
-}
-
-th,
-td {
-    padding: 0;
-}
-
 dt {
     font-weight: bold;
 }
 
-main table p {
-    margin: 0;
-    padding: 0;
+aside {
+    float: right;
+    width: 30%;
+    margin-left: 20px;
+    font-size: 0.9em;
+    background-color: #eee;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-/* Components */
-.alert {
-    background-color: #FBEC5D;
-    display: block;
-    overflow: hidden;
-    padding-inline: 0.75rem;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0;
-    margin-inline-end: 0;
-}
-
-.alert > p,
-.marquee > p {
-    margin-block: 1em;
+time {
+    font-family: monospace;
 }
 
 .marquee {
     overflow: hidden;
     white-space: nowrap;
-    background-color: #FBEC5D;
-    margin-block: 0 var(--space-4);
+    background-color: #fbec5d;
+    margin-block: 0 1rem;
 }
 
 .marquee > :first-child {
     display: inline-block;
+    margin-block: 1em;
     padding-left: 100%;
-    animation: marquee 35s linear infinite;
-    white-space: nowrap;
+    animation: marquee 25s linear infinite;
+}
+
+.alert {
+    background-color: #fbec5d;
+    display: block;
+    overflow: hidden;
+    padding-inline: 0.75rem;
+    margin-block: 1rem;
+}
+
+main ul,
+main ol {
+    padding-inline-start: 1.5rem;
+}
+
+a:not(.self)::after {
+    display: inline-block;
+    color: white;
+    font-size: x-small;
+    margin-left: 4px;
+    padding: 1px;
+    font-family: system-ui;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    vertical-align: super;
+}
+
+a[href^="https://www.youtube.com/"]::after,
+a[href^="https://youtu.be/"]::after {
+    background: red;
+    content: "YT";
+}
+
+a[href^="https://github.com/"]::after {
+    background: black;
+    content: "GH";
+}
+
+a[href^="https://bsky.app/"]::after {
+    background: cyan;
+    content: "BS";
+}
+
+a[href^="https://mastodon.social/"]::after {
+    background: purple;
+    content: "MST";
+}
+
+a[href^="https://en.wikipedia.org/"]::after,
+a[href^="https://de.wikipedia.org/"]::after {
+    background: gray;
+    content: "WIKI";
+}
+
+a[href$=".pdf"]::after {
+    background: navy;
+    content: "PDF";
+}
+
+a[href^="https://arxiv.org/"]::after {
+    background: maroon;
+    content: "AR";
+}
+
+a[href^="https://www.inkedin.com/"]::after {
+    background: blue;
+    content: "LI";
 }
 
 @keyframes marquee {
@@ -236,45 +188,27 @@ main table p {
     }
 }
 
-/* Print */
 @media print {
-    body {
-        max-width: none;
-    }
-
-    header,
+    nav,
+    hr:has(+ footer),
     footer {
         display: none;
     }
-}
 
-/* Pandoc default syntax highlighting */
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .marquee {
+        display: block;
+        overflow: hidden;
+        padding-inline: 0.75rem;
+        margin-block: 1rem;
+        white-space: normal;
+    }
+
+    .marquee > :first-child {
+        display: block;
+        margin-block: 1em;
+        padding-left: 0;
+        animation: none;
+        transform: none;
+        white-space: normal;
+    }
+}

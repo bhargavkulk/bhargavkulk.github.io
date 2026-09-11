@@ -1,5 +1,4 @@
 <%inherit file="base.mako"/>
-<h1>${title}</h1>
 
 <dl>
   <dt>Authors</dt>
@@ -12,7 +11,7 @@
   % endif
   % if arxiv:
     <dt>arXiv</dt>
-    <dd><a href="${arxiv}">${arxiv}</a></dd>
+    <dd><a href="https://arxiv.org/abs/${arxiv}">${arxiv}</a></dd>
   % endif
   % if slides:
     <dt>Slides</dt>

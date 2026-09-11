@@ -1,11 +1,11 @@
-#+title: About
+#+title: Bhargav Kulkarni
 #+author: Bhargav Kulkarni
 #+date: [2001-07-11 Wed]
 #+template: index.mako
 
 #+begin_marquee
 Our paper on a verified optimizer for Skia has been (conditionally) accepted to OOPSLA'26!
-Read more about it in [[/blog/skia-retro.html][this blog post]]
+Read more about it in [[/blog/skia-retro.html][this blog post]].
 #+end_marquee
 
 #+begin_quote
@@ -13,7 +13,7 @@ Once you learn to read, you will be forever free.\\
 -- /Frederick Douglass/
 #+end_quote
 
-#+attr_html: :class profile :width 165px
+#+attr_html: :class me :width 165px
 [[/images/bhargav.jpg]]
 
 Hi, I am Bhargav Kulkarni (bhārgav/भार्गव/ಭಾರ್ಗವ್)!
@@ -40,10 +40,10 @@ I list all my [[/research][publications]] and my [[/][CV]] on this site.
 The fastest way to reach out to me is via my e-mail: [[mailto:bhargavkishork@gmail.com][=bhargavkishork@gmail.com=]].
 I am also active on these sites but I may not answer as quickly:
 
-- [[https://github.com/bhargavkulk/][bhargavkulk@GitHub]]
-- [[https://tangled.org/bhargavkk.tngl.sh][bhargavkk@Tangled]]
+- [[https://github.com/bhargavkulk/][GitHub]]
+- [[https://bsky.app/profile/bhargavkk.tngl.sh][Bluesky]]
+- [[https://mastodon.social/@bhargavkk][Mastodon]]
 - [[https://www.linkedin.com/in/bhargav-kulkarni-600983192/][LinkedIn]]
-- [[https://mastodon.social/@bhargavkk][bhargavkk@mastodon.social]]
 
 This website hosts my (infrequently updated) [[/blog][blog]].
 Give it a read!

@@ -3,9 +3,9 @@
 #+template: research.mako
 #+authors: Bhargav Kulkarni, Pavel Panchekha
 #+doi: 10.1109/ARITH64983.2025.00025
-#+arxiv: https://arxiv.org/abs/2503.11884
+#+arxiv: 2503.11884
 #+slides: https://www.arith2025.org/slides/presentation-101.pdf
-#+conf: IEEE ARITH'25
+#+conf: ARITH'25
 
 * Abstract
 

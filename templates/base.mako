@@ -10,18 +10,17 @@
         <%block name="head_extra"></%block>
     </head>
     <body>
-        <header>
-            <h2><em>Bhargav Kulkarni</em></h2>
-            <nav>
-                <a href="/"><code>/home</code></a>
-                <a href="/blog"><code>/blog</code></a>
-                <a href="/garden"><code>/garden</code></a>
-                <a href="/research"><code>/research</code></a>
-                <a href="/resume/"><code>/cv</code></a>
-            </nav>
-        </header>
-        <hr>
+        <nav>
+            <ul>
+                <li><a href="/"><code>/home</code></a></li>
+                <li><a href="/blog"><code>/blog</code></a></li>
+                <li><a href="/garden"><code>/garden</code></a></li>
+                <li><a href="/research"><code>/research</code></a></li>
+                <li><a href="/resume/"><code>/cv</code></a></li>
+            </ul>
+        </nav>
         <main>
+            <h1>${title}</h1>
             ${self.body()}
         </main>
         <hr>

@@ -3,8 +3,6 @@
 from date_utils import parse_org_date
 %>
 
-<h1>${title}</h1>
-
 <table>
 % for entry in sorted(research_index, key=lambda entry: parse_org_date(entry['date']), reverse=True):
   <tr>

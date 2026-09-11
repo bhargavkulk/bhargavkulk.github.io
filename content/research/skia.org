@@ -3,7 +3,7 @@
 #+template: research.mako
 #+authors: Bhargav Kulkarni, Henry Whiting Pavel Panchekha
 #+doi: 10.1145/3839471
-#+arxiv: https://arxiv.org/abs/2603.23696
+#+arxiv: 2603.23696
 #+conf: OOPSLA'26
 
 Rasterization is the process of determining the color of every pixel drawn by an application.
