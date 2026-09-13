@@ -4,8 +4,8 @@
 
 * Code Actions
 
-Fuck lean for making this a thing. To get code actions for completions for things like =induction n
-with=, you need to
+Fuck lean for making this a thing.
+To get code actions for completions for things like =induction n with=, you need to
 
 1. add =Batteries= to your project.
 2. import =Batteries.CodeActions= at the top of file

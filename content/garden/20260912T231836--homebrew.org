@@ -1,0 +1,16 @@
+#+title:      Homebrew
+#+date:       [2026-09-12 Sat 23:18]
+#+identifier: 20260912T231836
+
+- =brew bundle dump= dumps all taps, casks, and packages into a file named =Brewfile=.
+  - It also lists =uv= tools, =cargo= crates, =npm= packages and more:
+    https://docs.brew.sh/Brew-Bundle-and-Brewfile
+  - =brew bundle check= will check if the bundle is wellformed.
+  - =brew bundle install= installs everything specified in the =Brewfile=.
+  - Maintaining this seems like a pain in the ass, [[https://github.com/nix-darwin/nix-darwin][Nix]] may be a solution, but that seems like a larger
+    pain in the ass.
+- =brew leaves= lists all the leaves of brew's dependency graph.
+- Taps are hard to keep track of, you can list taps with =brew tap=.
+  - To get rid of taps you don't need, you can do =brew tap-info <tap name>=.
+    The output will state if we have installed any packages or casks from that tap.
+  - =brew untap <tap name>= will remove a tap.
