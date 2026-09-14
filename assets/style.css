@@ -145,18 +145,18 @@ a[href^="https://github.com/"]::after {
 }
 
 a[href^="https://bsky.app/"]::after {
-    background: cyan;
+    background: #1185fe;
     content: "BS";
 }
 
 a[href^="https://mastodon.social/"]::after {
-    background: purple;
+    background: #6364ff;
     content: "MST";
 }
 
 a[href^="https://en.wikipedia.org/"]::after,
 a[href^="https://de.wikipedia.org/"]::after {
-    background: gray;
+    background: #939598;
     content: "WIKI";
 }
 
@@ -166,12 +166,12 @@ a[href$=".pdf"]::after {
 }
 
 a[href^="https://arxiv.org/"]::after {
-    background: maroon;
+    background: #b31b1b;
     content: "AR";
 }
 
 a[href^="https://www.linkedin.com/"]::after {
-    background: blue;
+    background: #0a66c2;
     content: "LI";
 }
 
