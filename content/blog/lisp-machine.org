@@ -1,0 +1,95 @@
+#+title: Revenge of the Lisp Machine
+#+date: [2026-09-18 Fri]
+#+template: post.mako
+#+description: Emacs + AI
+
+AI coding agents are pretty cool, but lately I've been having a lot of trouble communicating with
+them while writing code.
+Usually my workflow looks kinda like this:
+
+1. Tell the AI to do something.
+2. Stare at the chat window.
+3. See if it did the right thing.
+4. Stop if you are happy with the results, else go to step 1.
+
+At step 4, you provide the AI some sort of course correction.
+This may involve copying some code you want the AI to focus on into the chat, or copying an LSP
+diagnostic, along with a prompt to refine what the AI is going to do.
+
+My AI agent is usually running in a terminal window.
+This means I have to switch frequently between Emacs and my terminal (Ghostty) whenever I need to
+provide the AI some course correction.
+It would be nice if my agent could see what I am looking at in Emacs.
+Now, most agents come with an "IDE" connector, where the editor implements some sort of server which
+the AI agent connects to, and the editor exposes its state to the agent via a predefined protocol.
+Each agent defines its own protocol/standard for IDE connections.
+Moreover, they are almost never documented.
+So if you like switching between coding agent harnesses, you would have to implement a new server
+for each harness.
+This is pretty annoying.
+
+Fortunately, I use Emacs as my editor, and Emacs solves this problem very elegantly.
+Emacs implements its own server/client mechanism.
+You start a server by running =emacs --daemon= or by running =M-x server-start= and then talk to the
+server through the =emacsclient= command.
+But there is no protocol.
+The client talks to the server entirely through Elisp.
+For example, start an Emacs server, and then run:
+
+#+begin_src bash
+emacsclient --eval "(+ 1 2)"
+#+end_src
+
+This should print a =3= to stdout.
+=emacsclient= is asking the server's interpreter to run the s-expression.
+But we can do more than just arithmetic.
+Open the scratch buffer, and type some text out.
+Then run:
+
+#+begin_src bash
+emacsclient --eval '
+(with-current-buffer "*scratch*"
+  (buffer-substring-no-properties
+   (point-min)
+   (point-max)))
+'
+#+end_src
+
+This should print the contents of your scratch buffer.
+We now have a way to interact with Emacs' state in a really easy way!
+=emacsclient= is enough to get the agent to talk to Emacs, but the agent /can/ run arbitrary Elisp,
+meaning it /could/ delete the file you are currently editing.
+The easiest way to rein in the agent is to just create some sort of script that exposes a set of
+commands that you are fine with the agent running.
+Then you simply have each command dispatch to pre-written sets of Elisp code.
+
+For example, we could define a =read_region= command that simply evaluates this Elisp code snippet.
+#+begin_src elisp
+(json-encode
+ (let ((selection (or (gui-get-selection 'PRIMARY)
+                      (gui-get-selection 'CLIPBOARD))))
+   (and selection (substring-no-properties selection))))
+#+end_src
+
+Why JSON?
+IDK the agents seem to be RL'd on a lot of JSON.
+They understand it well.
+
+Finally, you describe all the commands that the script allows in a "skill" file.
+Most agent harnesses will then load the skill when you ask it to do anything which requires
+inspecting Emacs state.
+The possibilities are basically endless.
+I have a =diagnostics= command that just lists all the Flymake diagnostics.
+And thanks to Eglot (Emacs' LSP client) working well with Flymake, the diagnostics command will pull
+up LSP diagnostics when you are using an LSP server.
+I intended to use this "skill" to mark regions I want the agent to explain back to me or focus its
+efforts on.
+Many times, I want my agent to fix some LSP error, and I really don't want to copy and paste the
+specific error into another window, now I can just ask it to pull up all Flymake diagnostics very
+easily.
+Or, I could ask it to pull up the contents of my =compile-command= buffer and read the output of a
+build command.
+
+None of this would be possible without the extensibility that's baked into Emacs, or the fact that
+Emacs is literally an Elisp interpreter.
+Emacs truly is the /Platonic ideal/ of a /text editor/.
