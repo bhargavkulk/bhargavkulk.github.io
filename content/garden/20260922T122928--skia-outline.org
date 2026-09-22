@@ -1,0 +1,43 @@
+#+title:      Skia Outline
+#+date:       [2026-09-22 Tue 12:29]
+#+filetags:
+#+identifier: 20260922T122928
+
+* From slides to pixels
+
+- Everyone is looking at slides
+- Slides are a grid of pixels
+- No one places those pixels by hand
+- Keynote primitives: text, shapes, animations, transitions
+- Keynote's job: primitives → pixels
+
+* The pattern in visual computing
+
+- Same translation happens everywhere
+- OS: windows
+- GUI framework: widgets
+- Browser: HTML and CSS
+- Shared abstraction: graphics engine
+
+* Skia
+
+- 2D graphics engine from Google
+- Used in Chrome, Firefox, Android, and native applications like Sublime Text
+- Focus: the drawing API
+
+* Drawing on a canvas
+
+- Start with a shape: rectangle bounds + color
+- Clip: constrain future drawing operations
+- Overlapping shapes: combine new pixels with what is already there
+- Blend modes decide the result
+  - SrcOver: familiar “draw on top” behavior
+  - DstIn: keep only the existing content that overlaps the new shape
+
+* Saving state and layers
+
+- So far, every drawing operation has changed the canvas immediately.
+- But sometimes we only want a clip or transform to apply to a small part of the drawing. =save()=
+  lets us make those changes temporarily.
+- Sometimes we don’t want each shape to affect the canvas right away. =saveLayer()= lets Skia draw
+  them to a temporary canvas first, then blend the finished result back in one step.
