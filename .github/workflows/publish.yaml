@@ -49,12 +49,13 @@ jobs:
       - name: Set up Typst
         uses: typst-community/setup-typst@v5
 
-      - name: Build resume PDF and website
+      - name: Build CV variants and website
         run: |
-          rm -rf www/resume
-          mkdir -p www/resume
-          typst compile --font-path resume/fonts resume/main.typ www/resume/resume.pdf
-          typst compile --features html --format html --font-path resume/fonts resume/main.typ www/resume/index.html
+          rm -rf www/cv
+          mkdir -p www/cv
+          typst compile --font-path cv/fonts cv/main.typ www/cv/cv.pdf
+          typst compile --input resume=true --font-path cv/fonts cv/main.typ www/cv/resume.pdf
+          typst compile --features html --format html --font-path cv/fonts cv/main.typ www/cv/index.html
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v4

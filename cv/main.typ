@@ -27,6 +27,7 @@
 )
 - Formalized Skia's 2D rasterization semantics in Lean and built a verified optimizer that achieves
   an average speedup of 18.7% across the top 100 websites by traffic.
+- Front page of #link("https://news.ycombinator.com/item?id=49743934")[HackerNews]
 
 #publication(
     [Mixing Condition Numbers and Oracles for Accurate Floating-point Debugging],
@@ -51,6 +52,11 @@
 #employment([NASA Langley Formal Methods Group], [2024], [Research Intern])
 - Worked on generating proof certificates for the PVS automated theorem prover to verify Herbie’s (a
   floating-point superoptimizer) accuracy-aware optimizations
+
+#cv-only[
+== Service
+- *Artifact Evaluation Comittee*: #link("https://pldi26.sigplan.org/committee/pldi-2026-pldi-research-artifacts-artifact-evaluation-committee")[PLDI'26], #link("https://popl27.sigplan.org/committee/POPL-2027-artifact-evaluation-artifact-evaluation-committee")[POPL'27]
+]
 
 == Skills and Projects
 - *General Programming*: Python, Racket, Java

@@ -16,7 +16,7 @@
                 <li><a href="/blog"><code>/blog</code></a></li>
                 <li><a href="/garden"><code>/garden</code></a></li>
                 <li><a href="/research"><code>/research</code></a></li>
-                <li><a href="/resume/"><code>/cv</code></a></li>
+                <li><a href="/cv"><code>/cv</code></a></li>
             </ul>
         </nav>
         <main>

@@ -3,30 +3,35 @@
 #let html-css = ```css
   body {
     box-sizing: border-box;
-    max-width: 8.5in;
+    max-width: 800px;
     margin: 0 auto;
-    padding: 0.5in;
+    padding: 1rem;
     color: #000;
     font-family: "CharisW", serif;
     font-size: 11pt;
     line-height: 1.15;
   }
   h1.resume-name {
-    margin: 0 0 0.3em;
+    margin: 0.8em 0 0.3em;
     font-family: "Cooper Hewitt", sans-serif;
     font-size: 20pt;
     font-weight: 400;
     text-align: center;
   }
   nav.contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25em 0.75em;
     margin: 0 0 1em;
     font-family: "Fira Mono", monospace;
     font-size: 0.8em;
-    text-align: center;
   }
   nav.contact-links a {
     color: inherit;
     text-decoration: underline;
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
   h2.resume-section {
     margin: 1em 0 0.35em;
@@ -59,7 +64,7 @@
     margin: 0;
   }
   .pdf-link {
-    margin: 0 0 0.5em;
+    margin: 0 0 1em;
     text-align: left;
     font-family: "Fira Mono", monospace;
     font-size: 0.8em;
@@ -104,10 +109,17 @@
   [],
 )
 
+#let service(title, conferences) = quad(
+  strong(title),
+  conferences,
+  [],
+  [],
+)
+
 #let urls(urls_map) = context {
   if target() == "html" {
     html.elem("nav", attrs: (class: "contact-links"))[
-      #(urls_map.map(url => link(url.at(1))[#url.at(0)]).join("·"))
+      #(urls_map.map(url => link(url.at(1))[#url.at(0)]).join([]))
     ]
   } else {
     align(center)[
@@ -150,7 +162,9 @@
   #context {
     if target() == "html" {
       html.elem("p", attrs: (class: "pdf-link"))[
-      #html.elem("a", attrs: (href: "resume.pdf"))[View as PDF]
+        #html.elem("a", attrs: (href: "cv.pdf"))[CV PDF]
+        ·
+        #html.elem("a", attrs: (href: "resume.pdf"))[Resume PDF]
       ]
     }
   }
@@ -181,3 +195,7 @@
 
   #body
 ]
+
+#let cv-only(body) = if sys.inputs.at("resume", default: "false") != "true" {
+  body
+}
