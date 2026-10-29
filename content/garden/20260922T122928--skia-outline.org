@@ -1,7 +1,7 @@
 #+title:      Skia Outline
 #+date:       [2026-09-22 Tue 12:29]
-#+filetags:
 #+identifier: 20260922T122928
+#+OPTIONS: toc:nil
 
 * From slides to pixels
 
@@ -28,16 +28,51 @@
 * Drawing on a canvas
 
 - Start with a shape: rectangle bounds + color
-- Clip: constrain future drawing operations
-- Overlapping shapes: combine new pixels with what is already there
-- Blend modes decide the result
-  - SrcOver: familiar “draw on top” behavior
-  - DstIn: keep only the existing content that overlaps the new shape
+- skia offers api that control what is drawn
+- Clip:
+- clip is stateful constrain future drawing operations
+- Introduce Layers
 
-* Saving state and layers
+* Layers
 
-- So far, every drawing operation has changed the canvas immediately.
-- But sometimes we only want a clip or transform to apply to a small part of the drawing. =save()=
-  lets us make those changes temporarily.
-- Sometimes we don’t want each shape to affect the canvas right away. =saveLayer()= lets Skia draw
-  them to a temporary canvas first, then blend the finished result back in one step.
+- savelayer allocates a new drawing surface
+- subsequent drawing commands draw to this new drawing surface
+- provides you with a isolation
+- restore combiens
+- you could draw one on top of the other
+- DstIn: uses one layer to determine which parts of the other layer to keep
+
+* Similar programs
+
+- we've only introduced a small fragment of Skia's API
+- but even this small fragment rich enough to achieve the same imsge with different programs.
+- <discuss 3 different programs> Now while these 3 programs draw the same image, they have different
+  performance characteristics
+- This means we can replace blah blah blah
+- optimize programs
+
+* Semantics
+
+- To define the semantics of Skia, we first introduce an abstract model of images, which Skia
+  produces.
+- As images are a grid of pixels, we model images as maps from points to colors.
+- Shapes like rectangles become sets of points
+- we combines shapes and images with blend modes (binary operators over colors)
+  operators over colors).
+- Every Skia program then produces an image, by combinining Images, Shapes, and blend modes in
+  different ways
+- In the paper not only define the abstract model, but we also show how to convert actual Skia
+  programs into this abstract model
+
+* Rewrite
+
+- lets use these semantics to prove the rewrite we have been building up to in this talk.
+- lhs: dstin, rhs: clip
+
+* Eval
+
+- The horizontal axis shows a speedup value, with the red line mark- ing a 1× speedup meaning
+identical runtime for the baseline and optimized skp.
+- The vertical axis shows the fraction of benchmarks that meet or exceed that speed-up amount.
+- Across all our benchmarks we see a maximum speedup of 3.04×. The average geo-mean speedup across
+  all benchmarks is 1.12×.

@@ -1,0 +1,42 @@
+#+title:      Skia Script
+#+date:       [2026-09-22 Tue 11:08]
+#+identifier: 20260922T110818
+
+- Right now, everyone in this room is probably looking at my slides.
+- On the screen, these slides are just a grid of pixels
+- i did not fill in each pixel on the screen by hand to make these slides.
+- i instead use keynote to make my slides.
+- I opened keynote and used various primitives that keynote provides like textboxes, shapes,
+  animations, transitions.
+- Keynote has the responsibility to convert these primitives into the grid of pixels you see in
+  front of you.
+
+- This process of converting application-specific primitives into a grid of pixels to be displayed
+  is quite common in visual computing.
+- An OS has to display windows, a GUI framework has to display various widgets, and a Browsers has
+  to display HTML pages styled with CSS.
+- To handle his translation, all of these applications use a common abstraction, a grpahics engine.
+- A GE exposes a common set of drawing operations, that applications use to convert their own
+  primitives into pixels.
+- One such example of a graphics engine is Skia.
+- Skia is a 2d graphics engine developed at google, and poweres the rendering of browsers like
+  chrome, firefox, and webkit (spec on linux), native applications like Sublime Text, and also the
+  rendering in Android.
+- Lets take a brief look at the drawing API skia exposes.
+
+- The most basic command in skia is to draw a shape
+  - rectangle defines the bounds
+  - you can change how the rectangle is drawn with a color
+- You can further constrain what is drawn using a clip.
+  - Clip affects all subsequent command
+- What happens when we draw a second rectrangle on top of the one we have already drawn.
+  - Skia has to combine the old spixels arleady on the canvas with the new ones we are drawing.
+  - How these pixels are combined are governed by a blend mode
+  - Skia’s default blend mode srcover gives us the intuitive behavior of drawing one thing on top of
+    another.
+  - Skia also provides many other blend modes, like DstIn.
+  - DstIn keeps only the part of what is already on the canvas that overlaps the new shape.
+- So far, every drawing operation has changed the canvas immediately.
+- Sometimes we don’t want each shape to affect the canvas right away.
+- saveLayer() lets Skia draw them to a temporary canvas first, then blend the finished result back
+  in one step.
