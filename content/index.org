@@ -3,11 +3,6 @@
 #+date: [2001-07-11 Wed]
 #+template: index.mako
 
-#+begin_marquee
-Our paper on a verified optimizer for Skia has been accepted to OOPSLA'26!
-Read more about it in [[/blog/skia-retro.html][this blog post]].
-#+end_marquee
-
 #+begin_quote
 Once you learn to read, you will be forever free.\\
 -- /Frederick Douglass/
